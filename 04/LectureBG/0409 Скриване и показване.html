@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Пример 0612: Разширяеми елементи</title>
+
+		<style>
+			body {
+				padding: 3em 10em;
+			}
+			
+			h3 {	
+				background: lightgray;
+				font-size: 1.5em;
+				margin-top: 0.1em;
+				margin-bottom: 0.1em;
+				padding: 0.3em;
+				cursor: pointer;
+			}
+			
+			p {
+				margin: 0.25em auto 0.75em 2.5em;
+			}
+			
+			ol {
+				font-size: 1.15em;
+			}
+			
+			h3:hover, li:hover {
+				background: orange;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h3>Столицата на Гана е?</h3>
+		<ol>
+			<li>Акра</li>
+			<li>Бекра</li>
+			<li>Векра</li>
+			<li>Декра</li>
+		</ol>
+		
+		<h3>Сриниваса Рамануджан е индийски?</h3>
+		<ol>
+			<li>философ</li>
+			<li>поет</li>
+			<li>политик</li>
+			<li>математик</li>
+		</ol>
+		
+		<h3>Кое не е фаза от жизнения цикъл на комарите?</h3>
+		<ol>
+			<li>яйце</li>
+			<li>пулпа</li>
+			<li>лавра</li>
+			<li>имаго</li>
+		</ol>
+		
+		<h3>Кой български хан е син на хан Тервел?</h3>
+		<ol>
+			<li>Кормесий</li>
+			<li>Севар</li>
+			<li>Винех</li>
+			<li>Сабин</li>
+		</ol>
+		
+		<h3>Броят на платоновите тела е?</h3>
+		<ol>
+			<li>три</li>
+			<li>четири</li>
+			<li>пет</li>
+			<li>шест</li>
+		</ol>
+		
+		<h3>Розмаринът е от семейство?</h3>
+		<ol>
+			<li>Stilbaceae</li>
+			<li>Lamiaceae</li>
+			<li>Oleaceae</li>
+			<li>Phrymaceae</li>
+		</ol>
+		
+		<script>
+			// добавяне следене на кликване
+			var questions = document.getElementsByTagName( 'h3' );
+			for( var i=0; i<questions.length; i++ )
+				questions[i].onclick = showHide;
+			
+			// функция, която показва или скрива отговорите
+			function showHide( event )
+			{
+				var style = event.target.nextElementSibling.style;
+
+				if( style.display == 'none' )
+					style.display = 'block'
+				else
+					style.display = 'none';
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<style>
+			body { font-size: 2em; }
+		</style>
+	</head>
+	
+	<body>
+		<div></div>
+		
+		<script>
+			var tribo = '<span class="even">0</span>, <span class="even">0</span>, 1';
+			
+			var n = 1000;
+			
+			var a = 0;
+			var b = 0;
+			var c = 1;
+
+			// генериране на числа до горната граница
+			while( a+b+c < 1000000000 )
+			{
+				var d = a+b+c;
+			
+				// четните са маркирани с тага <span>
+				if( d%2 == 0 )
+					tribo += ', <span>' + d + '</span>';
+				else
+					tribo += ', ' + d;
+				
+				a = b;
+				b = c;
+				c = d;
+			}
+
+			// създаване на списъка с числа на Трибоначи
+			var div = document.getElementsByTagName( 'div' )[0];
+			div.innerHTML = tribo;
+			
+			// оцветяване в червено
+			var spans = document.getElementsByTagName( 'span' );
+			for( var i=0; i<spans.length; i++ )
+				spans[i].style.color = 'crimson';
+		</script>
+		
+	</body>
+
+</html>

@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+	</head>
+
+	<body>
+		<script>
+			// пресмята радиани от градуси
+			function rad(x)
+			{
+				return x*Math.PI/180;
+			}
+
+			// пресмята sin() от градуси
+			function sin(x)
+			{
+				var r = rad(x);
+				return Math.sin(r);
+			}
+			
+			// показва синусите през 30 градуса
+			for (n=0; n<=360; n+=30)
+			{
+				console.log('sin('+n+'°) \t= '+sin(n).toFixed(4));
+			}
+			</script>
+	</body>
+
+</html>

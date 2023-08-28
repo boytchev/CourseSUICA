@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+	</head>
+	
+	<body>
+		<h3>Проверка на чек-сума на ЕГН</h3>
+		
+		<p>
+			<input id="egn"></input>
+			<button onclick="check()">Проверка</button>
+		</p>
+		
+		<p>Резултат: <span id="res"></span></p>
+		
+		<script>
+			// функция, която проверява чек-сумата на ЕГН
+			function check()
+			{
+				// извличане на ЕГН като низ
+				var egn = document.getElementById( 'egn' ).value;
+				
+				var result;
+				
+				// изчисляване на правилната чек-сума от първите 9 цифри
+				var k = 2,
+					sum = 0;
+				for( var i=0; i<9; i++ )
+				{
+					sum += k*egn[i];
+					k *= 2;
+				}
+				
+				sum = (sum%11)%10;
+				
+				// проверка дали съвпада с 10-тата цифра
+				if( sum == egn[9] )
+					result = 'ЕГН-то е с правилна чек-сума';
+				else
+					result = 'ЕГН-то не е с правилна чек-сума';
+					
+				document.getElementById( 'res' ).innerHTML = result;
+			}
+		</script>
+		
+	</body>
+
+</html>

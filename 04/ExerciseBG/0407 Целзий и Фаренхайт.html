@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<style>
+			b {
+				color: crimson;
+			}
+			
+			b:hover {
+				background: cornflowerblue;
+				color: white;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<h3>Прогноза за 35 май 2202 година</h3>
+		
+		<p>
+			На 35 май средната температура ще е между <b>11°C</b> и <b>21°C</b> в
+			Северна България и по високите плата и между <b>8°C</b> и <b>29°C</b>
+			в Южна България. По Черноморието температурите ще варират от <b>5°C</b>
+			до <b>20°C</b>, а в планините ще има условия за сняг при температури
+			между <b>-12°C</b> и <b>-5°C</b> в планините.
+		</p>
+		<p>
+			Най-ниската температура за деня в страната ще бъде във фризерите от
+			почти <b>-27°C</b>, а най-високата &ndash; във фурните на пицарии <b>250°C</b>.
+			В градския транспорт се очаква температурите да са около <b>35°C</b>,
+			а в пиковите часове дори и <b>41°C</b>. При хората телесната температура
+			ще е между <b>36°C</b> и <b>38°C</b> с изолирани изключения.
+		</p>
+		
+		<script>
+			// закачане на onclick на всички градуси
+			var bolds = document.getElementsByTagName( 'b' );
+			for( var i=0; i<bolds.length; i++ )
+				bolds[i].onclick = toggle;
+				
+			// функция, която сменя C<->F
+			function toggle( event )
+			{
+				// HTML елемент, където е станало кликването
+				var element = event.target;
+				
+				// извличане на неговото съдържание
+				var text = element.innerHTML;
+				
+				// текущата мярка на градусите (последен символ в съдържанието)
+				var unit = text[ text.length-1 ];
+				
+				// числова стойност на градусите
+				var value = parseFloat( text );
+				
+				if( unit == 'C' )
+				{
+					// смяна C->F
+					unit = 'F';
+					value = Math.round( 9*value/5 + 32 );
+				}
+				else
+				{
+					// смяна F->C
+					unit = 'C';
+					value = Math.round( 5*(value-32)/9 );
+				}
+					
+				element.innerHTML = value + '°' + unit;
+			}
+		</script>
+		
+	</body>
+
+</html>

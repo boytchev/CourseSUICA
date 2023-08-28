@@ -1,7 +1,8 @@
 ### Съдържание
 - [Тема №1 &ndash; Въведение](#тема-1--въведение) [<small>[задачи](#задачи)</small>]
 - [Тема №2 &ndash; HTML](#тема-2--html) [<small>[задачи](#задачи-1)</small>]
-- [Тема №3 &ndash; CSS](#тема-3--html) [<small>[задачи](#задачи-2)</small>]
+- [Тема №3 &ndash; CSS](#тема-3--css) [<small>[задачи](#задачи-2)</small>]
+- [Тема №4 &ndash; JavaScript](#тема-4--javascript) [<small>[задачи](#задачи-3)</small>]
 
 
 ## Тема №1 &ndash; Въведение
@@ -163,3 +164,77 @@
 **0307** Стил на страница Б
 
 [<kbd><img src="03/ExerciseBG/0307%20Стил%20на%20страница%20Б.jpg" width="400"></kbd>](03/ExerciseBG/0307 Стил на страница Б.html)
+
+
+
+## Тема №4 – JavaScript
+
+#### Примери
+
+**0401** Числа и низове
+
+[<kbd><img src="04/LectureBG/0401%20Числа%20и%20низове.jpg" width="400"></kbd>](04/LectureBG/0401 Числа и низове.html)
+
+**0402** Масиви
+
+[<kbd><img src="04/LectureBG/0402%20Масиви.jpg" width="400"></kbd>](04/LectureBG/0402 Масиви.html)
+
+**0403** Условен оператор if
+
+[<kbd><img src="04/LectureBG/0403%20Условен%20оператор%20if.jpg" width="400"></kbd>](04/LectureBG/0403 Условен оператор if.html)
+
+**0404** Цикли for и while
+
+[<kbd><img src="04/LectureBG/0404%20Цикли%20for%20и%20while.jpg" width="400"></kbd>](04/LectureBG/0404 Цикли for и while.html)
+
+**0405** Функции
+
+[<kbd><img src="04/LectureBG/0405%20Функции.jpg" width="400"></kbd>](04/LectureBG/0405 Функции.html)
+
+**0406** Промяна на стил
+
+[<kbd><img src="04/LectureBG/0406%20Промяна%20на%20стил.jpg" width="400"></kbd>](04/LectureBG/0406 Промяна на стил.html)
+
+**0407** Промяна на съдържание
+
+[<kbd><img src="04/LectureBG/0407%20Промяна%20на%20съдържание.jpg" width="400"></kbd>](04/LectureBG/0407 Промяна на съдържание.html)
+
+**0408** Бутони
+
+[<kbd><img src="04/LectureBG/0408%20Бутони.jpg" width="400"></kbd>](04/LectureBG/0408 Бутони.html)
+
+**0409** Скриване и показване
+
+[<kbd><img src="04/LectureBG/0409%20Скриване%20и%20показване.jpg" width="400"></kbd>](04/LectureBG/0409 Скриване и показване.html)
+
+
+
+#### Задачи
+
+**0401** Кратно на 7
+
+[<kbd><img src="04/ExerciseBG/0401%20Кратно%20на%207.jpg" width="400"></kbd>](04/ExerciseBG/0401 Кратно на 7.html)
+
+**0402** Словесна оценка
+
+[<kbd><img src="04/ExerciseBG/0402%20Словесна%20оценка.jpg" width="400"></kbd>](04/ExerciseBG/0402 Словесна оценка.html)
+
+**0403** Числа на Трибоначи
+
+[<kbd><img src="04/ExerciseBG/0403%20Числа%20на%20Трибоначи.jpg" width="400"></kbd>](04/ExerciseBG/0403 Числа на Трибоначи.html)
+
+**0404** Страница на Трибоначи
+
+[<kbd><img src="04/ExerciseBG/0404%20Страница%20на%20Трибоначи.jpg" width="400"></kbd>](04/ExerciseBG/0404 Страница на Трибоначи.html)
+
+**0405** Проверка на ЕГН
+
+[<kbd><img src="04/ExerciseBG/0405%20Проверка%20на%20ЕГН.jpg" width="400"></kbd>](04/ExerciseBG/0405 Проверка на ЕГН.html)
+
+**0406** Създаване на индекс
+
+[<kbd><img src="04/ExerciseBG/0406%20Създаване%20на%20индекс.jpg" width="400"></kbd>](04/ExerciseBG/0406 Създаване на индекс.html)
+
+**0407** Целзий и Фаренхайт
+
+[<kbd><img src="04/ExerciseBG/0407%20Целзий%20и%20Фаренхайт.jpg" width="400"></kbd>](04/ExerciseBG/0407 Целзий и Фаренхайт.html)

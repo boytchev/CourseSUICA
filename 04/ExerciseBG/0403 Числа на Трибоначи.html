@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+	</head>
+	
+	<body>
+
+		<script>
+			// брой числа
+			var n = 20;
+			
+			// начални 3 числа в редицата
+			var a = 0;
+			var b = 0;
+			var c = 1;
+
+			console.log( a );
+			console.log( b );
+			console.log( c );
+			
+			for( var i=4; i<=n; i++ )
+			{
+				// число на Трибоначи
+				var d = a+b+c;
+				console.log( d );
+				
+				// подготовка за следващото число
+				a = b;
+				b = c;
+				c = d;
+			}
+		</script>
+		
+	</body>
+
+</html>
