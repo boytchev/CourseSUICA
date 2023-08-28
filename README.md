@@ -1,2 +1,11 @@
-# CourseSUICA
-Code examples from SIOUX/SUICA course at FMI/SU 
+# Съдържание
+
+## Теми
+
+## Тема-01. Въведение
+
+### Упражнения
+
+**0105** Червен куб.html
+
+[<kbd><img src="01/Червен куб.jpg" width="400"></kbd>](https://boytchev.github.io/CourseVAX/01/Червен куб.html)
