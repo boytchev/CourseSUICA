@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<script>
+
+var lectures = `
+`;
+
+var exercises = `
+`;
+
+
+function p( text = '' )
+{
+	document.write( text+'<br>' );
+}
+
+function process( names )
+{
+	var ext, head, str, path;
+	
+	for( var name of names )
+	{
+		name = name.split('/');
+		path = name[5]+'/'+name[6];
+		name = name.pop().split('"')[0].split('.');
+		ext = name.pop();
+		name = name.join('.');
+		
+		if( ext!='html' ) continue;
+		
+		head = name.split(' ');
+		head[0] = '**'+head[0]+'**';
+		head = head.join(' ');
+		
+		p(head);
+		p();
+		
+		str = `[&lt;kbd>&lt;img src="${path}/${name.split(' ').join('%20')}.jpg" width="400">&lt;/kbd>](${path}/${name}.html)`;
+		p(str);
+		p();
+	}
+}
+
+lectures = lectures.split( '\n' ).filter( x => x );
+exercises = exercises.split( '\n' ).filter( x => x );
+
+n = parseInt((lectures[0]||exercises[0]).split('/')[5]);
+
+p( `## Тема №${n} &ndash; ???` );
+p( );
+p( '#### Примери' );
+p( );
+
+process( lectures );
+
+p( );
+p( );
+p( '#### Задачи' );
+p( );
+
+process( exercises );
+
+</script>

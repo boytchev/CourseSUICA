@@ -1,0 +1,33 @@
+div {
+	width: 5em;
+	height: 5em;
+	position: fixed;
+}
+
+.top-left {
+	top: 1em;
+	left: 1em;
+	border-top: 1em cornflowerblue solid;
+	border-left: 1em cornflowerblue solid;
+}
+
+.top-right {
+	top: 1em;
+	right: 1em;
+	border-top: 1em cornflowerblue solid;
+	border-right: 1em cornflowerblue solid;
+}
+
+.bottom-left {
+	bottom: 1em;
+	left: 1em;
+	border-bottom: 1em cornflowerblue solid;
+	border-left: 1em cornflowerblue solid;
+}
+
+.bottom-right {
+	bottom: 1em;
+	right: 1em;
+	border-bottom: 1em cornflowerblue solid;
+	border-right: 1em cornflowerblue solid;
+}

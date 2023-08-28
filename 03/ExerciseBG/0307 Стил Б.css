@@ -1,0 +1,80 @@
+body{
+		background-image: url('background.png');
+		font-family: 'Calibri', sans-serif;
+	}
+
+div.page	{
+		width: 600px;
+		margin: 2em auto;
+		padding: 1em;
+		background: url('suica.png') no-repeat top center;
+	}
+	
+h1	{
+		font-family: 'Arial Black', Calibri, sans-serif;
+		font-size: 1.5em;
+		text-align: center;
+		margin: 2.5em 0 1em 0;
+		color: Maroon;
+	}
+
+p	{
+		margin: 0 0.5em 0.5em 120px;
+		text-align: justify;
+	}
+
+img.logo {
+		border: solid 5px Black;
+		border-radius: 15px;
+		float: right;
+		margin: 0.2em 0em 0em 1em;
+		left: -100px;
+		width: 150px;
+	}
+	
+div.note {
+		float: right;
+		width: 80px;
+		font-size: 80%;
+		font-family: 'Arial Black', Calibri, sans-serif;
+		text-align: center;
+		padding: 0.5em;
+		margin-left: 1em;
+		border: solid 5px tomato;
+		border-radius: 15px;
+	}
+
+a	{
+		display: block;
+		padding: 0.5em 0.5em;
+	}
+	
+:link,:visited {
+		text-decoration: none;
+		color: white;
+	}
+
+li:hover {
+		background-color: Black;
+		color: black;
+		border-radius: 7px;
+	}
+		
+ul	{
+		float: left;
+		margin-top: 0.15em;
+		margin-bottom: 1em;
+		padding: 4px;
+		background-color: Tomato;
+		border-radius: 10px;
+		width: 100px;
+		text-align: right;
+	}
+	
+li {
+		color: Black;
+		font-family: sans-serif;
+		font-size: 90%;
+		text-transform: uppercase;
+		list-style-type: none;
+	}
