@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<script src="suica.js"></script>
+	</head>
+	
+	<body>
+		<suica fullwindow ontime="onTime">
+			<orbit>
+			
+			<!-- основна конструкция на фара -->
+			<cone y="-30" size="8,40" color="white">
+			<prism y="4" size="6,4" color="gray">
+			<prism y="10" size="6,2" color="gray">
+			<pyramid y="12" size="6,2" color="gray">
+
+			<!-- светлина с прозрачност в края -->
+			<drawing id="light" size="4,1">
+				<moveTo point="-1,0">
+				<lineTo point="2,0">
+				<stroke color="yellow" size="2">
+			</drawing>
+			
+			<!-- въртящата се част на фара - прожектора и светлината -->
+			<group id="head">
+				<prism y="8" size="5,2" color="gold" spin="90">
+				<tube y="9" curve="0,0,0,0.2; -40,0,0,10" image="light" color="white" images="0.85,1">
+			</group>
+		</suica>
+		
+		<script>
+			// завъртане на фара според времето t
+			function onTime( t )
+			{
+				head.spin = 110 + 70*Math.sin( 2*t );
+			}
+		</script>
+	</body>
+	
+</html>

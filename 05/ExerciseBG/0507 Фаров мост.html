@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<script src="suica.js"></script>
+	</head>
+	
+	<body>
+		<suica fullwindow ontime="onTime">
+			<orbit>
+
+			<!-- светлина на фар -->
+			<drawing id="light" size="4,1">
+				<moveTo point="-1,0">
+				<lineTo point="2,0">
+				<stroke color="yellow" size="2">
+			</drawing>
+			
+			<!-- шаблон на тялото на фар -->
+			<group id="lighthouse" hidden>
+				<cone y="-30" size="8,40" color="white">
+				<prism y="4" size="6,4" color="gray">
+				<prism y="10" size="6,2" color="gray">
+				<pyramid y="12" size="6,2" color="gray">
+			</group>
+			
+			<!-- първи фар -->
+			<group center="20,0,20">
+				<clone src="lighthouse" visible>
+				<group id="head1">
+					<prism y="8" size="5,2" color="gold" spin="90">
+					<tube y="9" curve="0,0,0,0.2; -20,0,0,5" image="light" color="white" images="0.85,1">
+				</group>
+			</group>
+
+			<!-- втори фар -->
+			<group center="20,0,-20">
+				<clone src="lighthouse" visible>
+				<group id="head2">
+					<prism y="8" size="5,2" color="gold" spin="90">
+					<tube y="9" curve="0,0,0,0.2; -20,0,0,5" image="light" color="white" images="0.85,1">
+				</group>
+			</group>
+
+			<!-- трети фар -->
+			<group center="-20,0,20">
+				<clone src="lighthouse" visible>
+				<group id="head3">
+					<prism y="8" size="5,2" color="gold" spin="90">
+					<tube y="9" curve="0,0,0,0.2; -20,0,0,5" image="light" color="white" images="0.85,1">
+				</group>
+			</group>
+
+			<!-- четвърти фар -->
+			<group id="a" center="-20,0,-20">
+				<clone src="lighthouse" visible>
+				<group id="head4">
+					<prism y="8" size="5,2" color="gold" spin="90">
+					<tube y="9" curve="0,0,0,0.2; -20,0,0,5" image="light" color="white" images="0.85,1">
+				</group>
+			</group>
+		</suica>
+		
+		<script>
+			// въртене на прожекоторите на четирите фара
+			function onTime( t )
+			{
+				head1.spin = 45*Math.sin(2*t) - 45;	// 315
+				head2.spin = 45*Math.sin(2*t) + 45; // 45
+				head3.spin = 45*Math.sin(2*t) - 135; // 225
+				head4.spin = 45*Math.sin(2*t) + 135; // 135
+			}
+		</script>
+	</body>
+	
+</html>

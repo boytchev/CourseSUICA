@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<script src="suica.js"></script>
+	</head>
+	
+	<body>
+		<suica fullwindow ontime="onTime">
+			<orbit>
+			
+			<!-- първата тоалетна-->
+			<cube center="-15,-5,0" size="20,30" color="dimgray" wireframe>
+			<cube center="-15,-19,0" size="20,2" color="gray">
+			
+			<!-- втората тоалетна-->
+			<cube center="15,-5,0" size="20,30" color="dimgray" wireframe>
+			<cube center="15,-19,0" size="20,2" color="gray">
+		</suica>
+		
+		<script>
+			// цветове на мухите
+			colors = ['black', 'yellow', 'cornflowerblue', 'crimson', 'forestgreen'] ;
+			
+			// създаване на муха
+			function fly( i )
+			{
+				return point( [0,0,0], 5, colors[i] );
+			}
+			
+			// мухи в тоалетните
+			fliesA = [fly(0),fly(1),fly(2),fly(3),fly(4)];
+			fliesB = [fly(0),fly(1),fly(2),fly(3),fly(4)];
+			
+			function onTime( t )
+			{
+				// движението на мухите в първата тоалетна
+				// се получава по някакъв омотан начин
+				for( var i=0; i<5; i++ )
+				{
+					fliesA[i].x = 4*Math.sin(5.7*t+i*i)+4*Math.sin(4.9*t+i)-15;
+					fliesA[i].y = 4*Math.sin(5.1*t-i)+4*Math.cos(4.2*t-2*i)-5;
+					fliesA[i].z = 4*Math.cos(4.7*t+2*i)-4*Math.sin(4.7*t-i*i);
+				}
+
+				// движението на мухите във втората тоалетна
+				// копира движението на мухите от първата,
+				// но хоризонтално е симетрично
+				for( var i=0; i<5; i++ )
+				{
+					fliesB[i].x = -fliesA[i].x; // тук вижте знака "-"
+					fliesB[i].y = fliesA[i].y;
+					fliesB[i].z = fliesA[i].z;
+				}
+			}
+		</script>
+	</body>
+	
+</html>

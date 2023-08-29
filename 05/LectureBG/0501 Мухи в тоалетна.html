@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<script src="suica.js"></script>
+	</head>
+	
+	<body>
+		<suica fullwindow ontime="onTime">
+			<orbit>
+			
+			<!-- първата тоалетна-->
+			<cube center="-20,-10,0" size="20,30" color="dimgray" wireframe>
+			<cube center="-20,-24,0" size="20,2" color="gray">
+			
+			<!-- втората тоалетна-->
+			<cube center="20,10,10" size="20,30" color="dimgray" wireframe>
+			<cube center="20,-4,10" size="20,2" color="gray">
+		</suica>
+		
+		<script>
+			n = 20; // брой мухи
+			
+			// създаване на муха със случаен размер и скорост на летене
+			function makeFly( )
+			{
+				var fly = point();
+				its.size = random( 1, 3 );
+				its.speed = random( 0.7, 1 );
+				
+				return fly;
+			}
+			
+			// мухи в тоалетните
+			fliesA = [];
+			fliesB = [];
+			for( var i=0; i<n; i++)
+			{
+				fliesA.push( makeFly() );
+				fliesB.push( makeFly() );
+			}
+			
+			// нулевите мухи са големи и сини, за да се следят лесно "на око"
+			fliesA[0].color = 'cornflowerblue';
+			fliesA[0].size = '5';
+			fliesB[0].color = 'cornflowerblue';
+			fliesB[0].size = '5';
+			
+			function onTime( time )
+			{
+				// движението на мухите в първата тоалетна
+				// се получава по някакъв омотан начин
+				for( var i=0; i<n; i++ )
+				{
+					var t = fliesA[i].speed*time;
+					fliesA[i].x = 4*Math.sin(5.7*t+i*i)+4*Math.sin(4.9*t+i)-20;
+					fliesA[i].y = 4*Math.sin(5.1*t-i)+4*Math.cos(4.2*t-2*i)-10;
+					fliesA[i].z = 4*Math.cos(4.7*t+2*i)-4*Math.sin(4.7*t-i*i);
+				}
+
+				// движението на мухите във втората тоалетна
+				// копира движението на мухите от първата
+				for( var i=0; i<n; i++ )
+				{
+					fliesB[i].x = fliesA[i].x + 40;
+					fliesB[i].y = fliesA[i].y + 20;
+					fliesB[i].z = fliesA[i].z + 10;
+				}
+			}
+		</script>
+	</body>
+	
+</html>
