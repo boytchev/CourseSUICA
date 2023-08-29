@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<script src="suica.js"></script>
+	</head>
+	
+	<body>
+		<suica fullWindow>
+			<orbit distance="30">
+		</suica>
+		
+		<script>
+			/* по-компактен вид на същата функция
+			function tile( x, z )
+			{
+				cube( [Math.sqrt(2)*(x+0.5*(z%2)),0,2.5*Math.sqrt(2)*z], [5,0.5,1], hsl(random(25,35),30,random(30,50)) );
+				its.spinH = 90*(z%2-0.5);
+			} */
+
+			function tile( x, z )
+			{
+				cube( );
+
+				// хоризонтално отместване
+				its.x = Math.sqrt(2) * x;
+				if( z%2 ) its.x += Math.sqrt(2)/2;
+
+				// вертикално отместване
+				its.z = 2.5 * Math.sqrt(2) * z;
+
+				// размер
+				its.size = [5,0.5,1];
+				
+				// цвят
+				its.color = hsl( random(25,35), 30, random(30,50) );
+				
+				// завъртяност
+				if( z%2 )
+					its.spinH = 45;
+				else
+					its.spinH = -45;
+			}
+
+			for( var x=-30; x<=30; x++ )
+			for( var z=-10; z<=10; z++ )
+			{
+				tile( x, z );
+			}			
+		</script>
+	</body>
+
+</html>

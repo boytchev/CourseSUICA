@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit altitude="0">
+	</suica>
+	
+	<script>
+		n = 11; // брой правоъгълници
+		
+		length = 100; // дължина на конструкцията
+		
+		for( var i=0; i<n; i++ )
+		{
+			square( [-length/2+length*i/(n-1),0,0], [0.9*length/n,50], hsl( 300*i/(n-1), 100, 50 ) );
+		}
+	</script>
+</body>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<script src="suica.js"></script>
+	</head>
+	
+	<body>
+		<suica fullWindow background="lightcyan">
+			<orbit distance="100">
+		</suica>
+		
+		<script>
+			s = 15; // размер на "планетата"
+			n = 200; // брой сгради
+			
+			cube( [0,0,0], 2*s+5, 'seagreen' );
+			
+			for( var i=0; i<n; i++ )
+			{
+				// размер на сграда
+				sx = random( 1, 5 );
+				sy = random( 1, 5 );
+				sz = random( 1, 5 );
+				
+				// случайна позиция
+				x = random( -s, s );
+				y = random( -s, s );
+				z = random( -s, s );
+				
+				// избор на случайна стена на "планетата"
+				// преместване на позицията на сградата
+				// и удължаване на височината ѝ "нагоре"
+				switch( random([0,1,2,3,4,5]) )
+				{
+					case 0: x = -s; sx *= 5; break;
+					case 1: x = +s; sx *= 5; break;
+					case 2: y = -s; sy *= 5; break;
+					case 3: y = +s; sy *= 5; break;
+					case 4: z = -s; sz *= 5; break;
+					case 5: z = +s; sz *= 5; break;
+				}
+				
+				// създаване на самата сграда
+				cube( [x,y,z], [sx,sy,sz], hsl(60,random(0,20),random(60,100)) );
+			}
+			
+		</script>
+	</body>
+
+</html>

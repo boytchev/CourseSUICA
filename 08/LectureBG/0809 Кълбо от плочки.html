@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+	</suica>
+	
+	<script>
+		n = 1000; // брой плочки
+		r = 30; // радиус на кълбото
+		size = [0.5,5,5]; // размер на плочка
+		
+		// sin и cos на ъгъл в градуси, а не в радиани
+		function sin( x ) { return Math.sin( radians(x) ); }
+		function cos( x ) { return Math.cos( radians(x) ); }
+		
+		// създаване на плочките
+		for( var i=0; i<n; i++ )
+		{
+			// сферични ъгли
+			alpha = random( 0, 360 );
+			beta = random( -80, 80 );
+
+			// център на плочка
+			center = [
+				r*cos(alpha)*cos(beta),
+				r*sin(beta),
+				r*sin(alpha)*cos(beta)
+			]
+			
+			// цвят, зависещ от ъглите
+			color = hsl( alpha+beta, 100, 50 );
+			
+			// плочка, завъртяна към (0,0,0)
+			a = cube( center, size, color );
+			a.spinT = -alpha;
+			a.spinS = beta;
+			
+			// завъртането може да стане и с lookAt
+			// с размери [5,0.5,5] и без spinовете
+			// a.lookAt( [0,0,0] );
+		}
+	</script>
+</body>

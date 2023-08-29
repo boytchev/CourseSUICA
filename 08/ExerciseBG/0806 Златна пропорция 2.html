@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<script src="suica.js"></script>
+	</head>
+	
+	<body>
+		<suica fullWindow>
+			<orbit enablePan="true">
+		</suica>
+		
+		<script>
+			// златното сечение
+			ф = (1+Math.sqrt(5))/2;
+						
+			// рисуване на куб по хоризонтални координати (x,z) и размер
+			function myCube( x, z, size )
+			{
+				cube( [x+size/2,size/2-10,z-size/2], size, hsl(0,0,random(0,100)) );
+			}
+			
+			// начален размер и координати
+			size = 30;
+			x = -size*ф/2;
+			z = size/2;
+
+			for( var i=0; i<15; i++ )
+			{
+				// рисуване на куб
+				myCube( x, z, size );
+				
+				// отместване на центъра за следващия куб:
+				// веднъж по едната ос, веднъж -- по другата
+				if( i%2 )
+					z -= size;
+				else
+					x += size;
+					
+				// смаляване на размера на следващия куб
+				size = size/ф;
+			}
+		</script>
+		
+	</body>
+
+</html>

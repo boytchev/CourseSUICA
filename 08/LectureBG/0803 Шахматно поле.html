@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit altitude="0" distance="20">
+	</suica>
+	
+	<script>
+		n = 12; // размер на полето
+		
+		c = n/2-1/2; // отместване за центриране на полето
+
+		colors = ['linen','dimgray']; // цветове
+		
+		for( var x=0; x<n; x++ )
+		for( var y=0; y<n; y++ )
+		{
+			square( [x-c,y-c,0], 1, colors[(x+y)%2] );
+		}
+	</script>
+</body>

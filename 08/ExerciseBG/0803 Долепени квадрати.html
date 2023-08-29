@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<script src="suica.js"></script>
+	</head>
+	
+	<body>
+		<suica fullWindow>
+			<orbit>
+		</suica>
+		
+		<script>
+			// използвани цветове
+			colors = ['linen','peachpuff','lightsalmon','lightgray','gray','dimgray'];
+			
+			// цикъл по вертикала
+			for( var y=-45; y<=45; y+=15 )
+			{
+				// една хоризонтална лента
+				for( var x=-120; x<120; )
+				{
+					// случаен размер на квадрат
+					size = random( 1, 15 );
+					
+					// ръчна промяна на x до центъра на квадрата
+					x += size/2; 
+					
+					// квадрат и рамката му
+					square( [x,y,0], size, random(colors) );
+					square( [x,y,0], size, 'black' );
+					its.wireframe = true;
+					
+					// остатъчна промяна на x до края на квадрата
+					x += size/2;
+				}
+			}
+			
+		</script>
+	</body>
+
+</html>

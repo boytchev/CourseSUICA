@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<script src="suica.js"></script>
+	</head>
+	
+	<body>
+		<suica fullWindow>
+			<orbit>
+		</suica>
+		
+		<script>
+			n = 40; // размер
+			
+			// отпред
+			square( [0,0,n/2], n, 'cornflowerblue' );
+			
+			// отзад
+			square( [0,0,-n/2], n, 'seagreen' );
+
+			// вляво
+			square( [n/2,0,0], n, 'yellow' );
+			its.spinH = 90;
+
+			// вдясно
+			square( [-n/2,0,0], n, 'crimson' );
+			its.spinH = 90;
+
+			// отгоре
+			square( [0,n/2,0,0], n, 'white' );
+			its.spinV = 90;
+
+			// отдолу
+			square( [0,-n/2,0,0], n, 'black' );
+			its.spinV = 90;
+			
+		</script>
+	</body>
+
+</html>
