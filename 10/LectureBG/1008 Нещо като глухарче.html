@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+		
+		<!-- едно от семената на глухарчето -->
+		<group id="obj">
+			<point y="10" size="2" color="Black">
+			<line from="0,10,0" to="0,30,0" color="Black">
+			<sphere y="30" size="10,2" color="Linen">
+			<sphere y="31" size="3,0.5" color="LightSalmon">
+		</group>
+	</suica>
+	
+	<script>
+		n = 100; // брой семена
+		
+		// създаване на гкухарчето като случайно завъртяни семена
+		for( var i=0; i<n; i++ )
+			obj.clone.style( {spinH:random(0,360), spinV:random(0,360)} );
+	</script>	
+</head>

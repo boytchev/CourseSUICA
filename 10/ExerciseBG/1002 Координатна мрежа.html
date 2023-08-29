@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+	</suica>
+		
+	
+	<script>
+		// координатна ос
+		axis = group(
+			line( [0,-30,0], [0,30,0], 'black' ),
+			cone( [0,30,0], [1,2], 'black' ),
+			cone( [0,-30,0], [1,2], 'black' ).style({spinV:180})
+		);
+		
+		// координатна система
+		cosys = group(
+			sphere( [0,0,0], 1.5, 'black'),
+			axis,
+			axis.clone.style({spinV:90}),
+			axis.clone.style({spinH:90,spinV:90}),
+		);
+
+		// координатна мрежа
+		for( var i=-25; i<=25; i+=2.5 ) if( i != 0 )
+		{
+			color = (i%12.5 == 0) ? 'gray' : 'lightgray';
+			
+			cosys.add( line([-25,0,i], [25,0,i], color) );
+			cosys.add( line([i,0,-25], [i,0,25], color) );
+		}
+		
+		// два клонинга на координатната система
+		a = cosys.clone.style({center:[10,10,10],size:0.5,spin:[45,45,45]});
+		b = cosys.clone.style({center:[-10,5,-10],size:0.2,spin:[0,90,-45]});
+	</script>
+</body>

@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+		<!-- земя и трева -->
+		<cylinder y="-10" size="60,5" color="SaddleBrown">
+		<cylinder y="-5" size="60,1" color="Green">
+		<circle id="grass" y="-4" size="55" color="Green" spinV="90">
+	</suica>
+	
+	<script>
+		// функция за създаване на дърво
+		function firTree( n=4, center=[0,0,0], size=1 )
+		{
+			var tree = group();
+			
+			// ствол
+			tree.add( cylinder( [0,0,0], [1,2], 'SaddleBrown' ) );
+			
+			// корона
+			var width = 6, // размер
+				y = 2; // позиция
+				
+			// създаване на "етажите" на короната
+			for( var i=0; i<n; i++ )
+			{
+				tree.add( cone( [0,y,0], width, [0,0.2+i/(2*n-1),0] ) );
+				width *= 0.9;
+				y += width/3;
+			}
+				
+			// позициониране и оразмеряване на дървото
+			tree.center = center;
+			tree.size = size;
+			
+			return tree;
+		}
+		
+
+		n = 100; // брой дървета
+		
+		// създаване на гората
+		for( var i=0; i<n; i++ )
+			firTree( Math.round(random(5,15)), randomIn(grass), random(1,1.5) );
+	</script>	
+</head>

@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+	</suica>
+		
+	
+	<script>
+		R = 25; // голям радиус на тора
+		r = 10; // радиус на тръбата на тора
+		
+		// вертинални окръжности
+		cir = group( circle([R,0,0],2*r,'crimson').style({wireframe:true}) );
+		for( var i=1; i<70; i++ )
+			cir.clone.style({spinH:360*i/70});
+			
+		// хоризонтални окръжности
+		for( var i=0; i<20; i++ )
+		{
+			angle = radians( 360 * i/20 );
+			circle([0,r*Math.sin(angle),0],2*R+2*r*Math.cos(angle),'crimson').style({wireframe:true, spinV:90});
+		}	
+			
+	</script>
+</body>

@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit distance="5" altitude="0">
+	</suica>
+		
+	
+	<script>
+		// стъпка от изграждане на килим на Серпински
+		// обект "a" се клонира 8 пъти в шаблон 3x3 и
+		// цялата група се смалява трикратно, за да е
+		// толкова голяма, колкото първоначално е "a"
+		function sierpinskyCarpet( a )
+		{
+			return group(
+				a.clone.style({center:[1,1,0]}),
+				a.clone.style({center:[0,1,0]}),
+				a.clone.style({center:[-1,1,0]}),
+
+				a.clone.style({center:[1,0,0]}),
+				a.clone.style({center:[-1,0,0]}),
+
+				a.clone.style({center:[1,-1,0]}),
+				a.clone.style({center:[0,-1,0]}),
+				a.clone.style({center:[-1,-1,0]})
+			).style({size:[1/3,1/3,1]});
+		}
+		
+		// първоначален обект
+		a = cylinder( [-2.2,0,0], [1,0.5], 'violet' ).style({spinV:90});
+		
+		// създаване на още 4 нива на килима
+		for( var i=0; i<4; i++ )
+		{
+			a = sierpinskyCarpet( a );
+			a.x = -1.1+1.1*i;
+		}
+	</script>
+</body>

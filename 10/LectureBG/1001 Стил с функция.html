@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit enablePan>
+	</suica>
+	
+	<script>
+		// засиняваща функция
+		function bluish( object )
+		{
+			object.color = hsl( random(180,225), 70, 50 );
+			return object;
+		}
+		
+		// яка от 300 цилиндъра
+		n = 300;
+		for( var i=0; i<n; i++ )
+		{
+			// положение на цилиндър
+			alpha = radians( 360 * i/n );
+			center = [10*Math.cos(alpha), 0, 10*Math.sin(alpha)];
+
+			// създаване на синкав цилиндър
+			a = bluish( cylinder( center, [2,random(40,41)] ) );
+			a.spinH = 90+degrees( -alpha );
+			a.spinV = 90 + 15*Math.sin( 6*alpha );
+		}
+	</script>	
+</head>

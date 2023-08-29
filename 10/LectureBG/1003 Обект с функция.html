@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit enablePan>
+	</suica>
+	
+	<script>
+		// размери на пчелната пита
+		n = 15;
+		m = 10;
+
+		// създаване на клетка от пчелната пита
+		function honeyComb( x, y )
+		{
+			prism( 6, [9.5*x,0,8*y], [10,3] ).style({
+				color: [1,random(0.4,0.8),0],
+				spinH: 30,
+				wireframe: random([true,false]) // случайна запълненост
+			});
+		}
+		
+		// създаване на пчелната пита
+		for( var i=0; i<n; i++ )
+		for( var j=0; j<m; j++ )
+			honeyComb( i-(n-1)/2+(j%2)/2, j-(m-1)/2 );
+	</script>	
+</head>

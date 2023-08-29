@@ -12,12 +12,13 @@ tag:
 
 # Съдържание
 
-- [Тема №1 &ndash; Въведение](index-01.md)
-- [Тема №2 &ndash; HTML](index-02.md)
-- [Тема №3 &ndash; CSS](index-03.md)
-- [Тема №4 &ndash; JavaScript](index-04.md)
-- [Тема №5 &ndash; Геометрия](index-05.md)
-- [Тема №6 &ndash; Библиотека SUICA](index-06.md)
-- [Тема №7 &ndash; Точки и линии](index-07.md)
-- [Тема №8 &ndash; Квадрати и кубове](index-08.md)
-- [Тема №9 &ndash; Окръжности и сфери](index-09.md)
+- [Тема №1 &ndash; Въведение](01/index.md)
+- [Тема №2 &ndash; HTML](02/index.md)
+- [Тема №3 &ndash; CSS](03/index.md)
+- [Тема №4 &ndash; JavaScript](04/index.md)
+- [Тема №5 &ndash; Геометрия](05/index.md)
+- [Тема №6 &ndash; Библиотека SUICA](06/index.md)
+- [Тема №7 &ndash; Точки и линии](07/index.md)
+- [Тема №8 &ndash; Квадрати и кубове](08/index.md)
+- [Тема №9 &ndash; Окръжности и сфери](09/index.md)
+- [Тема №10 &ndash; Потребителски обекти](10/index.md)

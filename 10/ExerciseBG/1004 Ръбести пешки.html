@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit distance="40">
+		<group id="pawnTemplate" hidden>
+			<prism count="6"count="6" size="7,1">
+			<pyramid count="6" y="1" size="7,2">
+			<pyramid count="6" y="1" size="4,8">
+
+			<pyramid count="6" y="6.7" size="4,0.5">
+			<prism count="6" y="6.2" size="4,0.5">
+			<pyramid count="6" y="6.2" size="4,0.5" spinV="180">
+
+			<pyramid count="6" y="9.5" size="3.5,0.75">
+			<prism count="6" y="7.5" size="3.5,2">
+			<pyramid count="6" y="7.5" size="3.5,0.5" spinV="180">
+		</group>
+	</suica>
+		
+	
+	<script>
+		function pawn( center, color )
+		{
+			var obj = pawnTemplate.clone;
+			obj.hidden = false;
+			obj.center = center;
+			
+			for( var part of obj.groupElements )
+				part.color = color;
+			
+			return obj
+		}
+		
+		
+		pawn( [10,0,0], 'dimgray' );
+		pawn( [-10,0,0], 'dimgray' );
+		pawn( [0,0,10], 'white' );
+		pawn( [0,0,-10], 'white' );
+	</script>
+</body>

@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+		<sphere id="zone" size="100,50" hidden>
+	</suica>
+	
+	<script>
+		// брой пирамиди
+		n = 300;
+
+		// стил за рамка на пирамида
+		framed = {wireframe: true, color: 'black'};
+		
+		for( var i=0; i<n; i++ )
+		{
+			// случайна позиция
+			pos = randomIn( zone );
+			
+			// създаване на цветната пирамида
+			pyramid( 4, pos, [5,10] ).style({
+				color: hsl( random(0,360), 100, 60 ),
+				spinH: random( 0, 360 ),
+				spinV: random( 0, 360 ),
+			});
+
+			// добавяне на рамката ѝ като 
+			// клонинг, но с друг стил
+			its.clone.style( framed );
+		}
+	</script>	
+</head>

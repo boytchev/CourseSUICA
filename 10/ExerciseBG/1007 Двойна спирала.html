@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+	</suica>
+		
+	
+	<script>
+		// начален празен фрагмент
+		tail = group( );
+		
+		// създаване на 100 нови фрагмента като група
+		// от две призми и от предходния фрагмент
+		for( var i=0; i<100; i++ )
+			tail = group(
+				prism( 8, [0,0,0], [3,5], hsl(30,100,i) ),
+				prism( 8, [0,-0.2,0], [4,0.4], 'dimgray' ).style({spinV:-5}),
+				tail.style({y:5})
+			).style({spinV:10, size:0.98});
+
+		// втора, симетрична спирала
+		tail.clone.style({spinV:190});
+		
+	</script>
+</body>

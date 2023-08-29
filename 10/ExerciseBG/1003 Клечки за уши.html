@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow background="dimgray">
+		<orbit>
+		<!-- скрита сфера за позиция и квадрат за ориентация -->
+		<sphere id="position" size="100,50" hidden>
+		<square id="orientation" size="360" hidden>
+	</suica>
+		
+	
+	<script>
+		n = 200; // брой клечки
+		
+		// функция за създаване на клечка за уши
+		function cottonSwab( )
+		{
+			// цвят на самата клечка
+			var color = hsl( random(0,360), 100, 80 );
+			
+			return group(
+				cylinder( [0,-7,0], [0.5,14], color ),
+				sphere( [0,7,0], [1,3], 'white' ),
+				sphere( [0,-7,0], [1,3], 'white' )
+			);
+		}
+		
+		// купчина от клечи за уши
+		for( var i=0; i<n; i++ )
+		{
+			swab = cottonSwab( );
+			its.center = randomIn( position );
+			its.spin = randomIn( orientation );
+		}
+	</script>
+</body>

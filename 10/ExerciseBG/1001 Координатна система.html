@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+		
+		<!-- координатна система -->
+		<group id="cosys">
+			<!-- начало -->
+			<sphere size="1.5" color="black">
+			<!-- една ос -->
+			<group id="axis">
+				<line from="0,-30,0" to="0,30,0" color="black">
+				<cone y="30" size="1,2" color="black">
+				<cone y="-30" size="1,2" color="black" spinV="180">
+			</group>
+			<!-- втора и трета ос -->
+			<clone src="axis" spinV="90">
+			<clone src="axis" spinH="90" spinV="90">
+		</group>
+		
+		<!-- още две координатни системи -->
+		<clone src="cosys" center="10,10,10" size="0.5" spin="45,45,45">
+		<clone src="cosys" center="-10,5,-10" size="0.2" spin="0,90,-45">
+	</suica>
+	
+	<script>
+
+		
+	</script>
+</body>

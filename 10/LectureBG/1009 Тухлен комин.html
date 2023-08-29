@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit distance="180" enablePan>
+	</suica>
+	
+	<script>
+		function brownBrick( idx )
+		{
+			// цвят на тухлата
+			var color = [random(0.3,0.7),random(0,0.4),0];
+			
+			// същинската тухла
+			var brick = cube( [13,0,0], [2,1,4], color );
+			
+			// завъртяна група от една отместена тухла
+			return group(brick).style({y: -40, spinH: 18*idx});
+		}
+		
+		// ред от тухли
+		brickRow = group();
+		for( var i=0; i<20; i++ )
+			brickRow.add( brownBrick( i ) );
+		
+		// изграждане на комина
+		for( var i=0; i<100; i++ )
+		{
+			row = brickRow.clone;
+			row.y = i;
+			row.size = [1-i/150, 1];
+			row.spinH = 18*Math.round(random(0,20));
+			row.spinH += 9*i;
+		}
+		
+	</script>	
+</head>

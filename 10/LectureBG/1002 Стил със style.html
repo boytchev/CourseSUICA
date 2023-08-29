@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit enablePan>
+	</suica>
+	
+	<script>
+		// ограда от червеникави цилиндри
+		n = 300;
+		for( var i=0; i<n; i++ )
+		{
+			// положение и размер на цилиндър
+			alpha = radians( 360 * i/n );
+			h = 20+15*Math.sin( 6*alpha );
+			r = 35+10*Math.sin( 6*alpha );
+			
+			center = [r*Math.cos(alpha), -h/2, r*Math.sin(alpha)];
+
+			// създаване на червеникав цилиндър
+			cylinder( center, [2,h] ).style( {
+				color: hsl(random(-40,40),100,50)
+			} );
+		}
+	</script>	
+</head>
