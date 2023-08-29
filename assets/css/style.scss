@@ -3,8 +3,14 @@
 
 @import "{{ site.theme }}";
 
+/*
 .main-content {
   padding: 0 4rem 2rem 4rem;
+}
+*/
+
+.main-content h1 {
+  color: black;
 }
 
 #header_wrap .inner {
@@ -40,6 +46,7 @@ h4 {
 h1.project-name,
 h2.project-tagline {
 	color: white;
+	border: none;
 }
 
 h1.project-name {
