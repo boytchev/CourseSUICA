@@ -7,6 +7,10 @@
   padding: 0 4rem 2rem 4rem;
 }
 
+#header_wrap .inner {
+	padding: 0;
+}
+
 header.page-header {
 	padding: 1em 0;
 	margin-bottom: 0;
@@ -17,7 +21,7 @@ code {
 }
 
 h1, h2, h3 {
-	color: MediumSeaGreen;
+	color: RoyalBlue;
 	font-weight: bold;
 	border-bottom: 1px dotted green;
 }
@@ -30,7 +34,7 @@ h4 {
 	font-family: Consolas, monospace;
 	background: var(--color-bg-tertiary);
 	padding-left: 0.5em;
-	border-left: solid 0.25em MediumSeaGreen;
+	border-left: solid 0.25em RoyalBlue;
 }
 
 h1.project-name,
