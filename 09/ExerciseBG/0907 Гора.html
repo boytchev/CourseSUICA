@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit altitude="0">
+	</suica>
+	
+	<script>
+		n = 100; // брой дървета
+		
+		// земя
+		cylinder( [0,-10,0], [60,5], 'SaddleBrown' );
+		cylinder( [0,-5,0], [60,1], 'green' );
+		
+		// трева (ще се ползва за слагане на дърветата)
+		grass = circle( [0,-4,0], 55, 'green' );
+		its.spinV = 90;
+		
+		for( var i=0; i<n; i++ )
+		{
+			// място на дърво
+			pos = randomIn( grass ); 
+			
+			// мащаб, височина, широчина и размер на корона
+			scale = random( 0.5, 1 );
+			height = random( 10, 16 );
+			width = 1;
+			crown = random( 8, 12 );
+
+			// стъбло на дърво като 10 насложени конуса
+			for( var j=0; j<10; j++ )
+			{
+				cone( pos, [(1.1**j)*scale, (0.7**j)*height*scale], hsl(20,50,20) );
+			}
+			
+			// вертикално отместване на дървото
+			pos[1] += height*scale;
+			
+			// корона на дървото
+			sphere( pos, crown*scale, hsl(random(60,120),50,40) );
+		}
+		
+	</script>
+</body>

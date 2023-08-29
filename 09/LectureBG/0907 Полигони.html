@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+	</suica>
+	
+	<script>
+		for( var i=0; i<12; i++ )
+		{
+			// цветен n-ъгълник
+			polygon( i+3, [0,0,66-12*i], 20, hsl(30*i,100,50) );
+			its.spinS = -180*(1/2-1/(i+3))
+			
+			// контур на n-ъгълника
+			polygon( i+3, its.center, 20, 'black' );
+			its.spinS = -180*(1/2-1/(i+3))
+			its.wireframe = true;
+		}
+		
+	</script>
+</body>

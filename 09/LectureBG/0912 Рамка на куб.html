@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+		
+		<!-- сфери за върховете на куба -->
+		<sphere id="w" center="20,20,20" size="5" color="white">
+		<sphere id="y" center="20,20,-20" size="5" color="yellow">
+		<sphere id="v" center="20,-20,20" size="5" color="1,0,1">
+		<sphere id="r" center="20,-20,-20" size="5" color="red">
+		<sphere id="c" center="-20,20,20" size="5" color="cyan">
+		<sphere id="g" center="-20,20,-20" size="5" color="green">
+		<sphere id="b" center="-20,-20,20" size="5" color="blue">
+		<sphere id="k" center="-20,-20,-20" size="5" color="black">
+	</suica>
+	
+	<script>
+		n = 80; // брой фрагменти на всеки ръб
+		
+		// рисува ръб от a до b с дадена ориентация
+		// и с цветове между цветовете на a и b
+		function connect( a, b, spinH, spinV )
+		{
+			for( var i=0; i<n; i++ )
+			{
+				cylinder( lerp(a,b,i/n), [5,40/n] );
+				its.color = lerp(a.color,b.color,i/(n-1));
+				its.spinH = spinH;
+				its.spinV = spinV;
+			}
+		}
+		
+		// 4 хоризонтални ръба (ляво-дясно) 
+		connect( c, w, 90, 90 );
+		connect( k, r, 90, 90 );
+		connect( g, y, 90, 90 );
+		connect( b, v, 90, 90 );
+
+		// 4 вертикални ръба (горе-долу)
+		connect( k, g, 0, 0 );
+		connect( v, w, 0, 0 );
+		connect( r, y, 0, 0 );
+		connect( b, c, 0, 0 );
+
+		// 4 хоризонтални ръба (напред-назад) 
+		connect( g, c, 0, 90 );
+		connect( k, b, 0, 90 );
+		connect( y, w, 0, 90 );
+		connect( r, v, 0, 90 );
+		
+	</script>
+</body>

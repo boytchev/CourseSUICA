@@ -52,19 +52,20 @@ n = parseInt((lectures[0]||exercises[0]).split('/')[5]);
 
 var uriname = name.toLowerCase().split('&ndash;').join('').split(' ').join('-');
 
-p( `- [Тема №${n} &amp;ndash; ${name}](#тема-${n}--${uriname}) [&lt;small>[задачи](#задачи-${n-1})&lt;/small>]` );
+p( '---' );
+p( `title: Тема №${n} &amp;ndash; ${name}` );
+p( 'description: Архив с примери и решения' );
+p( 'tag: contents' );
+p( '---' );
 p( );
-p( );
-p( `## Тема №${n} &ndash; ${name}` );
-p( );
-p( '#### Примери' );
+p( '# Примери' );
 p( );
 
 process( lectures );
 
 p( );
 p( );
-p( '#### Задачи' );
+p( '# Задачи' );
 p( );
 
 process( exercises );

@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit altitude="0" distance="60">
+		<sphere color="white">
+	</suica>
+	
+	<script>
+		n = 20;
+		j = 1; // флаг +1,-1,+1,-1,... горе,долу,горе,долу,...
+		
+		// многоъгълници, demeque, полигони
+		for( i=0; i<n; i++ )
+		{
+			j = -j;
+			
+			// основни големи четириъгълни призми
+			prism( 4, [0,0,0], [8,15], 'black' );
+			its.spinH = 360/n*i;
+			its.spinV = 90 - 10*j;
+
+			// запълващи малки триъгълни призми
+			prism( 3, [0,0,0], [4.5,15,7], 'black' );
+			its.spinH = 360/n*i;
+			its.spinV = 90 + 22*j;
+			its.spinT = 90*j;
+		}
+		
+	</script>
+</body>

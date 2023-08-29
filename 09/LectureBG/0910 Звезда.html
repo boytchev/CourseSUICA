@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+	</suica>
+	
+	<script>
+		n = 7; // брой лъчи
+		
+		r1 = 19; // отдалеченост на малките жълти лъчи
+		r2 = 20.5; // отдалеченост на средните оранжеви лъчи
+		r3 = 22; // отдалеченост на големите червени лъчи
+
+		// тяло на звездата
+		prism( n, [0,0,0], [30,2], 'orange' );
+
+		// лъчи на звездата
+		for( i=0; i<n; i++ )
+		{
+			// ъгъл около периферията на тялото на звездата
+			alpha = 360*(i+0.5)/n;
+			cos = Math.cos( radians(alpha) );
+			sin = Math.sin( radians(alpha) );
+			
+			// малък жълт лъч
+			prism( 3, [r1*cos,0,r1*sin], [15,2], 'yellow' );
+			its.spinT = -alpha;
+
+			// среден оранжев лъч
+			prism( 3, [r2*cos,0.3,r2*sin], [20,1.4,15], 'orange' );
+			its.spinT = -alpha;
+
+			// голям червен лъч
+			prism( 3, [r3*cos,0.7,r3*sin], [25,0.6,15], 'red' );
+			its.spinT = -alpha;
+		}
+		
+	</script>
+</body>

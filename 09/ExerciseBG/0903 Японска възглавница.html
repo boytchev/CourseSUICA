@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+	</suica>
+	
+	<script>
+		n = 1000; // брой цилиндърчета
+		
+		// невидима елипсоидна форма на възглавницата
+		pillow = sphere( [0,0,0], [100,20,60] );
+		its.visible = false;
+		
+		for( var i=0; i<n; i++ )
+		{
+			// завъртяно цилиндърче на случайно
+			// място някъде във възглавницата
+			pos = randomIn( pillow );
+			cylinder( pos, [2,4,3], [0,random(0.5,0.8),1] );
+			its.spin = [random(0,360), random(0,360)];
+		}
+	</script>
+</body>

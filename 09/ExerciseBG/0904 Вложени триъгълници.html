@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit altitude="0">
+	</suica>
+	
+	<script>
+		// триъгълници
+		r = 80; // начален размер
+		for( var i=0; i<10; i++ )
+		{
+			// завъртян триъгълник
+			polygon( 3, [-35,-10,0], r, 'black' );
+			its.wireframe = true;
+			its.spinS = 60*i-30;
+			
+			// размер на следващия триъгълник
+			r = r/2;
+		}
+
+		// четириъгълници
+		r = 85;
+		for( var i=0; i<20; i++ )
+		{
+			// завъртян четириъгълник
+			polygon( 4, [35,0,0], r, 'black' );
+			its.wireframe = true;
+			its.spinS = 45*i-45;
+			
+			// размер на следващия четириъгълник
+			r = r/2**0.5;
+		}
+	</script>
+</body>

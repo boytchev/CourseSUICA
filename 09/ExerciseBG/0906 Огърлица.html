@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit altitude="0">
+	</suica>
+	
+	<script>
+		n = 33;
+		
+		// две нишки за огърлицата
+		circle( [0,5,0], 40, 'gray' );
+		its.wireframe = true;
+		circle( [0,5,0], 39.6, 'gray' );
+		its.wireframe = true;
+		
+		// редица от редуващи се украшния 
+		step = 6;
+		angle = -90-(n-1)/2*step;
+		for( var i=0; i<n; i++ )
+		{
+			a = radians( angle );
+			
+			if( i%2 )
+			{
+				// едните украшения са бели топчета
+				// те са по дъга с радиус 20 
+				sphere( [20*Math.cos(a),5+20*Math.sin(a),0], 2.2, 'azure' );
+			}
+			else
+			{
+				// другите са малки черни капачки, които са по дъга
+				// с радиус 19, т.е. нишките минават през средата им
+				prism( 6, [19*Math.cos(a),5+19*Math.sin(a),0], [2,2], 'black' );
+				its.spinH = 90;
+				its.spinV = 90-angle;
+
+				// към тях са закачени дълги цветни призми
+				prism( 6, [21*Math.cos(a),5+21*Math.sin(a),0], [2,random(4,20)], hsl(random(0,360),random(50,100),random(30,70)) );
+				its.spinH = 90;
+				its.spinV = 90-angle;
+			}
+			
+			angle += step;
+		}
+		
+	</script>
+</body>

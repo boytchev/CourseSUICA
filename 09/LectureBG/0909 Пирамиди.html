@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+	</suica>
+	
+	<script>
+		// каре от 7х7 пирамиди
+		for( var x=-3; x<=3; x++ )
+		for( var z=-3; z<=3; z++ )
+		{
+			pyramid( random([3,4,5,6,8,16,32]), [15*x,-5,15*z], [10,random(10,30)], hsl(random(270,420),100,50) );
+			its.spinH = random(0,360);
+		}
+		
+	</script>
+</body>

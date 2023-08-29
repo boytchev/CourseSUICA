@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+	</suica>
+	
+	<script>
+		n = 12; // размер на дъската
+		d = 10; // диаметър на плочка
+		s = d*Math.sin( radians(180/3) ); // страна на плочка
+		h = s*Math.sqrt(3)/2; // вертикално отместване
+
+		cx = (n-1)/2*s; // център на дъската по x
+		cz = cx *2/3; // център на дъската по z
+
+		// избрани цветове
+		colors = [ 'linen', 'dimgray', 'darkseagreen', 'darksalmon' ];
+		
+		// обхождане по редове
+		for( var x=1; x<=n; x++ )
+		{
+			colorIdx = x%4; // индекс на цвят
+			
+			// обхождане вътре в ред
+			for( var z=1; z<=x; z++ )
+			{
+				colorIdx++;
+
+				// създаване на плочка - най-пипкавото ѝ
+				// е смятането на координатите на центъра
+				prism( 3, [s*(x-z/2)-cx,-1,h*z-cz], [d,2], colors[colorIdx%4] );
+				its.spinH = 30;
+				
+				// създаване на втора плочка, долепена до първата,
+				// като двете плочки заедно образуват успоредник
+				if( z<x )
+				{
+					colorIdx++;
+					prism( 3, [its.x-s/2,-1,its.z+h/3], its.size, colors[colorIdx%4] );
+					its.spinH = 30+180;
+				}
+			}
+		}
+		
+	</script>
+</body>

@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+	</suica>
+	
+	<script>
+		n = 600; // брой петна
+		r = 60; // размер на сферата
+		
+		// голямата бяла сфера
+		sphere( [0,0,0], r, 'WhiteSmoke' );
+		
+		// вътрешна невидима сфера
+		inner = sphere();
+
+		for( var i=0; i<n; i++ )
+		{
+			// размер на петно
+			size = random( 2, 10 );
+			
+			// достатъчно голяма/малка вътрешна сфера
+			inner.size = r-size+0.1;
+			
+			// създаване на черна сфера с ецнтър
+			// на случайно място по вътрешната сфера
+			pos = randomOn( inner );
+			sphere( pos, size, 'black' );
+		}
+	</script>
+</body>
