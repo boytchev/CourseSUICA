@@ -1,7 +1,7 @@
 ---
 title: Тема №1 &ndash; Въведение
 description: Архив с примери и решения
-tag: 
+tag: contents
 ---
 
 # Примери

@@ -1,7 +1,7 @@
 ---
 title: Тема №2 &ndash; HTML
 description: Архив с примери и решения
-tag: 
+tag: contents
 ---
 
 # Примери
