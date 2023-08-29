@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+	</suica>
+	
+	<script>
+		n = 20; // брой точки
+		r = 25; // радиус на многоъгълника
+		
+		// наслагане на много на брой криви полигона
+		for( var j=0; j<100; j++ )
+		{
+			// пресмятане на точките + случайно отклонение
+			p = [];
+			for( var i=0; i<n; i++ )
+			{
+				alpha = radians( 360 * i/n );
+
+				x = r * Math.cos( alpha ) + random( -5, 5 );
+				y = r * Math.sin( alpha ) + random( -5, 5 );
+				z = random( -5, 5 );
+				
+				p[i] = [x, y, z];
+			}
+				
+			// рисуване на отсечките
+			for( var i=0; i<n; i++ )
+				line( p[i], p[(i+1)%n] );
+		}
+	</script>
+</body>

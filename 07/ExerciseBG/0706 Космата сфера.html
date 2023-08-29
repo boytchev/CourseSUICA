@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<script src="suica.js"></script>
+	</head>
+	
+	<body>
+		<suica fullWindow>
+			<orbit>
+		</suica>
+		
+		<script>
+			n = 500; // брой точки
+			r = 25; // радиус на сферата
+			
+			for( var i=0; i<n; i++ )
+			{
+				// ъгли на посоката на косъма
+				alpha = random( 0, 360 );
+				beta = random( -90, 90 );
+				
+				// корен на косъма
+				x = r * Math.cos(alpha) * Math.cos(beta);
+				y = r * Math.sin(alpha) * Math.cos(beta);
+				z = r * Math.sin(beta);
+				
+				// коефициент за дължина на косъма
+				k = random( 1.1, 1.4 );
+				
+				// корен и косъм
+				point( [x,y,z], 2 );
+				line( [x,y,z], [k*x,k*y,k*z] );
+			}
+		</script>
+	</body>
+
+</html>

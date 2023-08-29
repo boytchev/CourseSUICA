@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+		<oxyz>
+	</suica>
+	
+	<script>
+		// брой вътрешни точки
+		n = 100; 
+		
+		// две случайни крайни точки
+		a = point( [-40, random(-20,20), random(-20,20)] );
+		b = point( [40, random(-20,20), random(-20,20)] );
+
+		// създаване на вътрешните точки
+		for( var i=0; i<n; i++ )
+		{
+			// коефициент на линейната комбинация
+			k = random( 0, 1 );
+			
+			// изчисляване на (1-k)A+kB
+			x = a.x*(1-k) + k*b.x;
+			y = a.y*(1-k) + k*b.y;
+			z = a.z*(1-k) + k*b.z;
+
+			// създаване на вътрешна точка със случаен размер
+			point( [x,y,z], random(0.5,3), 'crimson' );
+		}
+	</script>
+</body>

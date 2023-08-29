@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+	</suica>
+	
+	<script>
+		n = 50; // брой линии
+		r = 10; // радиус на тунела
+		
+		// рисуване на тунела
+		for( var i=0; i<n; i++ )
+		{
+			alpha = radians( 360 * i/n );
+
+			x = r * Math.cos( alpha );
+			y = r * Math.sin( alpha );
+
+			line( [x,y,-50], [x,y,50] );
+		}
+	</script>
+</body>

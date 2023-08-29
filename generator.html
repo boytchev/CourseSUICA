@@ -2,12 +2,31 @@
 
 <script>
 
-var lectures = `
+var name = 'Точки и линии';
 
+var lectures = `
+"D:/Pavel/Projects/GitHub/CourseSUICA/07/LectureBG/0701 Осем точки (html).html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/07/LectureBG/0701 Осем точки (js).html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/07/LectureBG/0702 Пет различни точки.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/07/LectureBG/0703 Tочки по линия.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/07/LectureBG/0704 Tочки по окръжност.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/07/LectureBG/0705 Tочки по сфера.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/07/LectureBG/0706 Куб от отсечки.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/07/LectureBG/0707 Крив полигон.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/07/LectureBG/0708 Криви полигони.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/07/LectureBG/0709 Тунел от линии.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/07/LectureBG/0710 Крива пирамида.html"
 `;
 
 var exercises = `
-
+"D:/Pavel/Projects/GitHub/CourseSUICA/07/ExerciseBG/0701 Точки по квадрат.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/07/ExerciseBG/0702 Огърлица от точки.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/07/ExerciseBG/0703 Цветни точки по сфера.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/07/ExerciseBG/0704 Tочки по долна полусфера.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/07/ExerciseBG/0704 Tочки по лява полусфера.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/07/ExerciseBG/0705 Графика на функция.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/07/ExerciseBG/0706 Космата сфера.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/07/ExerciseBG/0707 Офис кошче.html"
 `;
 
 
@@ -48,7 +67,12 @@ exercises = exercises.split( '\n' ).filter( x => x );
 
 n = parseInt((lectures[0]||exercises[0]).split('/')[5]);
 
-p( `## Тема №${n} &ndash; ???` );
+var uriname = name.toLowerCase().split('&ndash;').join('').split(' ').join('-');
+
+p( `- [Тема №${n} &amp;ndash; ${name}](#тема-${n}--${uriname}) [&lt;small>[задачи](#задачи-${n-1})&lt;/small>]` );
+p( );
+p( );
+p( `## Тема №${n} &ndash; ${name}` );
 p( );
 p( '#### Примери' );
 p( );

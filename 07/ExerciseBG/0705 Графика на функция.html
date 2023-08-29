@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<script src="suica.js"></script>
+	</head>
+	
+	<body>
+		<suica fullWindow>
+		</suica>
+		
+		<script>
+			// изчислява точка по синусоида, t е в градуси
+			function sin( t )
+			{
+				return [t/10, 10*Math.sin(radians(t)), 0];
+			}
+			
+
+			// изчислява точка по крива, зададена с x(t) и y(t)
+			function heart( t )
+			{
+				t = radians( t );
+				
+				var x = 12*Math.sin(t) - 4*Math.sin(3*t);
+				var y = 13*Math.cos(t) - 5*Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t);
+				
+				return [x, y, 0];
+			}
+			
+			
+			// рисуване на синусоидата
+			for( var i=-720; i<720; i+=10 )
+				line( sin(i), sin(i+10) );
+
+
+			// рисуване на сърдечната пунктирана крива
+			for( var i=0; i<360; i+=4 )
+				line( heart(i), heart(i+2), 'crimson' );
+		</script>
+	</body>
+
+</html>

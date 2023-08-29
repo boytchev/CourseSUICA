@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<script src="suica.js"></script>
+	</head>
+	
+	<body>
+		<suica fullWindow>
+			<orbit>
+			<oxyz>
+		</suica>
+		
+		<script>
+			n = 500; // брой точки
+			r = 20; // радиус на сферата
+			
+			for( var i=0; i<n; i++ )
+			{
+				// сферични ъгли, alpha е ограничен
+				alpha = radians( random(90,270) );
+				beta = radians( random(-90,90) );
+				
+				// декартови координати
+				x = r * Math.cos(alpha) * Math.cos(beta);
+				y = r * Math.sin(beta);
+				z = r * Math.sin(alpha) * Math.cos(beta);
+				
+				point( [x,y,z], random(1,5), 'crimson' );
+			}
+		</script>
+	</body>
+
+</html>

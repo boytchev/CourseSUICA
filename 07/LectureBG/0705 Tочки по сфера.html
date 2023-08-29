@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+	</suica>
+	
+	<script>
+		// брой точки
+		n = 500; 
+		
+		// радиус на сферата
+		r = 30;
+
+		// създаване на точките
+		for( var i=0; i<n; i++ )
+		{
+			// ъгъли на точка i
+			alpha = radians( random(0,360) );
+			beta  = radians( random(-90,90) );
+			
+			// изчисляване на декартови координати от сферични
+			x = r * Math.cos( alpha ) * Math.cos( beta );
+			y = r * Math.sin( alpha ) * Math.cos( beta );
+			z = r * Math.sin( beta );
+
+			// създаване на точка по сфера
+			point( [x,y,z], random(1,5) );
+		}
+	</script>
+</body>

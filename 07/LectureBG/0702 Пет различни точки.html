@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+		<oxyz>
+		
+		<point center="-20,0,0" color="crimson">
+		<point x="-12.5" size="15" color="cornflowerblue">
+		<point size="30">
+		<point id="e">
+	</suica>
+	
+	<script>
+		// доукрасяване на точка с id="e"
+		e.x = 12.5;
+		e.size = 15;
+		e.color = "yellow";
+		
+		// създаване на нова точка с JS
+		f = point( [20,0,0] );
+		f.color = [0.2,0.6,0.3];
+	</script>
+</body>

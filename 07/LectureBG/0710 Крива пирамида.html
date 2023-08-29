@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+	</suica>
+	
+	<script>
+		// върхове на пирамида с основа abc и четвърти връх d
+		a = point( [random(-30,30), random(-30,30), random(-30,30)], 2 );
+		b = point( [random(-30,30), random(-30,30), random(-30,30)], 2 );
+		c = point( [random(-30,30), random(-30,30), random(-30,30)], 2 );
+		d = point( [random(-30,30), random(-30,30), random(-30,30)], 2 );
+
+		// ръбове на основата
+		line( a, b );
+		line( b, c );
+		line( c, a );
+		
+		// околни ръбове
+		line( a, d );
+		line( b, d );
+		line( c, d );
+	</script>
+</body>

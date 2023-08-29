@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<script src="suica.js"></script>
+	</head>
+	
+	<body>
+		<suica fullWindow>
+		</suica>
+		
+		<script>
+			n = 50; // брой точки
+			r = 20; // радиус на огърлицата
+			
+			// създаване на равномерно разпределени точки
+			for( var i=0; i<n; i++ )
+			{
+				alpha = radians( 360 * i/n );
+				x = r * Math.cos( alpha );
+				y = r * Math.sin( alpha );
+				
+				// размерите на точките са променливи
+				point( [x,y,0], 4-3*Math.sin(alpha), 'DodgerBlue' );
+			}
+		</script>
+	</body>
+
+</html>

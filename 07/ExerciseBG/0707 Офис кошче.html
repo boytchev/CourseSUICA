@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<script src="suica.js"></script>
+	</head>
+	
+	<body>
+		<suica fullWindow>
+			<orbit>
+		</suica>
+		
+		<script>
+			n = 80; // брой отсечки
+			r = 20; // радиус на кошчето
+			h = 50; // височина на кошчето
+			
+			x = [];
+			z = [];
+
+			// генериране на координати по окръжност
+			for( var i=0; i<n; i++ )
+			{
+				alpha = radians( 360 * i/n );
+				x[i] = r * Math.cos( alpha );
+				z[i] = r * Math.sin( alpha );
+			}
+
+			// рисуване на кошчето
+			for( var i=0; i<n; i++ )
+			{
+				// линии в едната посока (напред)
+				j = (i+20)%n;
+				line( [x[i],h/2,z[i]], [x[j],-h/2,z[j]] );
+
+				// линии в обратната посока (назад)
+				j = (i+n-20)%n;
+				line( [x[i],h/2,z[i]], [x[j],-h/2,z[j]] );
+			}
+		</script>
+	</body>
+
+</html>

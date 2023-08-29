@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+		
+		<point center=" 20, 20, 20">
+		<point center=" 20, 20,-20">
+		<point center=" 20,-20, 20">
+		<point center=" 20,-20,-20">
+		
+		<line from="20,20,20" to="20,20,-20" color="crimson">
+		<line from="20,20,20" to="20,-20,20" color="crimson">
+		<line from="20,20,20" to="-20,20,20" color="crimson">
+	</suica>
+	
+	<script>
+		point( [-20,  20,  20] );
+		point( [-20,  20, -20] );
+		point( [-20, -20,  20] );
+		point( [-20, -20, -20] );
+
+		line( [-20,-20,-20], [-20,-20,20], 'crimson' );
+		line( [-20,-20,-20], [-20,20,-20], 'crimson' );
+		line( [-20,-20,-20], [20,-20,-20], 'crimson' );
+	</script>
+</body>

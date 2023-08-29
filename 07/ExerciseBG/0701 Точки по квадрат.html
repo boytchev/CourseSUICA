@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<script src="suica.js"></script>
+	</head>
+	
+	<body>
+		<suica fullWindow>
+		</suica>
+		
+		<script>
+			n = 20; // брой точки на всяка страна
+			a = 20; // полудължина на страната на квадрата
+			
+			for( var i=0; i<n; i++ )
+			{
+				point( [random(-a,a),  a, 0], 2 ); // горна стена
+				point( [random(-a,a), -a, 0], 2 ); // долна стена
+				
+				point( [-a, random(-a,a), 0], 2 ); // лява стена
+				point( [ a, random(-a,a), 0], 2 ); // дясна стена
+			}
+		</script>
+	</body>
+
+</html>
