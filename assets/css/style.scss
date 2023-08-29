@@ -23,7 +23,7 @@ code {
 h1, h2, h3 {
 	color: RoyalBlue;
 	font-weight: bold;
-	border-bottom: 1px dotted green;
+	border-bottom: 1px dotted gray;
 }
 
 /* command */
@@ -34,7 +34,7 @@ h4 {
 	font-family: Consolas, monospace;
 	background: var(--color-bg-tertiary);
 	padding-left: 0.5em;
-	border-left: solid 0.25em RoyalBlue;
+	border-left: solid 0.25em CornflowerBlue;
 }
 
 h1.project-name,
