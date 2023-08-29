@@ -1,6 +1,6 @@
 ---
 title: Тема №1 &ndash; Въведение
-description: 
+description: Архив с примери и решения
 tag: contents
 ---
 
