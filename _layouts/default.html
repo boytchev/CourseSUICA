@@ -17,7 +17,10 @@
 
     <header class="page-header" role="banner">
       <h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
+
+		{% if page.description != "" %}
       <h2 class="project-tagline">{{ page.description | default: site.description | default: site.github.project_tagline }}</h2>
+		}
 	  
   
 		{% if page.title == "Suica" %}
@@ -36,7 +39,7 @@
 		{% endif %}
 
 		{% if page.tag contains "contents" %}
-			<a href="{{ site.github.url }}index.html" class="btn">Съдържание</a>
+			<a href="{{ site.github.url }}/index.html" class="btn">Съдържание</a>
 		{% endif %}
 
 		{% if page.tag contains "github" %}

@@ -3,15 +3,18 @@
 
 @import "{{ site.theme }}";
 
-/*
+
 .main-content {
-  padding: 0 4rem 2rem 4rem;
+  padding: 0 1rem;
 }
-*/
 
 .main-content h1 {
   color: black;
   font-weight: bold;
+}
+
+.main-content {
+  font-size: 0.9rem;
 }
 
 #header_wrap .inner {
@@ -31,6 +34,10 @@ h1, h2, h3 {
 	color: CornflowerBlue;
 	font-weight: bold;
 	border-bottom: 1px dotted gray;
+}
+
+h2 {
+	font-size: 1.25rem;
 }
 
 /* command */
@@ -54,7 +61,7 @@ h1.project-name {
 	margin-bottom: 0 !important;
 	padding-bottom: 0 !important;
 	border: none !important;
-	font-size: 2.5rem !important;
+	font-size: 2rem !important;
 }
 
 h2.project-tagline {
