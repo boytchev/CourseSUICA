@@ -46,6 +46,7 @@ h1.project-name {
 	margin-bottom: 0 !important;
 	padding-bottom: 0 !important;
 	border: none !important;
+	font-size: 2.5rem !important;
 }
 
 h2.project-tagline {
@@ -73,5 +74,5 @@ h5 {
 
 .page-header {
   background-color: dimgray !important;
-/*  background-image: linear-gradient(120deg, #155799, #159957);*/
+  background-image: linear-gradient(120deg, black, dimgray);
 }
