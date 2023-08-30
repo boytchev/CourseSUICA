@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<!-- улавяне на събития -->
+	<suica fullWindow onPointerMove="pointerMove" onPointerDown="pointerDown" orthographic="0,100">
+	</suica>
+	
+	<script>
+		
+		// при натискане на бутон се рисува точкова линия
+		// началото и края са една и съща точка
+		function pointerDown( event )
+		{
+			object = line( findPosition( event ), findPosition( event ), 'black' );
+		}
+
+		// при движение на мишката се рисува
+		function pointerMove( event )
+		{
+			// позиция на мишката
+			var pos = findPosition( event );
+			
+			// рисуване само при натиснат първи бутон
+			if( event.buttons == 1 )
+			{
+				// отместване по хоризонтала и вертикала
+				var dx = Math.abs(object.from[0]-pos[0]),
+					dy = Math.abs(object.from[1]-pos[1]);
+						
+				// което отместване е по-голямо, то
+				// определя  каква линия да се рисува
+				if( dx < dy )
+					pos[0] = object.from[0];
+				else
+					pos[1] = object.from[1];
+
+				object.to = pos;
+			}
+		}
+	</script>
+</head>

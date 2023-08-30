@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<!-- улавяне на събития -->
+	<suica fullWindow onPointerMove="pointerMove" onPointerUp="pointerUp" onPointerDown="pointerDown" orthographic="0,100">
+	</suica>
+	
+	<script>
+		draw = false;
+		
+		// рисуване на наклонена елипса
+		function drawNow( pos )
+		{
+			polygon( 12, pos, [10,60], 'black' );
+			its.spinS = -45;
+		}
+		
+		// при натискане на бутон се рисува наклонена
+		// елипса и се влиза в режим на рисуване
+		function pointerDown( event )
+		{
+			drawNow( findPosition( event ) );
+			draw = true;
+		}
+
+		// при пускане на бутон се излиза от режим на рисуване
+		function pointerUp( event )
+		{
+			draw = false;
+		}
+
+		// при движение, ако е активен режима на рисуване,
+		// то се рисува наклонена елипса
+		function pointerMove( event )
+		{
+			if( draw )
+				drawNow( findPosition( event ) );
+		}
+	</script>
+</head>

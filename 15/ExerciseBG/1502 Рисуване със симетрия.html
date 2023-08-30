@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<!-- улавяне на събития -->
+	<suica fullWindow onPointerMove="pointerMove" onPointerUp="pointerUp" onPointerDown="pointerDown" orthographic="0,100">
+	</suica>
+	
+	<script>
+		lastPos = null;
+		
+		// при натискане на бутон се запомня позицията на мишката
+		function pointerDown( event )
+		{
+			lastPos = findPosition( event );
+		}
+
+		// при пускане на бутон се забравя последната позиция
+		function pointerUp( event )
+		{
+			lastPos = null;
+		}
+
+		// при движение на мишката се рисува
+		function pointerMove( event )
+		{
+			// позиция на мишката
+			var pos = findPosition( event );
+					
+			// рисува се само когато има запомнена позиция
+			if( lastPos )
+			{
+				// рисуване на главната линия
+				// (x,y)
+				line( lastPos, pos );
+
+				// рисуване на хоризонтално симетричната линия
+				// (x,y) -> (-x,y)
+				lastPos[0] *= -1;
+				pos[0] *= -1;
+				line( lastPos, pos );
+
+				// рисуване на вертикално симетричната линия
+				// (-x,y) -> (-x,-y)
+				lastPos[1] *= -1;
+				pos[1] *= -1;
+				line( lastPos, pos );
+
+				// рисуване на хоризонтално симетричната линия
+				// (-x,-y) -> (x,-y)
+				lastPos[0] *= -1;
+				pos[0] *= -1;
+				line( lastPos, pos );
+
+				// вертикална симетрия за възстановяване на позицията
+				// (x,-y) -> (x,y)
+				lastPos[1] *= -1;
+				pos[1] *= -1;
+
+				// запомняне на позицията
+				lastPos = pos;
+			}
+		}
+	</script>
+</head>

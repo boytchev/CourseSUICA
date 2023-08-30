@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<!-- улавяне на събития -->
+	<suica fullWindow onPointerDown="pointerDown" orthographic="0,100">
+	</suica>
+	
+	<script>
+		// при натискане на бутон се създава точка
+		function pointerDown( event )
+		{
+			point( findPosition( event ), 10, 'black' );
+		}
+	</script>
+</head>

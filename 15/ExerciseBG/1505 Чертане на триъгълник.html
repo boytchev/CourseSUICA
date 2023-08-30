@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<!-- улавяне на събития -->
+	<suica fullWindow onPointerDown="down" onPointerMove="move" orthographic="0,100">
+	</suica>
+	
+	<script>
+		// брой създадени точки на текущия триъгълник
+		points = 0;
+		
+		// създаване на връх при натискане на бутон
+		function down( event )
+		{
+			// позиция на мишката
+			pos = findPosition( event );
+			
+			// действия според броя точки
+			switch( points )
+			{
+				case 0:
+					// първа страна на триъгълника
+					ab = line( pos, pos, 'black' );
+					points = 1;
+					break;
+				case 1:
+					// втора и трета страна на триъгълника
+					ac = line( ab.from, ab.from, 'black' );
+					bc = line( ab.to, ab.to, 'black' );
+					points = 2;
+					break;
+				case 2:
+					// готов триъгълник
+					points = 0;
+					break;
+			}
+		}
+
+		// промяна при движение
+		function move( event )
+		{
+			// позиция на мишката
+			pos = findPosition( event );
+			
+			// действия според броя точки
+			switch( points )
+			{
+				case 1:
+					// променя се краят на първата страна
+					ab.to = pos;
+					break;
+				case 2:
+					// променя се краят на втората и третата страна
+					ac.to = pos;
+					bc.to = pos;
+					break;
+			}
+		}
+	</script>
+</head>

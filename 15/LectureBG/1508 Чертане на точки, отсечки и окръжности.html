@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<!-- улавяне на събития -->
+	<suica fullWindow onPointerMove="pointerMove" onPointerDown="pointerDown" orthographic="0,100">
+	</suica>
+	
+	<script>
+		
+		// разстояние между два обекта
+		function distance( a, b )
+		{
+			return Math.sqrt( (a[0]-b[0])**2 + (a[1]-b[1])**2 + (a[2]-b[2])**2 );
+		}
+		
+		// при натискане на бутон се създава точка и се
+		// изчиства флагът, който помни има ли текущ обект
+		function pointerDown( event )
+		{
+			lastPoint = point( findPosition( event ) );
+			newObject = null;
+		}
+
+		// при движение на мишката се чертае
+		function pointerMove( event )
+		{
+			// позиция на мишката
+			var pos = findPosition( event );
+			
+			// натиснат ли е първия бутон?
+			if( event.buttons == 1 )
+			{
+				// ако няма запомнен обект, то се създава точка,
+				// линия в точката, като линията става текущ обект
+				if( !newObject )
+				{
+					newPoint = point( pos );
+					newObject = line( lastPoint, pos, 'black' );
+				}
+
+				// има текущ обект, който трябва да е линия, затова се
+				// мести крайната ѝ точка където е в момента мишката
+				newPoint.center = pos;
+				newObject.to = pos;
+			}
+
+			// натиснат ли е другия бутон?
+			if( event.buttons == 2 )
+			{
+				// ако няма запомнен обект, то се създава окръжност,
+				// с нулев радиус, т.е. тя се крие в точката, която
+				// е създадена при натискането на бутон
+				if( !newObject )
+				{
+					newObject = circle( lastPoint, 0, 'black' ).style({wireframe:true});
+				}
+
+				// има текущ обект, който трябва да е окръжност,
+				// затова се променя размерът ѝ според растоянието
+				// от центъра ѝ до където е в момента мишката
+				newObject.width = 2 * distance( pos, newObject.center );
+			}
+		}
+	</script>
+</head>

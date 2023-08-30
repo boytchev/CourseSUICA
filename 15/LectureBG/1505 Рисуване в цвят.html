@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<!-- улавяне на събития -->
+	<suica fullWindow onPointerMove="pointerMove" onPointerUp="pointerUp" onPointerDown="pointerDown" orthographic="0,100">
+	</suica>
+	
+	<script>
+		lastPos = null;
+		
+		// при натискане на бутон се запомня позицията на мишката
+		function pointerDown( event )
+		{
+			lastPos = findPosition( event );
+		}
+
+		// при пускане на бутон се забравя последната позиция
+		function pointerUp( event )
+		{
+			lastPos = null;
+		}
+
+		// при движение на мишката се рисува
+		function pointerMove( event )
+		{
+			// позиция на мишката
+			var pos = findPosition( event );
+				
+			// избор на цвят за рисуване
+			if( event.buttons == 1 ) color = 'crimson';
+			if( event.buttons == 2 ) color = 'royalblue';
+			if( event.buttons == 3 ) color = 'black';
+
+			// рисува се само когато има запомнена позиция
+			if( lastPos )
+			{
+				line( lastPos, pos, color );
+				lastPos = pos;
+			}
+		}
+	</script>
+</head>

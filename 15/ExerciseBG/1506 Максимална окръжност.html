@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<!-- улавяне на събития -->
+	<suica fullWindow onPointerDown="down" orthographic="0,100">
+		<square size="600" color="black">
+	</suica>
+	
+	<script>
+		// списък със създадените до момента окръжности
+		circles = [];
+		
+		// създаване на окръжност при натискане на бутон
+		function down( event )
+		{
+			// позиция на мишката
+			pos = findPosition( event );
+			x = pos[0];
+			y = pos[1];
+			
+			// ако е извън квадрата, нищо не се прави
+			if( x<=-300 || x>=300 ) return;
+			if( y<=-300 || y>=300 ) return;
+			
+			// максимален радиус до контура на квадрата
+			rad = Math.min( x-(-300), 300-x, y-(-300), 300-y );
+			
+			// актуализиране на радиуса до някоя от окръжностите
+			// ако мишката е вътре в окръжност, нищо не се прави
+			for( var cir of circles )
+			{
+				dist = Math.sqrt( (cir.x-x)**2 + (cir.y-y)**2 ) - cir.width/2;
+				if( dist < 0 ) return;
+				rad = Math.min( rad, dist );
+			}
+
+			// рисуване на окръжност
+			circles.push( circle( [x,y], 2*rad, 'white' ) );
+		}
+	</script>
+</head>

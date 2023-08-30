@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<!-- улавяне на движение на мишката -->
+	<suica fullWindow onPointerMove="pointerMove" orthographic="0,100">
+	</suica>
+	
+	<script>
+		lastPos = null;
+		
+		// обработване на движението на мишката
+		function pointerMove( event )
+		{
+			// екранна позиция
+			var pos = findPosition( event );
+					
+			// ако е имало предходна позиция, рисува се отсечка
+			if( lastPos ) line( lastPos, pos );
+			
+			// запомня се текущата позиция
+			lastPos = pos;
+		}
+	</script>
+</head>

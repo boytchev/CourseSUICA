@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<style>
+		suica {
+			width: 600px;
+			left: calc( 50% - 300px );
+		}
+	</style>
+</head>
+
+<body>
+	<!-- улавяне на събитията за влизане и излизане -->
+	<suica onPointerEnter="inside" onPointerLeave="outside">
+		<demo>
+		<cube id="a" size="10">
+	</suica>
+
+	
+	<script>
+		// при влизане става голям размер
+		function inside( event )
+		{
+			a.size = 40;
+		}
+
+		// при излизане се връща размер
+		function outside( event )
+		{
+			a.size = 10;
+		}
+	</script>
+	
+</head>

@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<!-- улавяне на събития -->
+	<suica fullWindow onPointerMove="move" orthographic="0,100">
+		<!-- бягаща сфера -->
+		<sphere id="a" size="100">
+		<!-- квадрат и невидима зона вътре в него -->
+		<square id="zone" size="400,400" hidden>
+		<square size="500,500" color="linen">
+	</suica>
+	
+	<script>
+		// движение на мишката
+		function move( event )
+		{
+			// позиция на мишката
+			pos = findPosition( event );
+			x = pos[0];
+			y = pos[1];
+			
+			// разстояние до сферата
+			dist = Math.sqrt( (a.x-x)**2 + (a.y-y)**2 );
+			
+			// ако е достатъчно голямо, нищо не се прави
+			if( dist > 0.6*a.width ) return;
+			
+			// иначе се избира случайно място в зоната,
+			// което е достатъчно далече от мишката
+			do
+			{
+				a.center = randomOn( zone );
+				dist = Math.sqrt( (a.x-x)**2 + (a.y-y)**2 );
+			} while ( dist < 2*a.width )
+		}
+	</script>
+</head>

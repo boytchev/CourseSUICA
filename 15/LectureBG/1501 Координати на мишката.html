@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<style>
+		suica {
+			width: 600px;
+			left: calc( 50% - 300px );
+		}
+		div {
+			font-size: 2em;
+			text-align: center;
+			width: 100%;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="info">
+		&nbsp;
+	</div>
+	
+	<!-- улавяне на движение на мишката, натискане и пускане на бутон на мишката -->
+	<suica onPointerMove="pointerEvent" onPointerDown="pointerEvent" onPointerUp="pointerEvent">
+		<orbit>
+		<cube>
+	</suica>
+	
+	<script>
+		// обработване на събитие
+		function pointerEvent( event )
+		{
+			// екранни Суика координати на събитието
+			var pos = findPosition( event );
+				
+			element('info').innerHTML = event.type+'('+pos[0]+','+pos[1]+') buttons='+event.buttons;
+		}
+	</script>
+</head>

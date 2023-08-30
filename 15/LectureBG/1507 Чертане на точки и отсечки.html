@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<!-- улавяне на събития -->
+	<suica fullWindow onPointerMove="pointerMove" onPointerDown="pointerDown" orthographic="0,100">
+	</suica>
+	
+	<script>
+		
+		// при натискане на бутон се създава точка и се
+		// изчиства флагът, който помни има ли текущ обект
+		function pointerDown( event )
+		{
+			lastPoint = point( findPosition( event ) );
+			newObject = null;
+		}
+
+		// при движение на мишката се рисува
+		function pointerMove( event )
+		{
+			// позиция на мишката
+			var pos = findPosition( event );
+			
+			// натиснат ли е първия бутон?
+			if( event.buttons == 1 )
+			{
+				// ако няма запомнен обект, то се създава точка,
+				// линия в точката, като линията става текущ обект
+				if( !newObject )
+				{
+					newPoint = point( pos );
+					newObject = line( lastPoint, pos, 'black' );
+				}
+
+				// има текущ обект, който трябва да е линия, затова се
+				// мести крайната ѝ точка където е в момента мишката
+				newPoint.center = pos;
+				newObject.to = pos;
+			}
+		}
+	</script>
+</head>
