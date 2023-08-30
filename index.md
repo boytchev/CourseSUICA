@@ -7,7 +7,11 @@ tag:
 Тази страница е софтуерен архив на дисциплината СИУКС
 (Създаване на интерактивно учебно компютърна съдържание) и
 съдържа примерите от лекциите и решенията на
-задачите от упражненията.
+задачите от упражненията. Анимациите са правени със Суика
+([сайт](https://boytchev.github.io/suica/),
+[документация](https://boytchev.github.io/suica/docs/user-guide.html),
+[справочник](https://boytchev.github.io/suica/docs/cheat-sheet.pdf)
+и [примери](https://boytchev.github.io/suica/docs/examples.html)).
 
 
 # Съдържание
