@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow ontime="loop">
+		<orbit>
+	</suica>
+	
+	<script>
+		n = 40; // брой стъпки
+		
+		// рамки на куб
+		cube( [0,0,0], n, 'black' );
+		its.wireframe = true;
+		
+		// подвижно топче в единия връх
+		a = sphere( [-n/2,-n/2,-n/2], 6, 'orange' );
+		
+		function loop( t, dT )
+		{
+			// диагонално движение до
+			// достигане на другия връх
+			if( a.x < n/2 )
+			{
+				a.x += 10*dT;
+				a.y += 10*dT;
+				a.z += 10*dT;
+			}
+		}
+	</script>
+</body>

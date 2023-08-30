@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow ontime="loop">
+		<orbit>
+	</suica>
+	
+	<script>
+		n = 40; // брой стъпки
+		
+		// рамки на куб
+		cube( [0,0,0], n, 'black' );
+		its.wireframe = true;
+		
+		// четири топчета, позицията им не е от значение
+		a = sphere( [0,0,0], 6, 'orange' );
+		b = sphere( [0,0,0], 6, 'orange' );
+		c = sphere( [0,0,0], 6, 'orange' );
+		d = sphere( [0,0,0], 6, 'orange' );
+		
+		function loop( t )
+		{
+			var k;
+			
+			// движение на първото топче
+			k = (n/2) * Math.sin(t);
+			a.center = [k,k,k]
+
+			// движение на второто топче
+			k = (n/2) * Math.sin(t + Math.PI/4);
+			b.center = [-k,k,k]
+			
+			// движение на третото топче
+			k = (n/2) * Math.sin(t + 2*Math.PI/4);
+			c.center = [-k,-k,k]
+			
+			// движение на четвъртото топче
+			k = (n/2) * Math.sin(t + 3*Math.PI/4);
+			d.center = [k,-k,k]
+		}
+	</script>
+</body>

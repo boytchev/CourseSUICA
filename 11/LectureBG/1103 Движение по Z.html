@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<orbit>
+		<oxyz>
+		<cube id="a" size="10">
+	</suica>
+	
+	<script>
+		function loop( t, dT )
+		{
+			// движение по Z
+			a.z = a.z + 25*dT;
+			
+			// връщане в начално положение,
+			// когато Z стане твърде голямо
+			if( a.z > 30 ) a.z = 0;
+		}
+	</script>	
+</head>

@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<orbit>
+		
+		<!-- модел на хилка -->
+		<group id="a" x="30">
+			<cylinder y="-0.5" size="10,1" color="seagreen">
+			<cylinder z="4" size="3,6,1.4" color="brown" spinV="90">
+			<sphere z="10" size="3,1.4,1" color="brown">
+		</group>
+		
+		<!-- втората хилка е клонинг -->
+		<clone id="b" x="-30" src="a">
+		
+		<!-- топчето за тенис -->
+		<sphere id="c" size="2" color="orange">
+	</suica>
+	
+	<script>
+		function loop( t )
+		{
+			// движение на едната хилка
+			a.y = 10*Math.sin(3.2*t-2.9);
+			a.z = 20*Math.sin(2.5*t+3.3);
+			a.spinH = 90 + 20*Math.sin(4.8*t-1.9);
+			a.spinV = 90 + 20*Math.sin(3.9*t+2.8);
+
+			// движение на другата хилка
+			b.y = 10*Math.sin(2.6*t-3.7);
+			b.z = 20*Math.sin(3.4*t+2.8);
+			b.spinH = 90 + 20*Math.sin(3.8*t+1.3);
+			b.spinV = 90 + 20*Math.sin(4.9*t-1.8);
+
+			// движение на топчето с линейна
+			// комбинация между двете хилки
+			var k = 0.02+0.96*Math.abs((3*t)%2 - 1);
+			c.center = lerp( a, b, k );
+		}
+	</script>	
+</head>

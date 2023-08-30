@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<orbit>
+		<cube id="a">
+	</suica>
+	
+	<script>
+		// функция, която се вика по веднъж на всеки кадър,
+		// като Суика се грижи да подаде времената t и dT
+		function loop( t, dT )
+		{
+			a.color = hsl( 180*t, 100, 50 );
+		}
+	</script>	
+</head>

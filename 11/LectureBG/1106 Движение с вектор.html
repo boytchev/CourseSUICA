@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<orbit>
+		<oxyz>
+		<cube id="zone" size="80,60,80" hidden>
+	</suica>
+	
+	<script>
+		// две случайни сфери с отсечка между тях
+		a = sphere( randomIn(zone), 5, 'dimgray' );
+		b = sphere( randomIn(zone), 5, 'dimgray' );
+		line( a, b, 'dimgray' );
+		
+		// трета сфера
+		c = sphere( [a.x,a.y,a.z], 6, 'orange' );
+
+		// общо време и общ вектор на движение
+		T = 3;
+		V = {x:b.x-a.x, y:b.y-a.y, z:b.z-a.z };
+		
+		function loop( t, dT )
+		{
+			// движение в интервала [2,T+2)
+			if( t>=2 && t<T+2 )
+			{
+				c.x += dT/T * V.x;
+				c.y += dT/T * V.y;
+				c.z += dT/T * V.z;
+			}
+		}
+	</script>	
+</head>

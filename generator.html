@@ -2,14 +2,27 @@
 
 <script>
 
-var name = '';
+var name = 'Анимация';
 
 var lectures = `
-
+"D:/Pavel/Projects/GitHub/CourseSUICA/11/LectureBG/1101 Анимация с цвят.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/11/LectureBG/1102 Движение по X.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/11/LectureBG/1103 Движение по Z.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/11/LectureBG/1104 Последователни движения (грешни).html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/11/LectureBG/1105 Последователни движения (работещи).html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/11/LectureBG/1106 Движение с вектор.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/11/LectureBG/1107 Движение с линейна комбинация.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/11/LectureBG/1108 Движение по пръстен.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/11/LectureBG/1109 Тенис.html"
 `;
 
 var exercises = `
-
+"D:/Pavel/Projects/GitHub/CourseSUICA/11/ExerciseBG/1102 Диагонално движение.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/11/ExerciseBG/1103 Диагонално4 движение.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/11/ExerciseBG/1104 Мравки на конец.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/11/ExerciseBG/1105 Профучаващи капсули.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/11/ExerciseBG/1106 Фотофиниш.html"
+"D:/Pavel/Projects/GitHub/CourseSUICA/11/ExerciseBG/1107 Преход между форми.html"
 `;
 
 
@@ -25,7 +38,7 @@ function process( names )
 	for( var name of names )
 	{
 		name = name.split('/');
-		path = name[5]+'/'+name[6];
+		path = name[6];
 		name = name.pop().split('"')[0].split('.');
 		ext = name.pop();
 		name = name.join('.');

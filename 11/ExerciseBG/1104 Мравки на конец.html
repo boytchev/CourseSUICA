@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow ontime="loop">
+		<orbit>
+	</suica>
+	
+	<script>
+		// брой мравки
+		n = 20;
+		
+		// конец от -30 до +30
+		line( [-30,0,0], [30,0,0], 'black' );
+
+		// мравки на случани позиции и със случайни скорости
+		ants = [];
+		for( var i=0; i<n; i++ )
+		{
+			ants[i] = point( [random(-25,25), 1, 0], 5, 'black' );
+			ants[i].v = random( -10, 10 );
+		}
+		
+		function loop( t, dT )
+		{
+			// движение на мравките
+			for( var i=0; i<n; i++ )
+			{
+				if( ants[i].x<-31 || ants[i].x>31 )
+					ants[i].y += -15*dT; // падане надолу
+				else
+					ants[i].x += ants[i].v*dT; // движение встрани
+			}
+		}
+	</script>
+</body>

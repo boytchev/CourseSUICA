@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+	</suica>
+	
+	<script>
+		// брой капсули
+		n = 250;
+		
+		// функция за създаване на цветна капсула
+		function capsule( )
+		{
+			// капсула от две сфери и два цилиндъра
+			var cap = group(
+				sphere( [0,-2,0], 2 ),
+				cylinder( [0,-2,0], 2 ),
+				cylinder( [0,0,0], 2 ),
+				sphere( [0,2,0], 2 )
+			);
+			
+			// случайно начално положение и цвят
+			cap.x = random(-100,100);
+			cap.y = random(-100,-400);
+			cap.z = random(-100,100);
+			recolor( cap );
+			
+			return cap; 
+		}
+		
+		// смяна на цвета на капсула
+		function recolor( capsule )
+		{
+			// два цвята за двете половина
+			var colA = hsl( random(0,360), 100, 50 ),
+				colB = hsl( random(0,360), 100, 50 );
+				
+			// оцветяване на 4-те елемента на капсулата
+			capsule.groupElements[0].color = colA;
+			capsule.groupElements[1].color = colA;
+			capsule.groupElements[2].color = colB;
+			capsule.groupElements[3].color = colB;
+			
+			return capsule;
+		}
+		
+		// капсули
+		capsules = [];
+		for( var i=0; i<n; i++ )
+			capsules[i] = capsule( );
+		
+		suica.ontime = loop;
+		 
+		function loop( t, dT )
+		{
+			// движение на капсулите
+			for( var i=0; i<n; i++ )
+			{
+				// ако капсула е твърде нагоре, тя се връща
+				// отдолу и ѝ се сменя цветът -- така изглежда
+				// като нова капсула
+				if( capsules[i].y > 100 )
+				{
+					capsules[i].y -= 200;
+					recolor( capsules[i] );
+				}
+				else
+					capsules[i].y += 50*dT;
+			}
+		}
+	</script>
+</body>

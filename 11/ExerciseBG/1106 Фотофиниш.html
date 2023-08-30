@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+	</suica>
+	
+	<script>
+		n = 20;
+		
+		// земя
+		cube( [0,-11.1,0], [60,2,4*n], 'dimgray' );
+		
+		// писти
+		for( var z=1; z<n; z++ )
+			line( [-30,-10,-2*n+4*z], [30,-10,-2*n+4*z], 'lightgray' );
+			
+		// старт и финал
+		square( [-25,-10,0], [1,4*n], 'white' ).style({spinV:90});
+		square( [25,-10,0], [1,4*n], 'white' ).style({spinV:90});
+		
+
+		// функция за създаване на болид
+		function bolid( z )
+		{
+			var color = hsl( random(0,360), 100*random(0,1)**0.5, random(20,80) );
+			
+			return group(
+				sphere( [0,-2,0], [2,1,1], color ), // задница
+				cylinder( [0,-2,0], [2,4,1], color ), // тяло
+				sphere( [0,2,0], [2,3,1], color ), // предница
+				cylinder( [-1,-1,0], [1.3,0.4], 'black' ).style({spinS:90}), // колело
+				cylinder( [ 1.3,-1,0], [1.3,0.4], 'black' ).style({spinS:90}), // колело
+				cylinder( [-1, 1.5,0], [1.3,0.2], 'black' ).style({spinS:90}), // колело
+				cylinder( [ 1.2, 1.5,0], [1.3,0.2], 'black' ).style({spinS:90}), // колело
+			).style({center:[-25,-9.5,z], spinH:90, spinV:90});
+		}
+		
+		// болиди
+		bolids = [];
+		for( var i=0; i<n; i++ )
+			bolids[i] = bolid( -2*n+4*i+2 );
+		
+		suica.ontime = loop;
+		 
+		function loop( t, dT )
+		{
+			// избор на случаен болид и случайна стъпка
+			var index = Math.floor( random(0,n) ),
+				step = random(0,0.4);
+				
+			// избраният болид се мести напред
+			bolids[index].x += step;
+			
+			// ако е стигнал финиша, прекратяване
+			// анимацията и всичко замръзва както си е
+			if( bolids[index].x > 21 )
+				suica.ontime = null;
+		}
+	</script>
+</body>
