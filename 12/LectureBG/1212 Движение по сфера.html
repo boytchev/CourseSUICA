@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<orbit>
+		
+		<!-- статичн сфера с три елипсоидни оси -->
+		<sphere size="40" color="lightgray">
+		<sphere size="41,12,12" color="black">
+		<sphere size="2,60,2" color="black">
+		<sphere size="12,12,41" color="black">
+		
+		<!-- три движещи се сфери -->
+		<sphere id="a" size="4" color="crimson">
+		<sphere id="b" size="4" color="yellow">
+		<sphere id="c" size="4" color="cornflowerblue">
+		
+		<!-- две окръжности за маркиране на тракетория на движение -->
+		<circle id="aa" color="crimson" wireframe spinV="90">
+		<circle id="cc" size="42" color="cornflowerblue" wireframe>
+	</suica>
+	
+	<script>
+		function loop( t, dT )
+		{
+			// движение на червената сфера
+			u = 4.7;
+			v = 0.2;
+			a.center = [ 20*Math.cos(u*t)*Math.cos(v*t), 20*Math.sin(v*t), 20*Math.sin(u*t)*Math.cos(v*t) ];
+
+			// движение на червената окръжност (тя е с променлив радиус)
+			aa.y = a.y;
+			aa.size = 40*Math.abs(Math.cos(v*t))+2;
+
+			// движение на жълтата сфера
+			u = 1.4;
+			v = 1.1;
+			b.center = [ 20*Math.cos(u*t)*Math.cos(v*t), 20*Math.sin(v*t), 20*Math.sin(u*t)*Math.cos(v*t) ];
+
+			// движение на синята сфера и синята окръжност
+			u = 0.2;
+			v = 4.9;
+			c.center = [ 20*Math.cos(u*t)*Math.cos(v*t), 20*Math.sin(v*t), 20*Math.sin(u*t)*Math.cos(v*t) ];
+			cc.spinH = degrees( -u*t );
+		}
+	</script>	
+</head>

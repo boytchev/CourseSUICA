@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<orbit altitude="0">
+
+		<!-- конус с изпъкнала основа -->
+		<pyramid count="120" y="-10" size="100,40" color="lightgray">
+		<prism count="120" y="-11" size="103,1" color="dimgray">
+		
+		<!-- движеща се сфера -->
+		<sphere id="ball" size="4" color="orange">
+	</suica>
+	
+	<script>
+		function loop( t, dT )
+		{
+			u = t/2; // хоризонтално положение
+			v = 18*Math.sin(t)+10; // вертикално положение
+			
+			// v=-10 -> r=50
+			// v=30  -> r=0
+			r = (30-v) * 50/40;
+			
+			// добавка, за да се движи сферата
+			// по повърхността на склона
+			r = r + 3;
+
+			ball.center = [ r*Math.cos(u), v, r*Math.sin(u) ];
+		}
+	</script>	
+</head>

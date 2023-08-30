@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<orbit altitude="0">
+		
+		<!-- четири трасета на движение -->
+		<circle size="60" wireframe color="gray">
+		<circle size="45" wireframe color="gray">
+		<circle size="30" wireframe color="gray">
+		<circle size="15" wireframe color="gray">
+		
+		<!-- четири движещи се сфери -->
+		<sphere id="a1" size="5" color="cornflowerblue">
+		<sphere id="a2" size="5" color="crimson">
+		<sphere id="a3" size="5" color="yellow">
+		<sphere id="a4" size="5" color="seagreen">
+	</suica>
+	
+	<script>
+		function loop( t, dT )
+		{
+			// в една посока
+			a1.x = 30 * Math.cos( t );
+			a1.y = 30 * Math.sin( t );
+
+			// в обратната посока
+			a2.x = 22.5 * Math.cos( -1.2 * t );
+			a2.y = 22.5 * Math.sin( -1.2 * t );
+			
+			// пак в първата посока
+			a3.x = 15 * Math.cos( 1.4 * t );
+			a3.y = 15 * Math.sin( 1.4 * t );
+			
+			// отново в обратната посока
+			a4.x = 7.5 * Math.cos( -1.6 * t );
+			a4.y = 7.5 * Math.sin( -1.6 * t );
+		}
+	</script>	
+</head>

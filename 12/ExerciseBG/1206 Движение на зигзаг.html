@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<orbit>
+		<!-- основна голяма сфера -->
+		<sphere size="40" color="lightgray">
+		
+		<!-- едно черно петно и 5 клонинга -->
+		<group id="a">
+			<sphere z="20" size="5,5,1" color="black">
+		</group>
+		<clone src="a" spinH="60">
+		<clone src="a" spinH="120">
+		<clone src="a" spinH="180">
+		<clone src="a" spinH="240">
+		<clone src="a" spinH="300">
+		
+		<!-- подвижна сфера -->
+		<sphere id="ball" size="4" color="orange">
+	</suica>
+	
+	<script>
+		// това n не се използва тук, най-вероятно е
+		// останало от по-предна версия на решението,
+		// но ми е жал да го трия, затова си стои...
+		n = 30;
+		
+		function loop( t, dT )
+		{
+			u = 2*t; // норизонтален ъгъл
+			v = 0.3*Math.sin(6*t); // вертикален ъгъл със синусоида
+			ball.center = [ 22*Math.cos(u)*Math.cos(v), 22*Math.sin(v), 22*Math.sin(u)*Math.cos(v) ];
+		}
+	</script>	
+</head>

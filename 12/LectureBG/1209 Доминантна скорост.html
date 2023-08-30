@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<orbit altitude="0">
+		
+		<!-- три квадратни оградени зони за движение -->
+		<group id="zone">
+			<square size="40,40" color="white">
+			<square size="40,40" color="dimgray" wireframe>
+		</group>
+		<clone src="zone" x="-45">
+		<clone src="zone" x="45">
+		
+		<!-- три движещи се окръжност -->
+		<sphere id="a" size="6,6,2" color="dimgray">
+		<sphere id="b" size="6,6,2" color="dimgray">
+		<sphere id="c" size="6,6,2" color="dimgray">
+	</suica>
+	
+	<script>
+		function loop( t, dT )
+		{
+			// доминантна хоризонтална скорост
+			u = 3.7;
+			v = 0.5;
+			a.center = [ -45+17*Math.cos(u*t), 17*Math.sin(v*t) ];
+
+			// без доминантна скорост
+			u = 1.4;
+			v = 1.1;
+			b.center = [     17*Math.cos(u*t), 17*Math.sin(v*t) ];
+
+			// доминантна вертикална скорост
+			u = 0.3;
+			v = 2.9;
+			c.center = [  45+17*Math.cos(u*t), 17*Math.sin(v*t) ];
+		}
+	</script>	
+</head>

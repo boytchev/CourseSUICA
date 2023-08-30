@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<orbit distance="200">
+		<sphere id="star" size="10" color="orange">
+	</suica>
+	
+	<script>
+		n = 15; // брой планети
+		m = 150; // брой луни
+		
+		// създаване на планетите - rad=радиус на орбитата, ofs=начален ъгъл
+		planets = [];
+		for( var i=0; i<n; i++ )
+			planets.push( sphere([0,0,0],random(2,5),'cornflowerblue').style({rad:20+20*i,ofs:random(0,360)}) );
+		
+		// създаване на луните - rad=радиус на орбитата, ofs=начален ъгъл, spd=скорост, idx=около коя планета
+		moons = [];
+		for( var i=0; i<m; i++ )
+			moons.push( sphere([0,0,0],random(0.3,1.5),'dimgray').style({rad:random(3,10),ofs:random(0,360),spd:random(2,10),idx:Math.round(random(0,n-1))}) );
+		
+		
+		function loop( t, dT )
+		{
+			// движение на планетите около звездата
+			for( planet of planets )
+			{
+				speed = 2 * 0.99**planet.rad;
+				angle = speed * t + planet.ofs;
+				planet.x = planet.rad * Math.cos( angle );
+				planet.z = planet.rad * Math.sin( angle );
+			}
+
+			// движение на луните около планетите им
+			for( moon of moons )
+			{
+				angle = moon.spd * t + moon.ofs;
+				
+				planet = planets[ moon.idx ];
+				
+				moon.x = planet.x + moon.rad * Math.cos( angle );
+				moon.z = planet.z + moon.rad * Math.sin( angle );
+			}
+		}
+	</script>	
+</head>

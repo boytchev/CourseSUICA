@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<orbit>
+		<sphere size="41" color="moccasin">
+	</suica>
+	
+	<script>
+		n = 50; // брой пешки
+		
+		// функция за създаване на пешла със случаен черносивобял цвят
+		function pawn( )
+		{
+			var color = hsl( 0, 0, random(0,100) );
+			
+			var obj = group(
+				prism( 6, [0,0,0], [7,1], color ),
+				pyramid( 6, [0,1,0], [7,2], color ),
+				pyramid( 6, [0,1,0], [4,8], color ),
+
+				pyramid( 6, [0,6.7,0], [4,0.5], color ),
+				prism( 6, [0,6.2,0], [4,0.5], color ),
+				pyramid( 6, [0,6.2,0], [4,0.5], color ).style({spinV:180}),
+
+				pyramid( 6, [0,9.5,0], [3.5,0.75], color ),
+				prism( 6, [0,7.5,0], [3.5,2], color ),
+				pyramid( 6, [0,7.5,0], [3.5,0.5], color ).style({spinV:180}),
+			);
+			
+			// скорост на пешката по двете ъглови направления
+			obj.u = random(0.2,1);
+			obj.v = random(0.2,1);
+			return obj;
+		}
+
+	
+		// масив от всички пешки
+		pawns = [];
+		for( var i=0; i<n; i++ )
+			pawns[i] = pawn( );
+			
+			
+		function loop( t, dT )
+		{
+			for( var i=0; i<n; i++ )
+			{
+				// изчисляване на движението на пешка
+				var u = pawns[i].u*t+i,
+					v = pawns[i].v*t-i;
+				pawns[i].center = [ 20*Math.cos(u)*Math.cos(v), 20*Math.sin(v), 20*Math.sin(u)*Math.cos(v) ];
+				
+				// завъртане на пешката, за да е стъпила на сферата
+				pawns[i].lookAt( [2*pawns[i].x, 2*pawns[i].y, 2*pawns[i].z] );
+			}
+		}
+	</script>	
+</head>

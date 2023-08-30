@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<sphere id="star" size="15" color="orange">
+		<sphere id="planet" size="6" color="cornflowerblue">
+		<sphere id="moon1" size="2" color="dimgray">
+		<sphere id="moon2" size="1.5" color="dimgray">
+	</suica>
+	
+	<script>
+		function loop( t, dT )
+		{
+			// движение на планетата в кръг около (0,0)
+			planet.x = 25*Math.cos( t );
+			planet.y = 25*Math.sin( t );
+			
+			// движение на по-близката луна около планетата
+			moon1.x = planet.x + 7*Math.cos( 3.2*t )
+			moon1.y = planet.y + 7*Math.sin( 3.2*t )
+			
+			// движение на по-далечната луна около планетата
+			moon2.x = planet.x + 9*Math.cos( 2.7*t )
+			moon2.y = planet.y + 9*Math.sin( 2.7*t )
+		}
+	</script>	
+</head>

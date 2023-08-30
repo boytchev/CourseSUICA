@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<orbit altitude="0">
+		
+		<!-- три движещи се сфери -->
+		<sphere id="a" size="6" color="crimson">
+		<sphere id="b" size="6" color="cornflowerblue">
+		<sphere id="c" size="6" color="yellow">
+	</suica>
+	
+	<script>
+		// функция y=f(x,z), определяща вертикалната y координата
+		// на точка от повърхината с хоризонтални координати (x,z)
+		function f( x, z )
+		{
+			return 7 * (1+Math.cos(x/11)) * (1+Math.cos(z/11)) - 10;
+		}
+		
+		// рисуване на мрежа по повърхнината
+		for( var x = -50; x<=50; x+=5 )
+		for( var z = -50; z<=50; z+=5 )
+		{
+			if( x<50) line( [x,f(x,z),z], [x+5,f(x+5,z),z] );
+			if( z<50) line( [x,f(x,z),z], [x,f(x,z+5),z+5] );
+		}
+		
+		function loop( t, dT )
+		{
+			// движение на едната сфера, u,v са скоростите
+			// по двете хоризонтални направления
+			u = 1.24;
+			v = 0.12;
+			x = 45*Math.cos(u*t);
+			z = 45*Math.sin(v*t);
+			a.center = [x,f(x,z),z];
+
+			// аналогично движение на втората сфера
+			u = 0.92;
+			v = 1.45;
+			x = 45*Math.cos(u*t);
+			z = 45*Math.sin(v*t);
+			b.center = [x,f(x,z),z];
+
+			// и на третата сфера
+			u = 0.13;
+			v = 1.17;
+			x = 45*Math.cos(u*t);
+			z = 45*Math.sin(v*t);
+			c.center = [x,f(x,z),z];
+		}
+	</script>	
+</head>

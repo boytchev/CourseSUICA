@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow ontime="loop">
+		<orbit>
+		<cylinder y="-20" size="30,40" color="linen">
+		
+		<!-- четири движещи се плочки -->
+		<cube id="a" size="20,5" color="crimson">
+		<cube id="b" size="20,5" color="cornflowerblue">
+		<cube id="c" size="20,5" color="yellow">
+		<cube id="d" size="20,5" color="seagreen">
+	</suica>
+	
+	<script>
+		function loop( t, dT )
+		{
+			// първа плочка
+			angle = 5.3*t;
+
+			a.center = [30*Math.sin(angle),-20,30*Math.cos(angle)];
+			a.spinT = degrees( angle );
+			
+			// втора плочка
+			angle = 4.6*t + radians(90);
+
+			b.center = [30*Math.sin(angle),-10,30*Math.cos(angle)];
+			b.spinT = degrees( angle );
+			
+			// трета плочка
+			angle = 3.8*t + radians(180);
+
+			c.center = [30*Math.sin(angle),0,30*Math.cos(angle)];
+			c.spinT = degrees( angle );
+			
+			// четвърта плочка
+			angle = 2.9*t + radians(270);
+
+			d.center = [30*Math.sin(angle),10,30*Math.cos(angle)];
+			d.spinT = degrees( angle );
+		}
+	</script>
+</body>

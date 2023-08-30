@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<orbit altitude="0">
+		<circle size="50" wireframe color="gray">
+		<sphere id="а" size="8" color="cornflowerblue">
+	</suica>
+	
+	<script>
+		function loop( t, dT )
+		{
+			// ъгъл на полярни координати
+			alpha = t;
+			
+			// преобразуване от полярни в декартови
+			а.x = 25 * Math.cos( alpha );
+			а.y = 25 * Math.sin( alpha );
+		}
+	</script>	
+</head>
