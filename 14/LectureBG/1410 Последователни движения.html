@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="tween.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow ontime="loop">
+		<orbit>
+		
+		<!-- статична плочка -->
+		<cube size="30,30,4" color="gray">
+		
+		<!-- движеща се плочка -->
+		<cube id="a" size="9,9,2" color="orange">
+	</suica>
+	
+	<script>
+		pos = {x:20, y:20};
+
+		// четири tween-а за 4-те движения по всяка от страните
+		m1 = new TWEEN.Tween( pos ).to( {x:20, y:-20}, 1000 );
+		m2 = new TWEEN.Tween( pos ).to( {x:-20, y:-20}, 1000 );
+		m3 = new TWEEN.Tween( pos ).to( {x:-20, y:20}, 1000 );
+		m4 = new TWEEN.Tween( pos ).to( {x:20, y:20}, 1000 );
+		
+		// движенията за навързани на цикъл
+		m1.chain( m2 );
+		m2.chain( m3 );
+		m3.chain( m4 );
+		m4.chain( m1 );
+
+		// ръчно се пуска само първият tween
+		m1.start( );
+		
+		function loop( )
+		{
+			// актуализиране на активният в момента tween
+			TWEEN.update( );
+			
+			// позиция на плочката
+			a.center = [pos.x, pos.y, 0];
+		}
+	</script>
+</head>
+

@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="tween.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow ontime="loop">
+		<orbit altitude="0">
+
+		<!-- два статични куба -->
+		<cube x="-30" size="10,40" color="gray">
+		<cube x="30" size="10,40" color="gray">
+		
+		<!-- движещи се сфери -->
+		<sphere id="a" x="-30" y="13" size="13" color="crimson">
+		<sphere id="b" x="-30" y="0" size="13" color="yellow">
+		<sphere id="c" x="-30" y="-13" size="13" color="seagreen">
+	</suica>
+	
+	<script>
+		// три начални позиции и една обща крайна
+		posA = {x: -30};
+		posB = {x: -30};
+		posC = {x: -30};
+		endPos = {x: 30};
+
+		// създаване и стартиране на първия tween 
+		new TWEEN.Tween( posA )
+			.to( endPos, 3000 ) // 3 секунди
+			.start( );
+		
+		// създаване и стартиране на втория tween 
+		new TWEEN.Tween( posB )
+			.to( endPos, 2000 ) // 2 секунди
+			.start( );
+		
+		// създаване и стартиране на третия tween 
+		new TWEEN.Tween( posC )
+			.to( endPos, 1000 ) // 1 секунди
+			.start( );
+		
+		function loop( )
+		{
+			// актуализиране на tween-овете
+			TWEEN.update( );
+			
+			// извличане променените стойности
+			a.x = posA.x;
+			b.x = posB.x;
+			c.x = posC.x;
+		}
+	</script>
+</head>
+

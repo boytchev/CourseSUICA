@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="tween.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow ontime="loop">
+		<orbit>
+		
+		<!-- движещи се кубове -->
+		<cube id="a" x="30" y="15" size="20" color="orange">
+		<cube id="b" x="30" y="-15" size="20" color="seagreen">
+	</suica>
+	
+	<script>
+		posA = {x: 30};
+		posB = {x: 30};
+		
+		// tween за жълтия куб, с движение отдясно-наляво,
+		// което се повтаря няколко пъти
+		new TWEEN.Tween( posA )
+			.to( {x: -30}, 1400 )
+			.easing( TWEEN.Easing.Cubic.InOut )
+			.repeat( 7 )
+			.start( );
+		
+		// tween за зеления куб, с движение наляво-надясно,
+		// което се повтаря с обръщане няколко пъти
+		new TWEEN.Tween( posB )
+			.to( {x: -30}, 1000 )
+			.easing( TWEEN.Easing.Cubic.InOut )
+			.repeat( 10 )
+			.yoyo( true )
+			.start( );
+		
+		function loop( )
+		{
+			// актуализиране на двата tween-a
+			TWEEN.update( );
+			
+			// хоризонтална позиция на кубовете
+			a.x = posA.x;
+			b.x = posB.x;
+		}
+	</script>
+</head>
+

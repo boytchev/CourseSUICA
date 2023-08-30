@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="tween.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow ontime="loop">
+		<orbit>
+		
+		<!-- движещ се цилиндър -->
+		<cylinder id="a" y="20" size="36,20" color="orange">
+	</suica>
+	
+	<script>
+		// функция за тор
+		function torus( u )
+		{
+			u = 2*Math.PI*u;
+			
+			var x = 30*Math.cos( u );
+				z = 30*Math.sin( u );
+			
+			return [x, 0, z ];
+		}
+		
+		// тръба, извита като тор
+		tube( [0,0,0], spline(torus), 10, [100,30], [1,0.3], 'gray' );
+		
+		// начална висока позиция
+		pos = {y: 20};
+
+		// tween с пружиниране
+		new TWEEN.Tween( pos )
+			.to( {y: -10}, 2000 )
+			.easing( TWEEN.Easing.Elastic.Out )
+			.start( );
+		
+		function loop( )
+		{
+			// актуализиране на tween-a
+			TWEEN.update( );
+			
+			// вертикална позиция на цилиндъра
+			a.y = pos.y;
+		}
+	</script>
+</head>
+

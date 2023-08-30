@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="tween.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow ontime="loop">
+		<orbit>
+		
+		<!-- движещ се обект -->
+		<cube id="a" x="-40" size="40,5,10">
+		
+		<!-- начално и крайно състояние -->
+		<cube x="-40" size="40,5,10" color="black" wireframe>
+		<cube x="40" size="5,40,40" color="black" wireframe>
+	</suica>
+	
+	<script>
+		// параметри на движението са хоризонталната позиция и размерът
+		animate = {x:-40, size:[40,5,10]};
+		
+		// tween за промяна на позиция и размер
+		new TWEEN.Tween( animate )
+			.to( {x:40, size:[5,40,40]}, 2000 )
+			.delay( 1000 )
+			.start( );
+		
+		function loop( )
+		{
+			// актуализиране на tween-а
+			TWEEN.update( );
+			
+			// промяна на положението и размера на куба
+			a.x = animate.x;
+			a.size = animate.size;
+		}
+	</script>
+</head>
+

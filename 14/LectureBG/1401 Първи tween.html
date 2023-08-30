@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="tween.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow ontime="loop">
+		<orbit altitude="0">
+		
+		<!-- два статични куба -->
+		<cube x="-30" size="10" color="gray">
+		<cube x="30" size="10" color="gray">
+		
+		<!-- движеща се сфера -->
+		<sphere id="s" x="-30" size="13" color="crimson">
+	</suica>
+	
+	<script>
+		// начално и крайно състояние
+		pos = {x: -30};
+		endPos = {x: 30};
+		
+		// създаване и стартиране на tween 
+		new TWEEN.Tween( pos )
+			.to( endPos, 2000 )
+			.start( );
+		
+		function loop( )
+		{
+			// актуализиране на tween 
+			TWEEN.update( );
+
+			// извличане променената стойност
+			s.x = pos.x;
+		}
+	</script>
+</head>
+

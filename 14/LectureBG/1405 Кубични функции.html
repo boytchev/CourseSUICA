@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="tween.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow ontime="loop">
+		<orbit>
+		
+		<!-- статични платформи -->
+		<cube x="-35" size="20,1,60" color="gray">
+		<cube x="35" size="20,1,60" color="gray">
+		
+		<!-- движещи се сфери -->
+		<sphere id="a" x="-35" z="-20" size="13" color="crimson">
+		<sphere id="b" x="-35" size="13" color="yellow">
+		<sphere id="c" x="-35" z="20" size="13" color="seagreen">
+	</suica>
+	
+	<script>
+		// начални и крайни ъгли на движение по дъга
+		angleA = {alpha: 180};
+		angleB = {alpha: 180};
+		angleC = {alpha: 180};
+		endAngle = {alpha: 0};
+
+		// tween с кубично движение в началото
+		new TWEEN.Tween( angleA )
+			.to( endAngle, 6000 )
+			.easing( TWEEN.Easing.Cubic.In )
+			.start( );
+		
+		// tween с кубично движение в края
+		new TWEEN.Tween( angleB )
+			.to( endAngle, 6000 )
+			.easing( TWEEN.Easing.Cubic.Out )
+			.start( );
+		
+		// tween с кубично движение в началото и в края
+		new TWEEN.Tween( angleC )
+			.to( endAngle, 6000 )
+			.easing( TWEEN.Easing.Cubic.InOut )
+			.start( );
+		
+		function loop( )
+		{
+			// актуализиране на tween-a
+			TWEEN.update( );
+
+			// преизчисляване на центровете на сферите
+			a.x = 35*Math.cos( radians(angleA.alpha) );
+			a.y = 25*Math.sin( radians(angleA.alpha) );
+
+			b.x = 35*Math.cos( radians(angleB.alpha) );
+			b.y = 25*Math.sin( radians(angleB.alpha) );
+
+			c.x = 35*Math.cos( radians(angleC.alpha) );
+			c.y = 25*Math.sin( radians(angleC.alpha) );
+		}
+	</script>
+</head>
+

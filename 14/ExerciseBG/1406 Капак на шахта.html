@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="tween.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow ontime="loop">
+		<orbit>
+		
+		<!-- капак на шахта от два цилиндъра - вторият е за по-тъмен ръб -->
+		<group id="a" x="-35" spinH="90">
+			<cylinder y="-0.5" z="-15" size="30,1" color="steel">
+			<cylinder y="-0.45" z="-15" size="30.1,0.9" color="dimgray">
+		</group>
+	</suica>
+	
+	<script>
+		// параметри за положението и ъгъла
+		animate = {x:-35, spinV:0};
+
+		// tween за първото плъзгане
+		t1 = new TWEEN.Tween( animate )
+			.to( {x:0, spinV:0}, 2000 )
+			.easing( TWEEN.Easing.Quadratic.In )
+			.delay( 1000 );
+			
+		// tween за превъртането
+		t2 = new TWEEN.Tween( animate )
+			.to( {x:0, spinV:180}, 1000 );
+			
+		// tween за второто плъзгане
+		t3 = new TWEEN.Tween( animate )
+			.to( {x:35, spinV:180}, 2000 )
+			.easing( TWEEN.Easing.Quadratic.Out );
+			
+		// трите tween-а са навързани последователно	
+		t1.chain(t2.chain(t3));
+		t1.start();
+		
+		function loop( )
+		{
+			// актуализиране на текущо активния tween
+			TWEEN.update( );
+
+			// позиция и завъртяност на капака
+			a.x = animate.x;
+			a.spinV = animate.spinV;
+		}
+	</script>
+</head>
+

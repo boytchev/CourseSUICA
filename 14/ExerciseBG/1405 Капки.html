@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="tween.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow ontime="loop">
+		<orbit>
+		
+		<!-- невидима зона на капките -->
+		<square id="zone" y="18" size="60,10" spinV="90" hidden>
+		
+		<!-- горна и долна платформа -->
+		<cube id="a" y="20" size="80,5,20" color="royalblue">
+		<cube id="b" y="-20" size="80,5,20" color="coral">
+	</suica>
+	
+	<script>
+		// създаване на капки
+		n = 200;
+		drops = [];
+		for( var i=0; i<n; i++ )
+		{
+			// всяка има случайна позиция и собствени
+			// параметри на tween в полето animate
+			pos = randomIn( zone );
+			drops[i] = point( pos, 3, a.color );
+			drops[i].animate = {y:18, color:a.color};
+
+			// tween-ът на капката се повтаря безкрайно
+			new TWEEN.Tween( drops[i].animate )
+				.to( {y:-18, color:b.color}, 2000 )
+				.easing( TWEEN.Easing.Quartic.In )
+				.repeat( Infinity )
+				.delay( random(0,3000) )
+				.start( );
+		
+		}
+		
+		function loop( )
+		{
+			// актуализиране на всички tween-ове
+			TWEEN.update( );
+			
+			// промяна на вертикалното положение 
+			// и цвета на всяка капка
+			for( var drop of drops )
+			{
+				drop.y = drop.animate.y;
+				drop.color = drop.animate.color;
+			}
+		}
+	</script>
+</head>
+

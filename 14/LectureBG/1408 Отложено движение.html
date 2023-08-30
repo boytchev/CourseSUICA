@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="tween.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow ontime="loop">
+		<orbit>
+		
+		<!-- статична платформа -->
+		<cube y="-11" size="80,1,80" color="gray">
+	</suica>
+	
+	<script>
+		// падащи плочки
+		plates = [];
+		for( var x=-30; x<=30; x+=10 )
+		for( var z=-30; z<=30; z+=10 )
+		{
+			// създаване на плочка
+			plate = cube( [x,20,z], [9,1], hsl( 270, 50, random(0,100) ) );
+			plate.pos = {y: 20};
+			plates.push( plate );
+			
+			// създаване на неин tween със случайно забавяне
+			new TWEEN.Tween( plate.pos )
+				.to( {y: -10}, 2000 )
+				.easing( TWEEN.Easing.Cubic.In )
+				.delay( random( 0, 4000 ) )
+				.start( );
+		}
+		
+		function loop( )
+		{
+			// актуализиране на всички tween-ове
+			TWEEN.update( );
+
+			// промяна на центровете на плочките
+			for( plate of plates )
+				plate.y = plate.pos.y;
+		}
+	</script>
+</head>
+

@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="tween.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow ontime="loop">
+		<orbit>
+		
+		<!-- статична платформа -->
+		<cube y="-11" size="80,1,40" color="gray">
+		
+		<!-- топащ се цилиндър -->
+		<cylinder id="a" y="20" size="35,10" color="orange">
+	</suica>
+	
+	<script>
+		// начална висока позиция
+		pos = {y: 20};
+
+		// tween с топане
+		new TWEEN.Tween( pos )
+			.to( {y: -10}, 2000 )
+			.easing( TWEEN.Easing.Bounce.Out )
+			.start( );
+		
+		function loop( )
+		{
+			// актуализиране на tween-a
+			TWEEN.update( );
+			
+			// вертикална позиция на цилиндъра
+			a.y = pos.y;
+		}
+	</script>
+</head>
+

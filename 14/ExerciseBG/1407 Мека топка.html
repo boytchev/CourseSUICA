@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="tween.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow ontime="loop">
+		<orbit>
+		
+		<!-- движеща се топка -->
+		<sphere id="a" size="20,20,20" color="orange">
+		
+		<!-- платформа -->
+		<prism count="8" y="-12" size="60,2" color="gray">
+	</suica>
+	
+	<script>
+		// параметри - позиция, вертикален размер, хоризонтален размер
+		animate = {y:0, height:20, width:20};
+		
+		// издигане
+		tw1 = new TWEEN.Tween( animate )
+			.to( {y:30}, 700 )
+			.easing( TWEEN.Easing.Quadratic.Out );
+
+		// падане
+		tw2 = new TWEEN.Tween( animate )
+			.to( {y:0}, 700 )
+			.easing( TWEEN.Easing.Quadratic.In );
+		tw1.chain(tw2);
+		
+		// смачкване
+		tw3 = new TWEEN.Tween( animate )
+			.to( {y:-8, height:4, width:30}, 150 )
+			.easing( TWEEN.Easing.Quadratic.Out );
+		tw2.chain(tw3);
+		
+		// възстановяване
+		tw4 = new TWEEN.Tween( animate )
+			.to( {y:0, height:20, width:20}, 150 )
+			.easing( TWEEN.Easing.Quadratic.In );
+		tw3.chain(tw4);
+		tw4.chain(tw1);
+		
+		// четирите tween-а са навързани на цикъл,
+		// стартира се само единият от тях
+		tw1.start( );
+		
+		function loop( )
+		{
+			// актуализиране на текущо активния tween
+			TWEEN.update( );
+
+			// позиция и размер на топката
+			a.y = animate.y;
+			a.height = animate.height;
+			a.width = animate.width;
+		}
+	</script>
+</head>
+

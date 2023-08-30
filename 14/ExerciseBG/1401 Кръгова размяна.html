@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="tween.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow ontime="loop">
+		<orbit>
+		
+		<!-- две движещи се сфери -->
+		<sphere id="a" size="13" color="crimson">
+		<sphere id="b" size="13" color="yellow">
+	</suica>
+	
+	<script>
+		// начални ъгли
+		angleA = {alpha: 0};
+		angleB = {alpha: 180};
+
+		// движение наляво през отгоре 0°->180°
+		new TWEEN.Tween( angleA )
+			.to( {alpha: 180}, 2000 )
+			.easing( TWEEN.Easing.Cubic.In )
+			.start( );
+		
+		// движение надясно през отдолу 180°->360°
+		new TWEEN.Tween( angleB )
+			.to( {alpha: 360}, 2000 )
+			.easing( TWEEN.Easing.Cubic.Out )
+			.start( );
+		
+		function loop( )
+		{
+			// актуализиране на двата tween-a
+			TWEEN.update( );
+			
+			// движение на червената сфера
+			a.x = 35*Math.cos( radians(angleA.alpha) );
+			a.y = 35*Math.sin( radians(angleA.alpha) );
+
+			// движение на жълтата сфера
+			b.x = 35*Math.cos( radians(angleB.alpha) );
+			b.y = 35*Math.sin( radians(angleB.alpha) );
+		}
+	</script>
+</head>
+

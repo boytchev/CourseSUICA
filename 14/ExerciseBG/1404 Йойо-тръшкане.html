@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="tween.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow ontime="loop">
+		<orbit>
+		
+		<!-- обект, който ще се тръшка -->
+		<group id="a" y="-15" spins="90">
+			<cube y="20" size="10,40,20" color="teal">
+			<cylinder z="10.1" size="4,20.2" color="azure" spinv="-90">
+			<cylinder z="10" size="10,20" color="teal" spinv="-90">
+			<cylinder y="40" z="10" size="10,20" color="teal" spinv="-90">
+		</group>
+	</suica>
+	
+	<script>
+		// параметър на тръшкането е ъгъла на завъртане
+		animate = {spinS: 90};
+		
+		// тръшкането е с отскачане, с обръщане на посоката
+		// и с безкрайно повторение (на английски е tantrum)
+		new TWEEN.Tween( animate )
+			.to( {spinS:-90}, 2000 )
+			.easing( TWEEN.Easing.Bounce.Out )
+			.repeat( Infinity )
+			.yoyo( true )
+			.start( );
+		
+		function loop( )
+		{
+			// актуализиране на tween-а
+			TWEEN.update( );
+			
+			// завъртане на обекта
+			a.spinS = animate.spinS;
+		}
+	</script>
+</head>
+

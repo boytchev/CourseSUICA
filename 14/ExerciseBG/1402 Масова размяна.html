@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="tween.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow ontime="loop">
+		<orbit>
+		
+		<!-- невидима зона -->
+		<circle id="zone" size="80" hidden>
+	</suica>
+	
+	<script>
+		n = 100; // брой сфери
+		
+		// създаване на сфери по окръжност
+		balls = [];
+		for( var i=0; i<n; i++ )
+		{
+			ball = sphere( [], 3, hsl(90,50,random(0,100)) );
+			ball.pos = randomOn( zone );
+			
+			// за всяка сфера има индивидуален tween за
+			// движение до случайно място по окръжността
+			// слес случайно изчакване
+			new TWEEN.Tween( ball.pos )
+				.to( randomOn(zone), random(500,2000) )
+				.delay( random(1000,2000) )
+				.start( );
+				
+			balls.push( ball );
+		}
+		
+		function loop( )
+		{
+			// актуализиране на всички tween-ове
+			TWEEN.update( );
+			
+			// движение на топките според tween-овете им
+			for( ball of balls ) ball.center = ball.pos;
+		}
+	</script>
+</head>
+
