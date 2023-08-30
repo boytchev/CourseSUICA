@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		
+		<!-- осем цветни топки, бялата е по-малка -->
+
+		<sphere center=" 30, 0, 30" color="white" size="10">
+		<sphere center=" 30, 0,-30" color="crimson" size="20">
+		<sphere center="-30, 0, 30" color="yellow" size="20">
+		<sphere center="-30, 0,-30" color="black" size="20">
+		
+		<sphere center=" 40, 0,  0" color="seagreen" size="20">
+		<sphere center="-40, 0,  0" color="violet" size="20">
+		<sphere center="  0, 0, 40" color="royalblue" size="20">
+		<sphere center="  0, 0,-40" color="orange" size="20">
+		
+		<!-- гледна точка по линията на бялата и лилавата -->
+		<lookat from="-40+3*(30-(-40)),0,0+3*(30-0)" to="-40,0,0" up="0,1,0">
+	</suica>
+</body>

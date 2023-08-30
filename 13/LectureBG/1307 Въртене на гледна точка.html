@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<!-- координатна система в XY -->
+		<line from="-5.5,0,0" to="5.5,0,0">
+		<line from="0,-5.5,0" to="0,5.5,0">
+		<cone y="5.5" size="0.25,0.5,0" color="black">
+		<cone x="5.5" size="0,0.5,0.25" color="black" spin="90,90">
+	</suica>
+	
+	<script>
+		// червени трасиращи точки
+		n = 150;
+		points = [];
+		for( var i=0; i<n; i++ )
+			points[i] = point( [0,100,0], 1, 'crimson');
+	
+		// деления по осите X и Y
+		for( var i=-5; i<5; i++ ) if( i )
+		{
+			line( [i,0.1,0], [i,-0.1,0], 'gray');
+			line( [0.1,i,0], [-0.1,i,0], 'gray');
+		}
+	
+		var idx = 0;
+		function loop( t, dT )
+		{
+			t = t/2;
+			
+			// рисуване на трасираща точка
+			var r = 3 + 2*Math.sin(5*t);
+			
+			i = Math.floor(30*t) % n;
+			
+			points[i].x = r * Math.cos( t );
+			points[i].y = r * Math.sin( t );
+	
+			// въртене на гедната точка, чрез въртене на вектора "нагоре"
+			
+//			това:	
+//			lookAt( [0,0,20], [0,0,0], [Math.cos(t),Math.sin(t),0] );
+//
+//			има същия ефект като това:
+//			lookAt( [0,0,20], [0,0,0], [r*Math.cos(t),Math.sin(t),0] );
+//
+//			а то може да се замести с:
+			lookAt( [0,0,20], [0,0,0], points[i] );
+
+		}
+	</script>
+</head>
+

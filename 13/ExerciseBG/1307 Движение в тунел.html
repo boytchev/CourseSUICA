@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+	</suica>
+	
+	<script>
+		// функция на траекторията, t=[0,2pi]
+		function path( t )
+		{
+			return [
+				20*(Math.sin(t) + 2*Math.sin(2*t)),
+				8*Math.sin(3*t),
+				20*(Math.cos(t) - 2*Math.cos(2*t))
+			];
+		}
+		
+		// създаване на тор (пръстен)
+		function torus( u )
+		{
+			u = 2*Math.PI*u;
+			
+			var x = 3*Math.cos( u );
+				y = 3*Math.sin( u );
+			
+			return [x, y, 0 ];
+		}
+		
+		// тунел
+		for( var i=0; i<200; i++ )
+		{
+			t = i/200 * 2*Math.PI;
+			
+			pos = path( t );
+			pos2 = path( t+0.01 );
+			angle = degrees( Math.atan2( pos2[0]-pos[0], pos2[2]-pos[2]) );
+			
+			if( i%10 )
+			{
+				// 9 от всеки 10 пръстена е тънка окръжност
+				circle( pos, 4, 'black' );
+				its.wireframe = true;
+			}
+			else
+			{
+				// 1 от всеки 10 пръстена е червен тор
+				tube( pos, spline(torus), 0.4, [60,6], 1, 'crimson' );
+			}
+
+			its.spinH = angle;
+		}
+		
+
+		
+		function loop( t )
+		{
+			// движения на гледната точка по траекторията на кривата
+			// като се гледа напред по същата траектория
+			pos = path( t/3 );
+			pos2 = path( t/3+0.1 );
+			lookAt( pos, pos2, [2+Math.sin(t),2,2+Math.cos(t)] );
+		}
+	</script>
+</head>
+

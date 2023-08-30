@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<!-- координатна система в XY -->
+		<line from="-13.5,0,0" to="13.5,0,0">
+		<line from="0,-13.5,0" to="0,13.5,0">
+		<cone y="13.5" size="0.5,1,0" color="black">
+		<cone x="13.5" size="0,1,0.5" color="black" spin="90,90">
+	</suica>
+	
+	<script>
+		// червени трасиращи точки
+		n = 200;
+		points = [];
+		for( var i=0; i<n; i++ )
+			points[i] = point( [0,100,0], 0.2, 'crimson');
+	
+		// деления по осите X и Y
+		for( var i=-13; i<13; i++ ) if( i )
+		{
+			line( [i,0.1,0], [i,-0.1,0], 'gray');
+			line( [0.1,i,0], [-0.1,i,0], 'gray');
+		}
+	
+		var idx = 0,
+			alpha = 0;
+		function loop( t, dT )
+		{
+			var r = t/10;
+		
+			if( r < 13 )
+			{
+				i = Math.floor(4*t) % n;
+				
+				// рисуване на спирала от точки, като те
+				// са по окръжност с увеличаващ се радиус
+				alpha += 0.7*dT;
+				points[i].x = r * Math.cos( alpha );
+				points[i].y = r * Math.sin( alpha );
+				points[i].size = 0.5 * r;
+				
+				// отдалечаваща се по Z гледна точка
+				lookAt( [0,0,1+4*r], [0,0,0], [0,1,0] );
+			}
+		}
+	</script>
+</head>
+

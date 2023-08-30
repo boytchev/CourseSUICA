@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<oxyz>
+
+		<!-- основни обекти на сцената -->
+		<cube size="20" color="yellow">
+		<sphere x="-20" size="20" color="seagreen">
+		<cone x="20" y="-10" size="20" color="crimson">
+		<cylinder center="-20,0,-15" spinV="90" size="7,30" color="white">
+		<cylinder x="20" size="10,2" color="pink">
+		
+		<!-- кръгче с "X" -->
+		<drawing id="ix" size="30">
+			<arc x="15" y="15" radius="15">
+			<fill color="black">
+			<fillText x="8" y="7" text="X" color="white" font="20px Arial">
+		</drawing>
+		<point id="x" x="30" size="8" color="white" image="ix">
+		
+		<!-- кръгче с "Y" -->
+		<drawing id="iy" size="30">
+			<arc x="15" y="15" radius="15">
+			<fill color="black">
+			<fillText x="8" y="7" text="Y" color="white" font="20px Arial">
+		</drawing>
+		<point id="y" y="30" size="8" color="white" image="iy">
+
+		<!-- кръгче с "Z" -->
+		<drawing id="iz" size="30">
+			<arc x="15" y="15" radius="15">
+			<fill color="black">
+			<fillText x="9" y="7" text="Z" color="white" font="20px Arial">
+		</drawing>
+		<point id="z" z="30" size="8" color="white" image="iz">
+		
+		<!-- гледна точка B -->
+		<lookat from="100,0,0" to="0,0,0" up="0,0,1">
+		
+	</suica>
+</head>
+

@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<!-- координатна система в XY -->
+		<line from="-0.5,0,0" to="13,0,0">
+		<line from="0,-1.5,0" to="0,4,0">
+		<cone y="4" size="0.1,0.2,0" color="black">
+		<cone x="13" size="0,0.2,0.1" color="black" spin="90,90">
+	</suica>
+	
+	<script>
+		// гледна точка откъм Z, но отместена в XY
+		lookAt( [2*Math.PI, 1, 10],
+				[2*Math.PI, 1, 0],
+				[0,1,0] );
+		
+		// някаква функция, която ще се рисува
+		function f( x )
+		{
+			return Math.exp( Math.cos(x) );
+		}
+		
+		// графика на функцията
+		for( var a=0.01; a<4*Math.PI; a+=0.1 )
+		{
+			line( [a,f(a),0], [a+0.1,f(a+0.1),0], 'crimson' );
+			line( [a,f(a),0], [a,0,0], 'pink' );
+		}
+	</script>
+</head>
+
