@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<orbit>
+		
+		<!-- бял куб с подменяща се текстура -->
+		<cube id="a" color="white">
+	</suica>
+	
+	<script>
+		// списък от 4 текстури
+		img = [
+			image( 'texture1.jpg' ),
+			image( 'texture2.jpg' ),
+			image( 'texture3.jpg' ),
+			image( 'texture4.jpg' )
+		];
+		
+		function loop( t )
+		{
+			// подмяна на текстура със следващата
+			a.image = img[ Math.floor(t) % 4 ];
+		}
+	</script>
+</head>

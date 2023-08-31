@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow background="lightgray">
+		<orbit>
+		
+		<!-- рисунка с прозрачност - няма зададен цвят -->
+		<drawing id="img" size="512,512">
+			<!-- черен контур -->
+			<moveTo point="0,0,512,0,512,512,0,512">
+			<stroke color="black" width="30" closed>
+
+			<!-- дебели черни линии през средата -->
+			<moveTo point="0,256,512,256">
+			<moveTo point="256,0,256,512">
+			<stroke color="black" width="60">
+			
+			<!-- централен кръг с рамка -->
+			<arc point="256,256" radius="100" color="crimson">
+			<fill color="white">
+			<stroke color="black" width="10">
+
+			<!-- бели линии над черните линии, малко по-тънки от тях -->
+			<moveTo point="0,256,512,256">
+			<moveTo point="256,0,256,512">
+			<stroke color="white" width="30">
+			
+		</drawing>
+		
+		<!-- куб с прозрачна текстура -->
+		<cube image="img" size="30" color="white">
+		
+		<!-- сфери по стените -->
+		<sphere x="15" size="5" color="crimson">
+		<sphere x="-15" size="5" color="crimson">
+		<sphere y="15" size="5" color="crimson">
+		<sphere y="-15" size="5" color="crimson">
+		<sphere z="15" size="5" color="crimson">
+		<sphere z="-15" size="5" color="crimson">
+	</suica>
+</head>

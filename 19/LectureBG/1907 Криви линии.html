@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow background="lightgray">
+		<orbit>
+		
+		<!-- рисунка за текстура -->
+		<drawing id="img" size="512,512" color="white">
+			<!-- дефиниране на форма с прави и криви линии -->
+			<moveTo point="-100,256,-20,236,0,255">
+			<curveTo m="128,378" point="256,256">
+			<curveTo m="378,128" point="512,256">
+			<lineTo point="532,276,610,256,610,-100,-100,-100">
+			
+			<!-- запълване със сив цвят -->
+			<fill color="gray">
+			
+			<!-- добавяне на черен контур -->
+			<stroke color="black" width="10" closed>
+		</drawing>
+		
+		<!-- основен цилиндър с вълнообразна текстура -->
+		<cylinder x="-20" color="white" size="40" spin="90,90" image="img" images="4,1">
+		
+		<!-- черни капачки в двата края на цилиндъра -->
+		<cylinder x="-21" color="black" size="40,1" spin="90,90">
+		<cylinder x="20" color="black" size="40,1" spin="90,90">
+	</suica>
+</head>

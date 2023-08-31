@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+		
+		<!-- рисунка с текст -->
+		<drawing id="img" size="512,128" color="lightgray">
+			<fillText x="30" y="30" text="ABCDEFGH" color="black" font="bold 80px Arial">
+		</drawing>
+
+		<!-- плочка с картинката с текста -->
+		<cube size="80,20,2" image="img" color="white">
+		
+		<!-- черен кант на плочката -->
+		<cube size="81,21,1.9" color="black">
+	</suica>
+</head>

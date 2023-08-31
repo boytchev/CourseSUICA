@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow background="lightgray">
+		<orbit>
+		
+		<!-- рисунка с по-голям размер -->
+		<drawing id="img" size="512,512" color="gray">
+		
+			<!-- най-външен пълен кръг -->
+			<arc x="256" y="256" radius="200">
+			<fill color="white">
+			<stroke color="black" width="10">
+
+			<!-- черен кръг в центъра -->
+			<arc x="256" y="256" radius="40">
+			<fill color="black">
+
+			<!-- черно кръгче под него -->
+			<arc x="256" y="190" radius="20">
+			<fill color="black">
+
+			<!-- вътрешна дъга -->
+			<arc x="256" y="256" radius="60" from="150" to="-150" ccw>
+			<stroke color="black" width="10">
+
+			<!-- средна дъга -->
+			<arc x="256" y="256" radius="85" from="100" to="-100" ccw>
+			<stroke color="black" width="10">
+
+			<!-- външна дъга -->
+			<arc x="256" y="256" radius="110" from="50" to="-50" ccw>
+			<stroke color="black" width="10">
+			
+		</drawing>
+		
+		<!-- куб, който ползва рисунката -->
+		<cube size="40" image="img" color="white">
+	</suica>
+</head>

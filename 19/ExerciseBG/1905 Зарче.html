@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+	</suica>
+	
+	<script>
+		// създаване на рисунка на стена на зарче
+		// параметърът n е броят точки на стената
+		function dice( n )
+		{
+			var drw = drawing( 256, 256, 'white' );
+			
+			// рамка
+			moveTo( 0, 0, 256, 0, 256, 256, 0, 256 );
+			stroke( 'black', 20, true );
+
+			// общо има 7 възможни позиции за точки - две редици
+			// от по 3 точки (това за шестица), и една централна
+			// точка (за единица, тройка и петица)
+			
+			// това е централната точка
+			if( n==1 || n==3 || n==5 )
+			{
+				arc( 128, 128, 20 );
+				fill( 'black' );
+			}
+			
+			// опитайте се да разберете останалите шест 
+			// условия за кои позиции на точки отговарят
+			if( n!=1 )
+			{
+				arc( 128-64, 128+64, 20 );
+				fill( 'black' );
+			}
+				
+			if( n==6 )
+			{
+				arc( 128-64, 128, 20 );
+				fill( 'black' );
+			}
+				
+			if( n==4 || n==5 || n==6 )
+			{
+				arc( 128-64, 128-64, 20 );
+				fill( 'black' );
+			}
+			
+			if( n==4 || n==5 || n==6 )
+			{
+				arc( 128+64, 128+64, 20 );
+				fill( 'black' );
+			}
+				
+			if( n==6 )
+			{
+				arc( 128+64, 128, 20 );
+				fill( 'black' );
+			}
+				
+			if( n!=1 )
+			{
+				arc( 128+64, 128-64, 20 );
+				fill( 'black' );
+			}
+			
+			return drw;
+		}
+		
+		s = 15;
+		
+		// предна стена
+		square( [0,0,s], 2*s, 'white' );
+		its.image = dice( 1 );
+		// задна
+		square( [0,0,-s], 2*s, 'white' );
+		its.spinH = 180;
+		its.image = dice( 6 );
+		// лява
+		square( [-s,0,0], 2*s, 'white' );
+		its.spinH = -90;
+		its.image = dice( 2 );
+		// дясна
+		square( [s,0,0], 2*s, 'white' );
+		its.spinH = 90;
+		its.image = dice( 5 );
+		// горна
+		square( [0,s,0], 2*s, 'white' );
+		its.spinV = 90;
+		its.image = dice( 4 );
+		// долна
+		square( [0,-s,0], 2*s, 'white' );
+		its.spinV = -90;
+		its.image = dice( 3 );
+		
+	</script>
+</head>

@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow background="lightgray">
+		<orbit>
+		
+		<!-- рисунка с име img и размери 128x128 пиксела -->
+		<drawing id="img" size="128,128" color="white">
+			<!-- оформяне на квадрат -->
+			<moveTo point="20,20">
+			<lineTo point="108,20">
+			<lineTo point="108,108">
+			<lineTo point="20,108">
+			<lineTo point="20,20">
+			
+			<!-- запълване на вътрешността на квадрата -->
+			<fill color="gray">
+			
+			<!-- добавяне на контур на квадрата -->
+			<stroke color="black" width="10" closed>
+			
+			<!-- бял X в средата -->
+			<moveTo point="40,40,88,88">
+			<moveTo point="40,88,88,40">
+			<stroke color="white" width="10">
+		</drawing>
+		
+		<!-- използване на рисунката като текстура на куб -->
+		<cube image="img" color="white">
+	</suica>
+</body>

@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<orbit altitude="0" distance="200">
+		<background color="black">
+	</suica>
+	
+	<script>
+		// рисунката е с пропорция 2:1
+		knot = drawing( 1024, 512 );
+		
+		// начална точка
+		x = 512;
+		y = 256;
+		s = 120;
+		
+		// относително преместване по права линия
+		function to( dx, dy )
+		{
+			x += dx;
+			y += dy;
+			lineTo( x, y );
+		}
+		
+		// относително преместване по крива линия
+		function cu( dx, dy, ddx, ddy )
+		{
+			x += dx;
+			y += dy;
+			curveTo( x, y, x+ddx, y+ddy );
+			x += ddx;
+			y += ddy;
+		}
+		
+		// обхождане на келтския възел
+		moveTo( x, y );
+		to( s, s );					// A-B
+		cu( s/2, s/2, s, 0 );		// B-C-D
+		cu( 0, -s, -s/2, -s/2 );	// D-E-F
+		to( -s, -s );
+		cu( -s, -s, -s, s );
+		to( -s, s );
+		cu( -s/2, s/2, 0, s );
+		cu( s, 0, s/2, -s/2 );
+		to( 2*s, -2*s );
+		cu( s/2, -s/2, s, 0 );
+		cu( 0, s, -s/2, s/2 );
+		to( -s, s );				// F-B
+		cu( -s, s, -s, -s );		// B-G-H
+		to( -s, -s );
+		cu( -s/2, -s/2, 0, -s );
+		cu( s, 0, s/2, s/2 );
+		to( s, s );
+		
+		// контур и основна част на лентата
+		stroke( 'navy', 30 );
+		stroke( 'white', 25 );
+
+		// списък от много келтски възли
+		// (т.е. правоъгълници с текстура - келтския възел)
+		sq = [];
+		for( var i=0; i<51; i++ )
+		{
+			sq[i] = square( [0,0,5*(25-i)], [90,45], hsl(200,100,100-2*i) );
+			sq[i].image = knot;
+		}
+		
+		
+		function loop( t )
+		{
+			// полюшване на възлите
+			for( var i=0; i<51; i++ )
+			{
+				sq[i].spinS = 50*Math.sin(t-i/10);
+			}
+		}
+	</script>
+</head>

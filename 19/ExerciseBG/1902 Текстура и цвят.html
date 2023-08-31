@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+
+<body>
+	<suica fullWindow>
+		<background color="gray">
+		<orbit altitude="0">
+		
+		<!-- цветни квадрати за фон -->
+		<square id="a1" color="white" x="-32" y="16">
+		<square id="a2" color="yellow" y="16">
+		<square id="a3" color="lime" x="32" y="16">
+		<square id="a4" color="blue" x="-32" y="-16">
+		<square id="a5" color="red" y="-16">
+		<square id="a6" color="cyan" x="32" y="-16">
+	</suica>
+	
+	<script>
+		// рисунка с 4 цветни кръга
+		img = drawing( 512, 512, 'white' );
+		
+		arc( 128, 128, 100 ); 
+		fill( 'lime' );
+		stroke( 'black', 10 );
+		
+		arc( 384, 128, 100 ); 
+		fill( 'red' );
+		stroke( 'black', 10 );
+		
+		arc( 384, 384, 100 ); 
+		fill( 'yellow' );
+		stroke( 'black', 10 );
+		
+		arc( 128, 384, 100 ); 
+		fill( 'white' );
+		stroke( 'black', 10 );
+		
+		// прилагане на рисунката като 
+		// текстура на шестте квадрата
+		a1.image = img;
+		a2.image = img;
+		a3.image = img;
+		a4.image = img;
+		a5.image = img;
+		a6.image = img;
+	</script>
+</head>

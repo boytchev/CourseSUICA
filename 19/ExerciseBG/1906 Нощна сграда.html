@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit altitude="10">
+
+		<!-- черен фон, когато сградите се рисуват, а текстурата
+		все още не е налична, сградите ще се виждат с цвета на фона -->
+		<background color="black">
+
+		<!-- звездно небе -->
+		<sphere color="white" size="500" image="stars.jpg">
+		
+		<!-- луна -->
+		<sphere y="30" z="-240" color="white" size="80" image="moon.jpg" spinH="-90">
+	</suica>
+	
+	<script>
+		// текстура на прозорец
+		img = image( 'window.jpg' );
+		
+		// каре от сгради
+		for( x=-100; x<=100; x+=10 )
+		for( z=-100; z<=20; z+=10 )
+		{
+			// случаен размер на сграда
+			sx = random([1,1,1,1,2,2,3]);
+			sy = random([1,1,1,1,1,1,1,2,2,2,2,2,3,3,4]);
+			if( random(0,20)<1 ) sy = random([6,8,10]);
+			
+			// създаване на сграда с прозорци
+			cube( [x,5*sy/2-20,z], [5*sx,5*sy,5*sx], hsl(random(100,300),30,80) )
+			its.image = image( 'window.jpg' );
+			its.images = [2*sx, 2*sy];
+			
+			// създаване на покрив на сградата
+			// керемидите са смачкани прозорци
+			pyramid( 4, [x,5*sy-20,z], [5*(2**0.5)*sx,1,5*(2**0.5)*sx], hsl(random(100,300),30,80) );
+			its.spinH = 45;
+			its.image = image( 'window.jpg' );
+			its.images = [40*sx, 40];
+			
+		}
+	</script>
+</head>
