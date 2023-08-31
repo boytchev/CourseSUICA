@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow orthographic="-1000,1000">
+		<lookat from="0,0,500">
+		
+		<!-- скролбар -->
+		<square y="-200" size="800,40" color="black" onPointerDown="pointerMoveBar" onPointerMove="pointerMoveBar">
+		<circle x="-400" y="-200" size="40" color="black" onPointerDown="pointerMoveLeft" onPointerMove="pointerMoveLeft">
+		<circle x="400" y="-200" size="40" color="black" onPointerDown="pointerMoveRight" onPointerMove="pointerMoveRight">
+		<sphere id="value" y="-200" size="35,35,10" color="orange">
+		
+		<!-- син трактор -->
+		<model id="tractor" src="https://boytchev.github.io/suica/assets/models/cars/tractor.glb" size="200" y="-100" spinH="180">
+	</suica>
+	
+	<script>
+		// кликване на левия край на скролбара,
+		// е като че ли се мести най-вляво
+		function pointerMoveLeft( event )
+		{
+			if( event.buttons )
+			{
+				value.x = -400;
+				tractor.spinH = 180 + value.x * 120/400;
+			}
+		}
+
+		// кликване на десния край на скролбара,
+		// е като че ли се мести най-вдясно
+		function pointerMoveRight( event )
+		{
+			if( event.buttons )
+			{
+				value.x = 400;
+				tractor.spinH = 180 + value.x * 120/400;
+			}
+		}
+
+		// движение върху бара с натиснат бутон
+		// мести според позицията на мишката върху скролбара
+		function pointerMoveBar( event )
+		{
+			if( event.buttons )
+			{
+				value.x = findPosition( event )[0];
+				tractor.spinH = 180 + value.x * 120/400;
+			}
+		}
+	</script>
+</head>

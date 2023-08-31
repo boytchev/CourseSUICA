@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow orthographic="1,1000" onPointerDown="pointerDown" onPointerUp="pointerUp" onPointerMove="pointerMove">
+		<lookat from="0,0,100">
+		
+		<!-- окръжност, по която се влачи -->
+		<circle size="400" color="black" wireframe>
+		
+		<!-- влачена сфера -->
+		<sphere id="a" y="-200" size="60,60,10" color="orange">
+	</suica>
+	
+	<script>
+		// начален ъгъл
+		k = -Math.PI/2;
+		
+		obj = null;
+		pos = null;
+		
+		// хващане на обект при натискане на бутон
+		function pointerDown( event )
+		{
+			pos = findPosition( event );
+			obj = findObject( event );
+		}
+
+		// пускане на обект при пускане на бутон
+		function pointerUp( event )
+		{
+			obj = null;
+		}
+
+		// движение на хванат обект при движение на мишката
+		function pointerMove( event )
+		{
+			if( obj )
+			{
+				var newPos = findPosition( event );
+
+				// влачи се ъгълът k
+				k += (newPos[0]-pos[0])/150;
+				
+				// от него се получава позицията на сферата по окръжността
+				a.center = [ 200*Math.cos(k), 200*Math.sin(k), 0];
+				
+				pos = newPos;
+			}
+		}
+	</script>
+</head>

@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow orthographic="1,1000" onPointerDown="pointerDown" onPointerUp="pointerUp" onPointerMove="pointerMove">
+		<lookat from="0,0,100">
+		
+		<!-- диск на циферблата -->
+		<sphere size="400,400,1" color="black">
+		<sphere size="380,380,2" color="white">
+		
+		<!-- влачена стрелка -->
+		<cone id="a" size="20,180,20" color="black">
+	</suica>
+	
+	<script>
+		// точки за маркиране на часовете
+		for( var i=0; i<12; i++ )
+			point( [170*Math.cos(2*Math.PI*i/12),170*Math.sin(2*Math.PI*i/12),1] );
+			
+		obj = null;
+		
+		// хващане на обект при натискане на бутон
+		function pointerDown( event )
+		{
+			obj = findObject( event, [a] );
+		}
+
+		// пускане на обект при пускане на бутон
+		function pointerUp( event )
+		{
+			obj = null;
+		}
+
+		// движение на хванат обект при движение на мишката
+		function pointerMove( event )
+		{
+			if( obj )
+			{
+				// стрелката се завърта в посока на мишката
+				obj.lookAt( findPosition( event ) );
+			}
+		}
+	</script>
+</head>

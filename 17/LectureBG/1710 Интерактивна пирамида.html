@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onPointerUp="pointerUp" onPointerMove="pointerMove">
+		<lookat from="0,0,100">
+
+		<!-- две интерактивни пирамиди -->
+		<pyramid id="a" x="20" y="-20" size="30,40" onPointerDown="pointerDown">
+		<pyramid id="b" x="-20" y="-20" size="30,40" onPointerDown="pointerDown">
+	</suica>
+	
+	<script>
+		pos = null;
+		obj = null;
+		
+		// хващане на обект при натискане на бутон
+		function pointerDown( event )
+		{
+			pos = findPosition( event );
+			obj = this;
+		}
+
+		// пускане на обект при пускане на бутон
+		function pointerUp( event )
+		{
+			pos = null;
+		}
+
+		// движение на хванат обект при движение на мишката
+		function pointerMove( event )
+		{
+			if( pos )
+			{
+				// намиране с колко се е преместила мишката
+				var newPos = findPosition( event ),
+					dX = newPos[0]-pos[0],
+					dY = newPos[1]-pos[1];
+
+				if( obj==b )
+				{
+					// ако е хваната пирамида b, нейното завъртане
+					// и нейната височина се променят едновременно
+					obj.spinH += dX;
+					obj.height += 0.3*dY;
+				}
+				else
+				{
+					// ако е хваната пирамида a, се променя или
+					// нейното завъртане, или нейната височина,
+					// което е по-голямо, но само то
+					if( Math.abs(dX) > 2*Math.abs(dY) )
+						obj.spinH += dX;
+					if( Math.abs(dY) > 2*Math.abs(dX) )
+						obj.height += 0.3*dY;
+				}
+				
+				// ограничаване на минималната и максималната височина
+				if( obj.height<1 ) obj.height = 1;
+				if( obj.height>50 ) obj.height = 50;
+				
+				pos = newPos;
+			}
+		}
+	</script>
+</head>

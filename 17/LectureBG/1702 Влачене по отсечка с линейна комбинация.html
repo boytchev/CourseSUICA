@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow orthographic="1,1000" onPointerDown="pointerDown" onPointerUp="pointerUp" onPointerMove="pointerMove">
+		<lookat from="0,0,100">
+		
+		<!-- влачена сфера -->
+		<sphere id="a" size="60,60,10" color="orange">
+		
+		<!-- невидими зони за двата края на отсечката, по която се влачи -->
+		<square id="zone1" x="-300" size="200,500" hidden>
+		<square id="zone2" x="300" size="200,500" hidden>
+	</suica>
+	
+	<script>
+		// отсечка, по която става влаченето
+		p1 = point( randomIn(zone1) );
+		p2 = point( randomIn(zone2) );
+
+		line( p1, p2 );
+		
+		// в началото сферата е в средата на отсечка
+		k = 0.5;
+		a.center = lerp( p1, p2, k );
+		
+		obj = null;
+		pos = null;
+		
+		// хващане на обект при натискане на бутон
+		function pointerDown( event )
+		{
+			pos = findPosition( event );
+			obj = findObject( event );
+		}
+
+		// пускане на обект при пускане на бутон
+		function pointerUp( event )
+		{
+			obj = null;
+		}
+
+		// движение на хванат обект при движение на мишката
+		function pointerMove( event )
+		{
+			if( obj )
+			{
+				var newPos = findPosition( event );
+
+				// всъщност се влачи параметърът k
+				k += (newPos[0]-pos[0])/610;
+				
+				// ограничаване в [0,1], за движение
+				// по отсечка, а не по цяла линия
+				if( k>1 ) k = 1;
+				if( k<0 ) k = 0;
+				
+				// от него с лиенйа комбинация се получава
+				// позицията на сферата по линията
+				a.center = lerp( p1, p2, k );
+				
+				pos = newPos;
+			}
+		}
+	</script>
+</head>

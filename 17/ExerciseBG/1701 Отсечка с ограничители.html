@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow orthographic="1,1000" onPointerDown="pointerDown" onPointerUp="pointerUp" onPointerMove="pointerMove">
+		<lookat from="0,0,100">
+		
+		<!-- невидима точка където е мишката -->
+		<point id="c" hidden>
+		
+		<!-- влачена сфера -->
+		<sphere id="d" size="60,60,10" color="orange">
+		
+		<!-- невидими зони за двата края на отсечката, по която се влачи -->
+		<square id="zone1" x="-300" size="200,500" hidden>
+		<square id="zone2" x="300" size="200,500" hidden>
+	</suica>
+	
+	<script>
+		R = 30; // радиус на движещата се сфера
+		r = 15; // радиус на ограничителите
+		
+		// отсечка с ограничители, по която става влаченето
+		a = sphere( randomIn(zone1), [2*r,2*r,5], 'dimgray' );
+		b = sphere( randomIn(zone2), [2*r,2*r,5], 'dimgray' );
+		line( a, b );
+
+		// пресмятане на ограниченията в двата края
+		L = Math.sqrt( (a.x-b.x)**2 + (a.y-b.y)**2 );
+		lim = (R+r)/L;
+		
+		// в началото сферата е в средата на отсечката
+		k = 0.5;
+		d.center = lerp( a, b, k );
+		
+		obj = null;
+		
+		// хващане на обект при натискане на бутон
+		function pointerDown( event )
+		{
+			obj = findObject( event );
+		}
+
+		// пускане на обект при пускане на бутон
+		function pointerUp( event )
+		{
+			obj = null;
+		}
+
+		function pointerMove( event )
+		{
+			c.center = findPosition( event );
+			if( obj )
+			{
+				// изчисляване на най-близка точка от линията до т. C
+				ca = [a.x-c.x, a.y-c.y];
+				ab = [b.x-a.x, b.y-a.y];
+				
+				caab = ca[0]*ab[0] + ca[1]*ab[1];
+				abab = ab[0]*ab[0] + ab[1]*ab[1];
+				
+				// резултатът е коефициент като за линейна комбинация
+				k = -caab/abab;
+				
+				// ограничаване според размера на ограничителите
+				if( k > 1-lim ) k = 1-lim;
+				if( k < lim )   k = lim;
+				
+				// преместване на сферата в съответната на k точка
+				d.center = lerp( a, b, k );
+			}
+		}
+	</script>
+</head>

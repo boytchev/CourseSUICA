@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow orthographic="1,1000" onPointerDown="pointerDown" onPointerUp="pointerUp" onPointerMove="pointerMove">
+		<lookat from="0,0,100">
+		
+		<!-- ограда на затвора -->
+		<square size="600,400" color="black" wireframe>
+		
+		<!-- затворник -->
+		<sphere id="prisoner" size="60,60,10" color="orange">
+	</suica>
+	
+	<script>
+		obj = null;
+		pos = null;
+		
+		// хващане на обект при натискане на бутон
+		function pointerDown( event )
+		{
+			pos = findPosition( event );
+			obj = findObject( event );
+		}
+
+		// пускане на обект при пускане на бутон
+		function pointerUp( event )
+		{
+			obj = null;
+		}
+
+		// движение на хванат обект при движение на мишката
+		function pointerMove( event )
+		{
+			if( obj )
+			{
+				var newPos = findPosition( event );
+
+				// размери на движението на мипката
+				obj.x += newPos[0]-pos[0];
+				obj.y += newPos[1]-pos[1];
+				
+				// нова хоризонтална позиция, ограничена от оградата
+				if( obj.x <-300+30 ) obj.x = -300+30;
+				if( obj.x > 300-30 ) obj.x =  300-30;
+				
+				// нова вертикална позиция, ограничена от оградата
+				if( obj.y <-200+30 ) obj.y = -200+30;
+				if( obj.y > 200-30 ) obj.y =  200-30;
+				
+				pos = newPos;
+			}
+		}
+	</script>
+</head>

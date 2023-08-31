@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow orthographic="1,1000" onPointerDown="pointerDown" onPointerUp="pointerUp" onPointerMove="pointerMove">
+		<lookat from="0,0,100">
+		
+		<!-- влачени сфери -->
+		<sphere id="ballA" y="200" size="60,60,10" color="orange">
+		<sphere id="ballB" y="-150" size="60,60,10" color="orange">
+	</suica>
+	
+	<script>
+		// параметри и ограничения за първата сфера
+		ballA.angle = 90;
+		ballA.r = 200;
+		ballA.sign = -1;
+		ballA.min = 20;
+		ballA.max = 180-20;
+		
+		// параметри и ограничения за втората сфера
+		ballB.angle = 270;
+		ballB.r = 150;
+		ballB.sign = 1;
+		ballB.min = 180-40;
+		ballB.max = 360+40;
+		
+		// рисуване на дъга от окръжност
+		function drawArc( obj )
+		{
+			for( var i=obj.min; i<obj.max; i+=5 )
+			{
+				a = radians(i);
+				b = radians(i+5);
+				line( [obj.r*Math.cos(a),obj.r*Math.sin(a),0],
+					  [obj.r*Math.cos(b),obj.r*Math.sin(b),0] );
+			}
+		}
+		
+		// рисуване на двете дъги
+		drawArc( ballA );
+		drawArc( ballB );
+
+		obj = null;
+		pos = null;
+		
+		// хващане на обект при натискане на бутон
+		function pointerDown( event )
+		{
+			pos = findPosition( event );
+			obj = findObject( event );
+		}
+
+		// пускане на обект при пускане на бутон
+		function pointerUp( event )
+		{
+			obj = null;
+		}
+
+		// движение на хванат обект при движение на мишката
+		function pointerMove( event )
+		{
+			if( obj )
+			{
+				var newPos = findPosition( event );
+
+				// промяна в ъгъла на обекта (като при полярни координати)
+				obj.angle += obj.sign*(newPos[0]-pos[0]);
+				
+				// ограничаване до ъгловия размер на дъгата
+				if( obj.angle>obj.max ) obj.angle = obj.max;
+				if( obj.angle<obj.min ) obj.angle = obj.min;
+				
+				// полярни -> декартови координати
+				obj.x = obj.r * Math.cos( radians(obj.angle) );
+				obj.y = obj.r * Math.sin( radians(obj.angle) );
+				
+				pos = newPos;
+			}
+		}
+	</script>
+</head>

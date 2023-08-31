@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onPointerDown="pointerDown" onPointerUp="pointerUp" onPointerMove="pointerMove">
+		<lookat from="40,60,80">
+		
+		<!-- неподвижен куб -->
+		<cube id="zone" color="white">
+		
+		<!-- движеща се сфера -->
+		<sphere id="ball" y="15" size="4" color="navy">
+	</suica>
+	
+	<script>
+		obj = null;
+		pos = null;
+		
+		// хващане на обект при натискане на бутон
+		function pointerDown( event )
+		{
+			obj = findObject( event, [ball] );
+		}
+
+		// пускане на обект при пускане на бутон
+		function pointerUp( event )
+		{
+			obj = null;
+		}
+
+		// движение на хванат обект при движение на мишката
+		function pointerMove( event )
+		{
+			if( obj )
+			{
+				// отново намираме обекта под мишката
+				var onObj = findObject( event, [zone] );
+				if( onObj )
+				{
+					// за да имаме актуалните координати
+					// по неговата повърхност
+					var point = onObj.intersectData.point;
+					ball.center = [point.x, point.y, point.z];
+				}
+			}
+		}
+	</script>
+</head>

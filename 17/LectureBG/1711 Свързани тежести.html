@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow orthographic="1,1000" onPointerDown="pointerDown" onPointerUp="pointerUp" onPointerMove="pointerMove">
+		<lookat from="0,0,100">
+		
+		<!-- макара на райета -->
+		<pyramid id="pa" count="32" y="200" size="200,100,200" color="lightgray" spinV="90">
+		<pyramid id="pb" count="32" y="200" size="200,100,200" color="gray" spinV="90" spinT="1">
+		
+		<!-- две движещи се тежести -->
+		<sphere id="ballA" x="-105" y="-50" size="40,40,10" color="orange">
+		<sphere id="ballB" x="105" y="-50" size="40,40,10" color="orange">
+	</suica>
+	
+	<script>
+		// заоблената част на въжето е комплект от отсечки
+		for( var i=0; i<180; i+=10 )
+		{
+			var a = radians( i ),
+				b = radians( i+10 );
+			
+			line(
+				[105*Math.cos(a),105*Math.sin(a)+200,0],
+				[105*Math.cos(b),105*Math.sin(b)+200,0]
+			);
+		}
+		
+		// прави части на въжето
+		a = line( [-105,200,0], [-105,-50,0] );
+		b = line( [105,200,0], [105,-50,0] );
+		
+		obj = null;
+		pos = null;
+		
+		// хващане на обект при натискане на бутон
+		function pointerDown( event )
+		{
+			pos = findPosition( event );
+			obj = findObject( event );
+		}
+
+		// пускане на обект при пускане на бутон
+		function pointerUp( event )
+		{
+			obj = null;
+		}
+
+		// движение на хванат обект при движение на мишката
+		function pointerMove( event )
+		{
+			if( obj )
+			{
+				var newPos = findPosition( event );
+
+				// хванатият обект се дърпа, но само надолу
+				if( newPos[1] < pos[1] )
+					obj.y += newPos[1]-pos[1];
+
+				// долна граница, която не трябва да се минава
+				if( obj.y < -150 )
+					obj.y = -150;
+					
+				// колкото едната тежест се дърпа надолу,
+				// толкова другата се изтегла нагоре
+				if( obj==ballA )
+					ballB.y = -100-ballA.y;
+				else
+					ballA.y = -100-ballB.y;
+					
+				// корекция в правите части на въжето
+				a.to = ballA;
+				b.to = ballB;
+				
+				// въртене на макарата
+				pa.spinT = -ballA.y/2;
+				pb.spinT = -ballA.y/2+1;
+					
+				pos = newPos;
+			}
+		}
+	</script>
+</head>

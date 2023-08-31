@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow orthographic="0,1000" onPointerDown="pointerDown" onPointerUp="pointerUp" onPointerMove="pointerMove">
+		<lookat from="0,0,100">
+		
+		<!-- основа на крана -->
+		<sphere size="250,250,10" color="black" z="10">
+		
+		<!-- движещ се индикатор -->
+		<sphere id="indicator" size="60,60,20" color="white" z="10">
+	</suica>
+	
+	<script>
+		// начална позиция и цвят на индикатора
+		indicator.x = 80*Math.cos( radians(-20) );
+		indicator.y = 80*Math.sin( radians(-20) );
+		indicator.color = hsl( 0, 100, 50 );
+			
+		obj = null;
+		
+		// хващане на обект при натискане на бутон
+		function pointerDown( event )
+		{
+			obj = findObject( event, [indicator] );
+		}
+
+		// пускане на обект при пускане на бутон
+		function pointerUp( event )
+		{
+			obj = null;
+		}
+
+		// движение на хванат обект при движение на мишката
+		function pointerMove( event )
+		{
+			if( obj )
+			{
+				pos = findPosition( event );
+				
+				// изчисляване на ъгъла от координатите на мишката
+				angle = 90-degrees( Math.atan2(pos[0],pos[1]) );
+				
+				// ограничаване на ъгъла в [-20°,200°]
+				if( angle < -20 ) angle = -20;
+				if( angle > 200 ) angle = 200;
+
+				// преместване на индикатора
+				indicator.x = 80*Math.cos( radians( angle ) );
+				indicator.y = 80*Math.sin( radians( angle ) );
+				
+				// оцветяване според ъгъла
+				indicator.color = hsl( angle+20, 100, 50 );
+			}
+		}
+	</script>
+</head>

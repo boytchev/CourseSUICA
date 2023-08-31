@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="tween.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow ontime="loop" onPointerLeave="pointerUp" onPointerDown="pointerDown" onPointerMove="pointerMove" onPointerUp="pointerUp">
+		<lookat from="0,30,100" to="0,10,0">
+		
+		<!-- платформа -->
+		<cube y="-11" size="80,1,40" color="gray">
+		
+		<!-- движещ се цилиндър -->
+		<cylinder id="a" y="-10" size="35,10" color="orange">
+	</suica>
+	
+	<script>
+		// вертикална позиция за tween
+		pos = {y: -10};
+
+		y = null;
+		
+		// хващане на обект при натискане на бутон
+		function pointerDown( event )
+		{
+			if( findObject( event, [a] ) )
+				y = findPosition( event )[1];
+		}
+
+		// пускане на обект при пускане на бутон
+		function pointerUp( event )
+		{
+			if( y != null )
+			{
+				// падането с топане е чрез tween
+				pos.y = a.y;
+				new TWEEN.Tween( pos )
+					.to( {y: -10}, 30*(a.y+20) )
+					.easing( TWEEN.Easing.Bounce.Out )
+					.start();
+			}
+			
+			y = null;
+		}
+
+		// движение на хванат обект при движение на мишката
+		function pointerMove( event )
+		{
+			if( y != null )
+			{
+				var newY = findPosition( event )[1];
+			
+				// 0.08 е скоростта на влачене нагоре
+				a.y += 0.08*(newY-y);
+				
+				y = newY;
+			}
+		}
+
+		
+		function loop( )
+		{
+			TWEEN.update( );
+			
+			if( y == null )
+				a.y = pos.y;
+		}
+	</script>
+</head>
+
