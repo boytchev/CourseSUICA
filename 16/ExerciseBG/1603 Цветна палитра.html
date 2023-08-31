@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<style>
+		suica {
+			width: 600px;
+			left: calc( 50% - 300px );
+		}
+	</style>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit altitude="0">
+		
+		<!-- централна сфера -->
+		<sphere id="a" size="38,38,5" color="gray">
+	</suica>
+	
+	<script>
+		// ореол от малки цветни сфери
+		// всяка следи влизането на мишката
+		n = 16;
+		for( var i=0; i<n; i++ )
+		{
+			angle = radians( 360 * i/n );
+			
+			sphere( [25*Math.cos(angle),25*Math.sin(angle),0], [9,9,1], hsl(degrees(angle),100,50) );
+			its.onpointerenter = recolor;
+		}
+		
+		// при влизане на мишката в сфера
+		function recolor( )
+		{
+			// нейният цвят се дава на голямата сфера
+			a.color = this.color;
+		}
+	</script>
+	
+</head>

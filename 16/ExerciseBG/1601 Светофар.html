@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<style>
+		suica {
+			width: 600px;
+			left: calc( 50% - 300px );
+		}
+	</style>
+</head>
+
+<body>
+	<suica fullWindow onPointerMove="pointerMove">
+		<orbit altitude="0">
+		
+		<!-- горна и долна граница -->
+		<line from="-30,30,0" to="30,30,0">
+		<line from="-30,-30,0" to="30,-30,0">
+		
+		<!-- кръгове на светофара -->
+		<circle id="a" y="20" size="20" color="red">
+		<circle id="b" size="20" color="yellow">
+		<circle id="c" y="-20" size="20" color="green">
+	</suica>
+	
+	<script>
+		// движение на мишката
+		function pointerMove( event )
+		{
+			// обект под мишката
+			obj = findObject(event);
+			
+			// ако е единият кръг, той става голям, а другите два
+			// се смаляват, но и трите кръга си променят y координатата
+			if( obj == a )
+			{
+				a.size = 32; a.y = 14;
+				b.size = 14; b.y = -9;
+				c.size = 14; c.y = -23;
+			}
+			else
+			// аналогично за втория кръг
+			if( obj == b )
+			{
+				a.size = 14; a.y = 23;
+				b.size = 32; b.y = 0;
+				c.size = 14; c.y = -23;
+			}
+			else
+			// и за третия
+			if( obj == c )
+			{
+				a.size = 14; a.y = 23;
+				b.size = 14; b.y = 9;
+				c.size = 32; c.y = -14;
+			}
+			// ако няма обект под мишката, всички стават малки
+			// и им се връщат оригиналните y координати
+			else
+			{
+				a.size = 20; a.y = 20;
+				b.size = 20; b.y = 0;
+				c.size = 20; c.y = -20;
+			}
+		}
+	</script>
+	
+</head>

@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<style>
+		suica {
+			width: 600px;
+			left: calc( 50% - 300px );
+		}
+	</style>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<orbit altitude="0">
+		
+		<!-- сплескана сфера, която следи влизане и излизане на мишката -->
+		<sphere id="a" size="30,30,5" color="gray" onPointerEnter="big" onPointerLeave="small">
+	</suica>
+	
+	<script>
+		// целеви размер
+		size = 30;
+		
+		// при влизане на мишката целевият размер става голям
+		function big( )
+		{
+			size = 60;
+		}
+		
+		// при излизане на мишката целевият размер става малък
+		function small( )
+		{
+			size = 40;
+		}
+		
+		function loop( )
+		{
+			// плавна промяна на текущия размер на сферата
+			// в посока на целевия размер на сферата
+			a.width = a.width*0.95 + 0.05*size;
+			a.height = a.width;
+		}
+	</script>
+	
+</head>

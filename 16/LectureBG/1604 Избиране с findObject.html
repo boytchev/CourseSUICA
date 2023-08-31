@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onPointerMove="pointerMove">
+		<orbit>
+		
+		<!-- три цветни сфери -->
+		<sphere x="-30" size="15" color="royalblue">
+		<sphere size="15" color="yellow">
+		<sphere x="30" size="15" color="crimson">
+	</suica>
+	
+	<script>
+		// намерена сфера
+		obj = null;
+		
+		// обработване на движението на мишката
+		function pointerMove( event )
+		{
+			// ако е имало намерена сфера, прави се малка
+			if( obj ) obj.size = 15;
+			
+			// търси се сфера под курсора на мишката
+			obj = findObject( event );
+			
+			// ако има намерена сфера, прави се голяма
+			if( obj ) obj.size = 30;
+		}
+	</script>
+</head>

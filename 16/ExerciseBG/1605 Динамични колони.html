@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<orbit speed="0.3">
+	</suica>
+	
+	<script>
+		// създаване на колони в кръг, всяка 
+		// реагира на движение на мишката
+		n = 48;
+		columns = [];
+		for( var i=0; i<n; i++ )
+		{
+			angle = radians( 360 * i/n );
+			cube( [30*Math.cos(angle),5,30*Math.sin(angle)], [3,40,3], hsl(random(120-80,120+80),100,50) );
+			its.spinH = -degrees( angle );
+			its.onpointermove = shrink;
+			
+			columns.push( its );
+		}
+			
+		// свиване на колона
+		function shrink( )
+		{
+			this.height = 2;
+			this.y = this.height/2 - 15;
+		}
+		
+		function loop( t, dT )
+		{
+			k = dT/2;
+			// на всеки кадър всяка колона се разпъва към пълния
+			// си размер чрез линейна комбинация
+			for( var column of columns )
+			{
+				column.height = column.height*(1-k) + k*40;
+				column.y = column.height/2 - 15;
+			}
+		}
+	</script>
+</head>

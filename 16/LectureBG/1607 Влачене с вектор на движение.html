@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow orthographic="1,1000" onPointerDown="pointerDown" onPointerUp="pointerUp" onPointerMove="pointerMove">
+		<lookat from="0,0,800">
+		
+		<!-- три цветни сфери за влачене -->
+		<sphere x="-300" size="160" color="royalblue">
+		<sphere size="160" color="yellow">
+		<sphere x="300" size="160" color="crimson">
+	</suica>
+	
+	<script>
+		// влачена сфера и позиция на хващане
+		obj = null;
+		pos = null;
+		
+		// при натискане на бутон се запомня позицията
+		// и се търси дали има сфера отдолу
+		function pointerDown( event )
+		{
+			pos = findPosition( event );
+			obj = findObject( event );
+		}
+
+		// при пускане на бутон се забравя, че има влачена сфера
+		function pointerUp( event )
+		{
+			obj = null;
+		}
+
+		// при движение на мишката се мести влачената сфера
+		// толкова, колкото се е придвижила мишката
+		function pointerMove( event )
+		{
+			if( obj )
+			{
+				var newPos = findPosition( event );
+				
+				// местене колкото се е преместила мишката
+				obj.x += newPos[0]-pos[0];
+				obj.y += newPos[1]-pos[1];
+				
+				// запомня се новата позиция
+				pos = newPos;
+			}
+		}
+	</script>
+</head>

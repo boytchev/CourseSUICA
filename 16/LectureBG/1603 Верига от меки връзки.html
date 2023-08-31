@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onPointerMove="pointerMove" orthographic="0,1000" onTime="loop">
+	</suica>
+	
+	<script>
+		// списък от окръжности
+		n = 50;
+		a = [];
+		for( var i=0; i<n; i++ )
+			a.push( circle([0,0,0], 10+5*i, hsl(0,0,random(0,100)) ) );
+		
+		// целева позиция
+		pos = [0,0,0];
+
+		// при движение на мишката се запомня новата цел
+		function pointerMove( event )
+		{
+			pos = findPosition( event );
+		}
+		
+		function loop( t, dT )
+		{
+			// движение на първата окръжност към целта
+			a[0].center = lerp( a[0].center, pos, 0.2 );
+			
+			// движение на всяка от останалите окръжности
+			// към предходната окръжност
+			for( var i=1; i<n; i++ )
+			{
+				a[i].center = lerp( a[i].center, a[i-1].center, 0.2 );
+				a[i].z = -i;
+			}
+		}
+	</script>
+</head>

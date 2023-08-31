@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow orthographic="1,1000" onPointerDown="pointerDown" onPointerUp="pointerUp" onPointerMove="pointerMove">
+		<lookat from="0,0,800">
+		
+		<!-- три върха на триъгълник -->
+		<circle id="a" center="-100,-30,0" size="20" color="black">
+		<circle id="b" center="100,-30,0" size="20" color="black">
+		<circle id="c" center="-30,60,0" size="20" color="black">
+		
+		<!-- три страни на триъгълник -->
+		<line id="ab" from="a" to="b">
+		<line id="bc" from="b" to="c">
+		<line id="ca" from="c" to="a">
+	</suica>
+	
+	<script>
+		// влачен връх и позиция на хващане
+		obj = null;
+		pos = null;
+		
+		// при натискане на бутон се запомня позицията
+		// и се търси дали има връх на триъгълник отдолу
+		function pointerDown( event )
+		{
+			pos = findPosition( event );
+			obj = findObject( event, [a,b,c] );
+		}
+
+		// при пускане на бутон се забравя, че има влачен връх
+		function pointerUp( event )
+		{
+			obj = null;
+		}
+
+		// при движение на мишката се мести влаченият връх
+		function pointerMove( event )
+		{
+			if( obj )
+			{
+				var newPos = findPosition( event );
+				
+				// преместване на върха
+				obj.x += newPos[0]-pos[0];
+				obj.y += newPos[1]-pos[1];
+				
+				pos = newPos;
+				
+				// актуализиране на позицията на трите страни на
+				// триъгълника, без значение, че за едната няма нужда
+				ab.from = a; ab.to = b;
+				bc.from = b; bc.to = c;
+				ca.from = c; ca.to = a;
+			}
+		}
+	</script>
+</head>

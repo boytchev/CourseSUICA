@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onPointerDown="pointerDown" onPointerUp="pointerUp" onPointerMove="pointerMove">
+		<background color="gray">
+	</suica>
+	
+	<script>
+		// първоначална гледна точка, зависи от два ъгъла
+		lookA = radians( 90 );
+		lookB = 0;
+		
+		lookAt( [
+			100*Math.cos(lookA)*Math.cos(lookB),
+			100*Math.sin(lookB),
+			100*Math.sin(lookA)*Math.cos(lookB)
+		] );
+		
+		// създаване на тухли, които ще се въртят интерактивно
+		for( var x = -40; x<=40; x+=10 )
+		for( var y = -20; y<=20; y+=10 )
+		{
+			cube( [x,y,0], [3,6,10], ((x+y)/10)%2 ? 'linen' : 'dimgray' );
+			its.spinH = random( -60, 60 );
+			its.spinV = random( -30, 30 );
+		}
+			
+		// избрана тухла, позиция на мишката
+		// и флаг дали се прави някакво влачене
+		obj = null;
+		pos = [0,0];
+		drag = false;
+		
+		// при натискане на бутон се запомня позицията
+		// и се търси дали има тухла на това място,
+		// маркира се, че има влачене
+		function pointerDown( event )
+		{
+			pos = findPosition( event );
+			obj = findObject( event );
+			drag = true;
+		}
+
+		// при пускане на бутон се забравя, че има влачене
+		function pointerUp( event )
+		{
+			drag = false;
+		}
+
+		// при движение на мишката се върти избраната тухла
+		// или се върти цялата сцена
+		function pointerMove( event )
+		{
+			// намиране на новата позиция и на движението на мишката
+			var newPos = findPosition( event ),
+				dX = newPos[0]-pos[0],
+				dY = newPos[1]-pos[1];
+				
+				pos = newPos;
+				
+			// ако има влачене
+			if( drag )
+			{
+				// има влачене и има обект (т.е. тухла)
+				if( obj )
+				{
+					// върти се тухлата
+					obj.spinH += dX;
+					obj.spinV -= dY;
+				}
+				// има влачене, но няма обект
+				else
+				{
+					// вместо да се върти сцената се
+					// променят ъглите на гледната точка
+					lookA += 0.01*dX;
+					lookB -= 0.01*dY;
+					
+					// вертикалният ъгъл е ограничен отгоре и отдолу
+					if( lookB < -1.5 ) lookB = -1.5;
+					if( lookB >  1.5 ) lookB =  1.5;
+					
+					// промяна на позицията на гледната точка
+					lookAt( [
+						100*Math.cos(lookA)*Math.cos(lookB),
+						100*Math.sin(lookB),
+						100*Math.sin(lookA)*Math.cos(lookB)
+					] );
+				}
+			}
+		}
+	</script>
+</head>

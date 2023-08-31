@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onPointerDown="pointerDown" onPointerUp="pointerUp" onPointerMove="pointerMove">
+		<background color="gray">
+	</suica>
+	
+	<script>
+		// създаване на тухли, които ще се въртят интерактивно
+		for( var x = -40; x<=40; x+=10 )
+		for( var y = -20; y<=20; y+=10 )
+		{
+			cube( [x,y,0], [3,6,10], ((x+y)/10)%2 ? 'linen' : 'dimgray' );
+			its.spinH = random( -60, 60 );
+			its.spinV = random( -30, 30 );
+		}
+			
+		// избрана тухла и позиция на мишката
+		obj = null;
+		pos = null;
+		
+		// при натискане на бутон се запомня позицията
+		// и се търси дали има тухла на това място
+		function pointerDown( event )
+		{
+			pos = findPosition( event );
+			obj = findObject( event );
+		}
+
+		// при пускане на бутон се забравя, че има избрана тухла
+		function pointerUp( event )
+		{
+			obj = null;
+		}
+
+		// при движение на мишката се върти избраната тухла
+		function pointerMove( event )
+		{
+			if( obj )
+			{
+				var newPos = findPosition( event );
+				
+				// завъртането зависи от преместването на мишката
+				obj.spinH += newPos[0]-pos[0];
+				obj.spinV -= newPos[1]-pos[1];
+				
+				pos = newPos;
+			}
+		}
+	</script>
+</head>

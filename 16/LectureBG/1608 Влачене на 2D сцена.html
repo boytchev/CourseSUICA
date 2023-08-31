@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onPointerDown="pointerDown" onPointerUp="pointerUp" onPointerMove="pointerMove" perspective="1,10000">
+		<lookat from="0,0,500">
+	</suica>
+	
+	<script>
+		// разни обекти из равнината XY
+		for( var i=0; i<500; i++ )
+			polygon(
+				Math.round(random(3,10)),
+				[ random(-3000,3000), random(-1500,1500), 0 ],
+				100,
+				hsl( random(0,360), 100, 50 )
+			).style({awireframe: true});
+			
+			
+		// текуща позиция и координати на гледната точка
+		pos = null;
+		lookX = 0;
+		lookY = 0;
+		lookD = 500;
+
+		
+		// при натискане на бутон се запомня позицията
+		function pointerDown( event )
+		{
+			pos = findPosition( event );
+		}
+
+		// при пускане на бутон се забравя позицията
+		function pointerUp( event )
+		{
+			pos = null;
+		}
+		
+		// влачене на сцената, ако има запомнена позиция
+		// (т.е. има започнато влачене)
+		function pointerMove( event )
+		{
+			if( pos )
+			{
+				// нова позиция и колко е промяната по осите
+				var newPos = findPosition( event ),
+					dX = pos[0] - newPos[0],
+					dY = pos[1] - newPos[1];
+			
+				// ако е натиснат първия бутон се плъзга
+				// гледната точка
+				if( event.buttons == 1 )
+				{
+					lookX += 0.001*lookD*dX;
+					lookY += 0.001*lookD*dY;
+				}
+
+				// ако е натиснат другия бутон се променя
+				// отдалечеността на гледната точка
+				if( event.buttons == 2 )
+				{
+					lookD *= 1.01**dY;
+				}
+				
+				// нова гледна точка
+				lookAt( [lookX,lookY,lookD], [lookX,lookY,0], [0,1,0] );
+				
+				pos = newPos;
+			}
+		}
+	</script>
+</head>

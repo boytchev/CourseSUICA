@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+		
+		<!-- три цветни сфери, всяка слуша за влизане и излизане на мишката -->
+		<sphere x="-30" size="15" color="royalblue" onPointerEnter="big" onPointerLeave="small">
+		<sphere size="15" color="yellow" onPointerEnter="big" onPointerLeave="small">
+		<sphere x="30" size="15" color="crimson" onPointerEnter="big" onPointerLeave="small">
+	</suica>
+	
+	<script>
+		// при влизане в сфера тя се прави голяма
+		// реагиралият обект е в this
+		function big( event )
+		{
+			this.size = 30;
+		}
+
+		// при излизане от сфера тя се прави малка
+		// реагиралият обект е в this
+		function small( event )
+		{
+			this.size = 15;
+		}
+	</script>
+</head>
