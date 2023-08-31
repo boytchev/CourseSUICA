@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="lil-gui.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow ontime="loop">
+		<circle id="c" color="gray">
+	</suica>
+	
+	<script>
+		// интерактивни данни
+		data = {size: 30}; 
+		
+		// панел
+		gui = new lil.GUI(); 
+		
+		// размер
+		gui.add( data, 'size', 5, 100 );
+			
+		function loop( )
+		{
+			// промяна на размера според данните в панела
+			c.size = data.size;
+		}
+	</script>
+</head>

@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="lil-gui.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<orbit>
+		<cube id="ground" size="60,1,60">
+	</suica>
+	
+	<script>
+		// панел
+		gui = new lil.GUI();
+		
+		// три контролера за цветове
+		data = { skyColor: 0xF0FFFF, groundColor: 0x008000, prismColor: 0xFF0030 };
+		gui.addColor( data, 'skyColor' ).name( 'Небе' );
+		gui.addColor( data, 'groundColor' ).name( 'Земя' );
+		gui.addColor( data, 'prismColor' ).name( 'Призми' );
+		
+		// създаване на призмите
+		prisms = [];
+		for( var i=0; i<8; i++ )
+		{
+			p = prism( 8, [0,0,0],[5] );
+				its.spinV = 90;
+				its.z = 20;
+				
+			g = group( p );
+				its.p = p;
+				its.y = 2.75;
+				its.spinH = i/8 * 360;
+				its.spinS = 0;
+				
+			prisms.push( g );
+		}
+		
+		function loop( t, dT )
+		{
+			// цвят на фона
+			background( data.skyColor );
+			
+			// цвят на земята
+			ground.color = data.groundColor;
+
+			// търкаляне и цвят на всички призми
+			for( var i=0; i<8; i++ )
+			{
+				prisms[i].spinH += 20*dT;
+				prisms[i].spinS -= 220*dT;
+				prisms[i].p.color = data.prismColor;
+			}
+		}
+	</script>
+</head>

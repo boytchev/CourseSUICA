@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="lil-gui.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<circle id="c" color="gray">
+	</suica>
+	
+	<script>
+		// панел
+		gui = new lil.GUI(); 
+		
+		// използване на целия обект, но се 
+		// променя само едно от свойствата му
+		gui.add( c, 'size', 5, 100 );
+	</script>
+</head>

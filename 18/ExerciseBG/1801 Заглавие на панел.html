@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="lil-gui.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<circle id="a" color="crimson" x="-30">
+		<circle id="b" color="royalblue" x="30">
+	</suica>
+	
+	<script>
+		// панел с ново име
+		gui = new lil.GUI( {title: 'Окръжности'} ); 
+		
+		// контролери с HTML имена за червената окръжност
+		guiA = gui.addFolder( 'Червена' );
+		guiA.add( a, 'x', -50, 50 ).name( 'X<sub> ч</sub>' );
+		guiA.add( a, 'y', -30, 30 ).name( 'Y<sub> ч</sub>' );
+		
+		// контролери с HTML имена за синята окръжност
+		guiB = gui.addFolder( 'Синя' );
+		guiB.add( b, 'x', -50, 50 ).name( 'X<sub> с</sub>' );
+		guiB.add( b, 'y', -30, 30 ).name( 'Y<sub> с</sub>' );
+	</script>
+</head>

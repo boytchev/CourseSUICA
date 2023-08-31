@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="lil-gui.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<orbit>
+		<cube size="60,1,60" color="gray">
+	</suica>
+	
+	<script>
+		// панел
+		gui = new lil.GUI();
+		
+		// интерактивни данни за скорост, цветност и скачане
+		data = { speed: 1, colors: true, jumps: false };
+		gui.add( data, 'speed', 0, 3 ).name( 'скорост' ).step( 0.1 );
+		gui.add( data, 'colors' ).name( 'цветове' );
+		gui.add( data, 'jumps' ).name( 'скачане' );
+
+		// създаване на призмите
+		prisms = [];
+		for( var i=0; i<8; i++ )
+		{
+			// самата призма
+			p = prism( 8, [0,0,0],[5] );
+				its.spinV = 90;
+				its.z = 20;
+				
+			// сложена е в група, но защо?!?
+			g = group( p );
+				its.p = p;
+				its.spinH = i/8 * 360;
+				its.spinS = 0;
+				
+			prisms.push( g );
+		}
+		
+		function loop( t, dT )
+		{
+			// анимация за всяка призма
+			for( var i=0; i<8; i++ )
+			{
+				// търкаляне
+				prisms[i].spinH += data.speed * 20*dT;
+				prisms[i].spinS -= data.speed * 220*dT;
+				
+				// цветност или с еднотипен цвят 
+				if( data.colors )
+					prisms[i].p.color = hsl( 360 * i/8 + 150*t, 100, 50 );
+				else
+					prisms[i].p.color = 'tan';
+				
+				// търкаляне и скачане или само търкаляне
+				if( data.jumps )
+					prisms[i].y = 2.8 + 5*Math.abs( Math.sin( 2*Math.PI * i/8 + 5*t) );
+				else
+					prisms[i].y = 2.8;
+					
+				// промяна на центъра не е нужна,
+				// но защо?!?
+			}
+		}
+	</script>
+</head>

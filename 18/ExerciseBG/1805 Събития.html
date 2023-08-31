@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="lil-gui.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<!-- две външни окръжности -->
+		<circle id="a" color="crimson" x="-20">
+		<circle id="b" color="royalblue" x="20">
+		
+		<!-- вътрешна окръжност с рамка -->
+		<group id="c">
+			<circle color="black" size="10" wireframe>
+			<circle color="white" size="10">
+		</group>
+	</suica>
+	
+	<script>
+		// панел
+		gui = new lil.GUI( {title: 'Окръжности'} ); 
+
+		// папка за червената окръжност с улавяне на събитието onChange
+		guiA = gui.addFolder( 'Червена' );
+		guiA.add( a, 'width', 1, 59 ).name( 'Размер' ).decimals( 1 ).onChange( changeA ).listen( );
+		
+		// папка за синята окръжност с улавяне на събитието onChange
+		guiB = gui.addFolder( 'Синя' );
+		guiB.add( b, 'width', 1, 59 ).name( 'Размер' ).decimals( 1 ).onChange( changeB ).listen( );
+		
+		// промяна в червената окръжност, променя другите две
+		function changeA( value )
+		{
+			b.width = 60 - value;
+			c.x = a.width/2 - 15;
+		}
+
+		// промяна в синята окръжност, променя другите две
+		function changeB( value )
+		{
+			a.width = 60 - value;
+			c.x = a.width/2 - 15;
+		}
+	</script>
+</head>

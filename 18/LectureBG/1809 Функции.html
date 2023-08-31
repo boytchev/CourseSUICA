@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="lil-gui.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+		
+		<!-- стена в група -->
+		<group id="s1">
+			<square size="20" z="10">
+			<square size="20" z="10" color="black" wireframe>
+		</group>
+		
+		<!-- още 5 стени, клонинги на първата -->
+		<clone id="s2" src="s1" spinV="90">
+		<clone id="s3" src="s1" spinV="180">
+		<clone id="s4" src="s1" spinV="270">
+		<clone id="s5" src="s1" spinH="90">
+		<clone id="s6" src="s1" spinH="-90">
+	</suica>
+	
+	<script>
+		// панел
+		gui = new lil.GUI();
+
+		// котролери-бутони
+		data = { openCube: openCube, closeCube: closeCube };
+		gui.add( data, 'openCube' ).name( 'Отвори' );
+		gui.add( data, 'closeCube' ).name( 'Затвори' );
+
+		var sides = [s1, s2, s3, s4, s5, s6];
+	
+		// функция за отваряне на куб
+		function openCube( )
+		{
+			for( var side of sides )
+			{
+				side.groupElements[0].z = 16;
+				side.groupElements[1].z = 16;
+			}
+		}
+			
+		// функция за заваряне на куб
+		function closeCube( )
+		{
+			for( var side of sides )
+			{
+				side.groupElements[0].z = 10;
+				side.groupElements[1].z = 10;
+			}
+		}
+	</script>
+</head>

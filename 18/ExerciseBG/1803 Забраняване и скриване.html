@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="lil-gui.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<circle id="a" color="crimson" x="-30">
+		<circle id="b" color="royalblue" x="30">
+	</suica>
+	
+	<script>
+		// панел
+		gui = new lil.GUI( {title: 'Окръжности'} ); 
+
+		// контролери за скриване на папки и на целия панел
+		buttons = { a:true, b:true, all:hideAll };
+		gui.add( buttons, 'a' ).name( 'Червени даннни' ).onChange( toggleA );
+		gui.add( buttons, 'b' ).name( 'Сини даннни' ).onChange( toggleB );
+		gui.add( buttons, 'all' ).name( 'Скрий панела' );
+		
+		// папка с някои забранени контролери за червената окръжност
+		guiA = gui.addFolder( 'Червена' );
+		guiA.add( a, 'x', -50, 50 ).name( 'X' ).disable();
+		guiA.add( a, 'y', -30, 30 ).name( 'Y' );
+		guiA.add( a, 'width', 1, 30 ).name( 'Размер' ).disable();
+		
+		// папка с някои забранени контролери за червената синята
+		guiB = gui.addFolder( 'Синя' );
+		guiB.add( b, 'x', -50, 50 ).name( 'X' ).disable();
+		guiB.add( b, 'y', -30, 30 ).name( 'Y' );
+		guiB.add( b, 'width', 1, 30 ).name( 'Размер' ).disable();
+		
+		// скриване/показване на папката за червената окръжност
+		function toggleA( event )
+		{
+			if( buttons.a )
+				guiA.show();
+			else
+				guiA.hide();
+		}
+		
+		// скриване/показване на папката за синята окръжност
+		function toggleB( event )
+		{
+			if( buttons.b )
+				guiB.show();
+			else
+				guiB.hide();
+		}
+		
+		// скриване на целия панел
+		function hideAll( )
+		{
+			gui.hide();
+		}
+		
+	</script>
+</head>

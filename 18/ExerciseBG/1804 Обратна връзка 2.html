@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="lil-gui.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow ontime="loop">
+		<circle id="a" color="crimson" x="-30">
+		<circle id="b" color="royalblue" x="30">
+	</suica>
+	
+	<script>
+		// панел
+		gui = new lil.GUI( {title: 'Окръжности'} ); 
+
+		// папка за червената окръжност със слушащи контролери
+		guiA = gui.addFolder( 'Червена' );
+		guiA.add( a, 'x', -50, 50 ).name( 'X' ).decimals( 1 ).listen( );
+		guiA.add( a, 'y', -30, 30 ).name( 'Y' ).decimals( 1 ).listen( );
+		guiA.add( a, 'width', 1, 30 ).name( 'Размер' ).decimals( 1 ).listen( );
+		
+		// папка за синята окръжност със слушащи контролери
+		guiB = gui.addFolder( 'Синя' );
+		guiB.add( b, 'x', -50, 50 ).name( 'X' ).decimals( 1 ).listen( );
+		guiB.add( b, 'y', -30, 30 ).name( 'Y' ).decimals( 1 ).listen( );
+		guiB.add( b, 'width', 1, 30 ).name( 'Размер' ).decimals( 1 ).listen( );
+		
+		function loop( t )
+		{
+			// промяна на червената окръжност
+			a.x = 40*Math.sin( 0.21*t+1 );
+			a.y = 20*Math.sin( 0.39*t+2 );
+			a.width = 15+10*Math.sin( 2*t );
+
+			// промяна на синята окръжност
+			b.x = 40*Math.sin( 0.47*t-2 );
+			b.y = 20*Math.sin( 0.15*t-1 );
+			b.width = 15+10*Math.cos( 2*t );
+		}
+	</script>
+</head>

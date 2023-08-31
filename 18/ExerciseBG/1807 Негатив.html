@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="lil-gui.umd.js"></script>
+	
+	<style>
+		/* стил на левия панел */
+		.panel-left {
+			position: absolute;
+			z-index: 1;
+			left: 0.5em;
+		}
+
+		/* стил на десния панел */
+		.panel-right {
+			position: absolute;
+			z-index: 1;
+			right: 0.5em;
+		}
+		
+		/* промяна на цветовете на панелите и контролерите */
+		.lil-gui {
+			--background-color: GhostWhite;
+			--text-color: Black;
+			--title-background-color: LightGray;
+			--title-text-color: Black;
+			--widget-color: Gray;
+			--hover-color: LightGray;
+			--focus-color: LightGray;
+			--number-color: Black;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- HTML елементи, в които да са панелите -->
+	<div id="boxA" class="panel-left"></div>
+	<div id="boxB" class="panel-right"></div>
+	
+	<suica fullWindow background="black">
+		<circle id="a" color="crimson" x="-30">
+		<circle id="b" color="royalblue" x="30">
+	</suica>
+	
+	<script>
+		// панел с променени цветове за червената окръжност
+		guiA = new lil.GUI( {title: 'Червена окръжност', container: element('boxA')} ); 
+		guiA.add( a, 'x', -50, 50 ).name( 'X' );
+		guiA.add( a, 'y', -30, 30 ).name( 'Y' );
+		guiA.add( a, 'width', 1, 30 ).name( 'Размер' );
+		
+		// панел с променени цветове за синята окръжност
+		guiB = new lil.GUI( {title: 'Синя окръжност', container: element('boxB')} ); 
+		guiB.add( b, 'x', -50, 50 ).name( 'X' );
+		guiB.add( b, 'y', -30, 30 ).name( 'Y' );
+		guiB.add( b, 'width', 1, 30 ).name( 'Размер' );
+	</script>
+</head>

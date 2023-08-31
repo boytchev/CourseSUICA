@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<script src="lil-gui.umd.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit>
+		<cube size="60,1,60" color="gray">
+		<cylinder id="c" size="5,10" color="orange">
+	</suica>
+	
+	<script>
+		// панел
+		gui = new lil.GUI();
+		
+		// група с контролери за координати
+		guiCoord = gui.addFolder( 'Координати' );
+		guiCoord.add( c, 'x', -20, 20 ).name( 'X' );
+		guiCoord.add( c, 'z', -20, 20 ).name( 'Z' );
+		
+		// група с контролери за размери
+		guiSize = gui.addFolder( 'Размери' );
+		guiSize.add( c, 'width', 1, 20 ).step(1).name( 'Дебелина' );
+		guiSize.add( c, 'height', 1, 20 ).step(1).name( 'Височина' );
+	</script>
+</head>
