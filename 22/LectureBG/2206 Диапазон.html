@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+
+	<style>
+		* {
+			font-family: Candara;
+			font-size: 105%;
+		}
+		
+		h1 {
+			display: inline-block;
+			padding: 0 0.5em 0 0;
+			margin: 0 1em 0 0;
+			border-right: gray dotted 1px;
+		}
+		
+		.panel {
+			position: absolute;
+			left: 0.5em;
+			top: 0.5em;
+			right: 0.5em;
+			border: solid 1px black;
+			padding: 0.5em 0.25em 0.5em 0.25em;
+			text-align: center;
+			background-color: White;
+		}
+		
+		input {
+			vertical-align: middle;
+		}
+	</style>
+
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop" background="lightgray">
+	</suica>
+
+	<!-- панел с плъзгачи -->
+	<div class="panel">
+		<h1>Изберете ъгли:</h1>
+		Хоризонтален: <input type="range" id="hor" min="-120" max="120" value="0">
+		Вертикален: <input type="range" id="ver" min="-80" max="80" value="0">
+	</div>
+	
+	
+	<script>
+		// списък със случайни кубове
+		cubes = [];
+		
+		for( var i=0; i<100; i++ )
+		{
+			cubes.push(
+				cube( [random(-75,75),random(-75,75),random(-75,75)], 10, 'gray' )
+			);
+			its.spin = [random(0,360),random(0,360),random(0,360)];
+		}
+		
+		// запомнят се плъзгачите
+		hor = element( 'hor' );
+		ver = element( 'ver' );
+		
+		function loop( )
+		{
+			// извличат се стойностите на плъзгачите
+			var h = radians(parseInt(hor.value)),
+				v = radians(parseInt(ver.value));
+			
+			// гледната точка се актуализира
+			// според тези стойности
+			lookAt( [200*Math.cos(h)*Math.cos(v),
+					 200*Math.sin(v),
+					 200*Math.sin(h)*Math.cos(v),
+					] );
+		}
+	</script>
+	
+</body>
+
+
+
+	

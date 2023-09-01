@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+
+	<style>
+		* {
+			font-family: Candara;
+			font-size: 105%;
+		}
+		
+		h1 {
+			padding-bottom: 0.1em;
+			margin: 0 0 0.5em 0;
+			font-size: 1.5em;
+			border-bottom: gray dotted 1px;
+			width: 100%;
+		}
+		
+		.panel {
+			position: absolute;
+			left: 0.5em;
+			top: 0.5em;
+			width: 10em;
+			border: solid 1px black;
+			padding: 0 0.25em 0.5em 0.25em;
+			text-align: center;
+			background-color: LightGray;
+		}
+		
+		.panel div {
+			margin: 0.25em 0;
+		}
+		
+		button {
+			width: 9em;
+		}
+	</style>
+
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<!-- графично поле с координатна система -->
+	<suica fullWindow background="GhostWhite" orthographic>
+		<line from="-1000,0,0" to="1000,0,0">
+		<line from="0,-1000,0" to="0,1000,0">
+	</suica>
+
+	<!-- панел за въвеждане на данни -->
+	<div class="panel">
+		<h1>Окръжност</h1>
+		<div>X = <input type="text" id="x" value="" size="5"></div>
+		<div>Y = <input type="text" id="y" value="" size="5"></div>
+		<div>R = <input type="text" id="r" value="" size="5"></div>
+		<br>
+		<button id="create">Създай</button>
+	</div>
+
+	<script>
+		// запомнят се HTML елементите за въвеждане на данните
+		elemX = element( 'x' );
+		elemY = element( 'y' );
+		elemR = element( 'r' );
+
+		// реакция при кликване на бутона
+		element( 'create' ).onclick = create;
+		
+		z = -100;
+		function create()
+		{
+			// извличане на параметрите на окръжност
+			var x = Number( elemX.value );
+			var y = Number( elemY.value );
+			var r = Number( elemR.value );
+			
+			// създаване на окръжност
+			circle( [x,y,z++], 2*r, hsl(random(0,360),100,50) );
+			
+			// изчистване на полетата за въвеждане
+			elemX.value = '';
+			elemY.value = '';
+			elemR.value = '';
+		}
+	</script>
+	
+</body>
+
+
+
+	

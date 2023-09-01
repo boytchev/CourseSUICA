@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+
+	<style>
+		* {
+			font-family: Candara;
+			font-size: 105%;
+		}
+		
+		h1 {
+			padding-bottom: 0.1em;
+			margin: 0 0 0.5em 0;
+			font-size: 1.5em;
+			border-bottom: gray dotted 1px;
+			width: 100%;
+		}
+		
+		.panel {
+			position: absolute;
+			left: 0.5em;
+			top: 0.5em;
+			width: 10em;
+			border: solid 1px black;
+			padding: 0 0.25em 0.5em 0.25em;
+			text-align: center;
+			background-color: LightGray;
+		}
+		
+		label {
+			display: block;
+			text-align: left;
+			padding-left: 0.75em;
+		}
+		
+		input {
+            transform: scale(1.5);
+			margin: 0.5em;
+        }
+	</style>
+
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow background="Gray" onTime="loop">
+	</suica>
+
+	<!-- панел с чекбоксове -->
+	<div class="panel">
+		<h1>Движение</h1>
+		<label><input type="checkbox" id="hor">Хоризонтално</label>
+		<label><input type="checkbox" id="ver">Вертикално</label>
+		<label><input type="checkbox" id="rad">Радиално</label>
+	</div>
+
+	<script>
+		// запомняне на HTML елементите
+		hor = element( 'hor' );
+		ver = element( 'ver' );
+		rad = element( 'rad' );
+
+		// по подразбиране хоризонталното движение е включено
+		hor.checked = true;
+		
+		// ъгли за хоризонтално, вертикално и радиално движение
+		angleHor = 0;
+		angleVer = 0;
+		angleRad = 0;
+		
+		// случайни кубове в сцената
+		for( var i=0; i<50; i++ )
+		{
+			cube( [random(-100,100),random(-100,100),random(-100,100)], 15, 'white' );
+			its.spin = [random(0,360),random(0,360),random(0,360)];
+		}
+		
+		function loop( t, dT )
+		{	
+			// промяна на ъгъла на движенията, ако те са включени
+			if( hor.checked ) angleHor += dT;
+			if( ver.checked ) angleVer += dT;
+			if( rad.checked ) angleRad += dT;
+
+			// актуализиране на гледната точка
+			var h = angleHor,
+				v = Math.sin(angleVer),
+				r = 200+100*Math.sin(angleRad);
+			
+			lookAt( [r*Math.cos(h)*Math.cos(v),
+					 r*Math.sin(v),
+					 r*Math.sin(h)*Math.cos(v),
+					 ]);
+		}
+	</script>
+	
+</body>
+
+
+
+	

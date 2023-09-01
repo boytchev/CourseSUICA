@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+
+	<style>
+		* {
+			font-family: Candara;
+			font-size: 105%;
+		}
+		
+		h1 {
+			padding-bottom: 0.1em;
+			margin: 0 0 0.5em 0;
+			font-size: 1.15em;
+			border-bottom: gray dotted 1px;
+			width: 100%;
+		}
+		
+		.panel {
+			margin: 10em auto;
+			width: 20em;
+			border: solid 1px black;
+			padding: 0.5em 0.25em 0.5em 0.25em;
+			text-align: center;
+			background-color: White;
+		}
+		
+		input {
+			vertical-align: middle;
+		}
+	</style>
+	
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<!-- панел за избор на дата и час -->
+	<div class="panel">
+		<h1>Изберете:</h1>
+		Дата: <input type="date" id="dat" onchange="update()">
+		Час: <input type="time" id="tim" onchange="update()">
+		<div id="res"></div>
+	</div>
+	
+	
+	<script>
+		// функция, която се активира при промяна
+		// на датата или часа
+		function update()
+		{
+			// извличане на дата и час
+			var date = element('dat').value,
+				time = element('tim').value;
+
+			// създаване на описанието
+			var result = '<br><br><h1>Избрано:</h1>';
+			
+			// добавяне на датата и часът към описанието
+			if( date ) result += ' Дата: <b>'+date+'</b>';
+			if( time ) result += ' Час: <b>'+time+'</b>';
+			
+			// показване на описанието
+			element('res').innerHTML = result;
+		}
+	</script>
+	
+</body>
+
+
+
+	

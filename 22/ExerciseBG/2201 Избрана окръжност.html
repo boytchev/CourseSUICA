@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+
+	<style>
+		* {
+			font-family: Candara;
+			font-size: 105%;
+		}
+		
+		h1 {
+			padding-bottom: 0.1em;
+			margin: 0 0 0.5em 0;
+			font-size: 1.5em;
+			border-bottom: gray dotted 1px;
+			width: 100%;
+		}
+		
+		.panel {
+			position: absolute;
+			left: 0.5em;
+			top: 0.5em;
+			width: 10em;
+			border: solid 1px black;
+			padding: 0 0.25em 0.5em 0.25em;
+			text-align: center;
+			background-color: LightGray;
+		}
+		
+		.panel div {
+			margin: 0.25em 0;
+		}
+		
+		button {
+			width: 9em;
+		}
+	</style>
+
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<!-- графично поле с координатна система и невидим контур на окръжност -->
+	<suica fullWindow background="GhostWhite" orthographic onPointerDown="onPointerDown" onTime="loop">
+		<line from="-1000,0,0" to="1000,0,0">
+		<line from="0,-1000,0" to="0,1000,0">
+		<circle id="blinker" color="black" wireframe hidden>
+	</suica>
+
+	<!-- панел за въвеждане на данни -->
+	<div class="panel">
+		<h1>Окръжност</h1>
+		<button id="random">Случайни данни</button>
+		<br>
+		<br>
+		<div>X = <input type="text" id="x" value="" size="5"></div>
+		<div>Y = <input type="text" id="y" value="" size="5"></div>
+		<div>R = <input type="text" id="r" value="" size="5"></div>
+		<br>
+		<button id="create">Създай</button>
+	</div>
+
+	<script>
+		// избран обект
+		obj = null;
+		
+		// запомнят се HTML елементите за въвеждане на данните
+		elemX = element( 'x' );
+		elemY = element( 'y' );
+		elemR = element( 'r' );
+
+		// реакция при кликване на бутоните
+		element( 'random' ).onclick = randomData;
+		element( 'create' ).onclick = create;
+		
+		function randomData()
+		{
+			// случайни параметри на окръжност
+			elemX.value = Math.round(random(-300,300));
+			elemY.value = Math.round(random(-150,150));
+			elemR.value = Math.round(random(10,80));
+		}
+		
+		z = -100;
+		function create()
+		{
+			// извличане на параметрите на окръжност
+			var x = Number( elemX.value );
+			var y = Number( elemY.value );
+			var r = Number( elemR.value );
+			
+			if (obj)
+			{
+				// ако има избрана окръжност, то се
+				// променят нейните координати и размер
+				obj.center = [x,y,0];
+				obj.size = 2*r;
+
+				blinker.center = [x,y,0];
+				blinker.size = 2*r;
+			}
+			else
+			{
+				// създаване на окръжност
+				circle( [x,y,z++], 2*r, hsl(random(0,360),100,random(30,70)) );
+				
+				// изчистване на полетата за въвеждане
+				elemX.value = '';
+				elemY.value = '';
+				elemR.value = '';
+			}
+		}
+		
+		// реакция при кликване
+		function onPointerDown( event )
+		{
+			// има ли обект на това място?
+			obj = findObject( event );
+			if( obj )
+			{
+				// има обект, мигащият контур става видим и
+				// с размери и положение като избрания обект
+				blinker.visible = true;
+				blinker.center = obj.center;
+				blinker.size = obj.size;
+
+				// показване в панела на размера и 
+				// положението на избрания обект
+				elemX.value = obj.x;
+				elemY.value = obj.y;
+				elemR.value = obj.size/2;
+
+				// преименуване на бутона
+				element( 'create' ).innerHTML = 'Промени';
+			}
+			else
+			{
+				// няма обект, контурът се скрива
+				blinker.visible = false;
+
+				// изчистват се полетата за въвеждане
+				elemX.value = '';
+				elemY.value = '';
+				elemR.value = '';
+				
+				// преименуване на бутона
+				element( 'create' ).innerHTML = 'Създай';
+			}
+			
+			// ако има избран обект, бутонът за случайни данни е забранен
+			element( 'random' ).disabled = (obj!=null);
+		}
+		
+		function loop( t )
+		{
+			if (obj)
+			{
+				// ако има избран обект, контурът мига
+				blinker.visible = (2*t)%1 > 0.5;
+			}
+		}
+	</script>
+	
+</body>
+
+
+
+	

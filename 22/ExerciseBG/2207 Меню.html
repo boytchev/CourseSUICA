@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+
+	<style>
+		/* стил на цялото меню */
+		div.menu {
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			background: black;
+			width: 100%;
+			font-size: 1.5em;
+			border-bottom: solid 1px dimgray;
+		}
+		
+		/* стил на елемент от менюто */
+		div.menuitem {
+			font-family: sans-serif;
+			color: white;
+			display: inline-block;
+			padding: 0.25em 0.5em;
+			margin: 0;
+			background: black;
+			cursor: default;
+			border-right: dotted 1px dimgray;
+		}
+		
+		/* стил на елемент от менюто, когато мушката е отгоре */
+		div.menuitem:hover {
+			background: #303030;
+		}
+	</style>
+
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow background="lightgray">
+		<orbit>
+		<!-- скрит куб -->
+		<cube id="cu" hidden>
+		<!-- скрита призма-->
+		<group id="pr" hidden><prism y="-15"></group>
+		<!-- скрит конус-->
+		<group id="co" hidden><cone size="40" y="-15"></group>
+		<!-- скрита пешка-->
+		<group id="pa" hidden>
+			<cylinder y="-13"size="21,3">
+			<cone y="-10" size="21,6">
+			<cone y="-10" size="12,24">
+
+			<sphere y="14" size="12">
+			<sphere y="7" size="12,3">
+		</group>
+	</suica>
+
+	<!-- меню, със съдържание в HTML тагове и стил в CSS -->
+	<div class="menu">
+		<div class="menuitem" onclick="showNone()">
+			≡
+		</div><div class="menuitem" onclick="showCube()">
+			КУБ
+		</div><div class="menuitem" onclick="showPrism()">
+			ПРИЗМА
+		</div><div class="menuitem" onclick="showCone()">
+			КОНУС
+		</div><div class="menuitem" onclick="showPawn()">
+			ПЕШКА
+		</div>
+	</div>
+	
+	
+	<script>
+		// скриване на всички обекти
+		function showNone( )
+		{
+			cu.visible = !true;
+			pr.visible = !true;
+			co.visible = !true;
+			pa.visible = !true;
+		}
+
+		// скриване на всички обекти, без куба
+		function showCube( )
+		{
+			cu.visible = true;
+			pr.visible = !true;
+			co.visible = !true;
+			pa.visible = !true;
+		}
+
+		// скриване на всички обекти, без призмата
+		function showPrism( )
+		{
+			cu.visible = !true;
+			pr.visible = true;
+			co.visible = !true;
+			pa.visible = !true;
+		}
+
+		// скриване на всички обекти, без конуса
+		function showCone( )
+		{
+			cu.visible = !true;
+			pr.visible = !true;
+			co.visible = true;
+			pa.visible = !true;
+		}
+
+		// скриване на всички обекти, без пешката
+		function showPawn( )
+		{
+			cu.visible = !true;
+			pr.visible = !true;
+			co.visible = !true;
+			pa.visible = true;
+		}
+	</script>
+	
+</body>
+
+
+
+	
