@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	
+	<style>
+		/* позиция на надпис */
+		div {
+			position: absolute;
+			font-family: sans-serif;
+			border-radius: 1em;
+			padding: 0.25em 0.5em;
+		}
+		
+		/* мъжко име */
+		.male {
+			color: RoyalBlue;
+			background: rgba(180,220,255,0.75);
+		}
+
+		/* женско име */
+		.female {
+			color: Crimson;
+			background: rgba(255,220,220,0.75);
+		}
+	</style>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<orbit>
+		<cube id="p" wireframe size="40" color="black">
+	</suica>
+
+	<!-- осем надписа с имена -->
+	<div id="0" class="male">Георги</div>
+	<div id="1" class="male">Иван</div>
+	<div id="2" class="male">Димитър</div>
+	<div id="3" class="male">Николай</div>
+	<div id="4" class="female">Мария</div>
+	<div id="5" class="female">Иванка</div>
+	<div id="6" class="female">Елена</div>
+	<div id="7" class="female">Йорданка</div>
+	
+	<script>		
+		function loop( t )
+		{	
+			var pos;
+
+			// позициониране на първия надпис над съответния връх на куба
+			pos = p.screenPosition( [20,20,20] );
+			element(0).style = 'left:'+(pos[0]-35)+'px; top:'+(pos[1]-10)+'px;';
+
+			// позициониране на втория надпис
+			pos = p.screenPosition( [-20,20,-20] );
+			element(1).style = 'left:'+(pos[0]-25)+'px; top:'+(pos[1]-10)+'px;';
+
+			// на третия надпис
+			pos = p.screenPosition( [-20,-20,20] );
+			element(2).style = 'left:'+(pos[0]-40)+'px; top:'+(pos[1]-10)+'px;';
+
+			// и на четвъртия
+			pos = p.screenPosition( [20,-20,-20] );
+			element(3).style = 'left:'+(pos[0]-35)+'px; top:'+(pos[1]-10)+'px;';
+
+			// и на 5-тия
+			pos = p.screenPosition( [-20,20,20] );
+			element(4).style = 'left:'+(pos[0]-35)+'px; top:'+(pos[1]-10)+'px;';
+
+			// 6
+			pos = p.screenPosition( [20,20,-20] );
+			element(5).style = 'left:'+(pos[0]-25)+'px; top:'+(pos[1]-10)+'px;';
+
+			// и т.н.
+			pos = p.screenPosition( [-20,-20,-20] );
+			element(6).style = 'left:'+(pos[0]-30)+'px; top:'+(pos[1]-10)+'px;';
+
+			pos = p.screenPosition( [20,-20,20] );
+			element(7).style = 'left:'+(pos[0]-40)+'px; top:'+(pos[1]-10)+'px;';
+		}
+	</script>
+</body>
+
+
+
+	

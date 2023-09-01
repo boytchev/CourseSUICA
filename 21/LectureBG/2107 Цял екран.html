@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<!-- режим на цял екран - без видими рамки, заглавия и други приложения -->
+	<suica fullScreen background="lightgray">
+		<orbit speed="0.4">
+		
+		<!-- рисунка със знака за "безкрайност" -->
+		<drawing id="pic" width="264" height="264" color="lightsalmon">
+			<moveTo point="42,8">
+			<lineTo x="222" y="8">
+			<curveTo m="256,8" x="256" y="42">
+			<lineTo x="256" y="222">
+			<curveTo m="256,256" x="222" y="256">
+			<lineTo point="42,256">
+			<curveTo m="8,256" x="8" y="222">
+			<lineTo point="8,42">
+			<curveTo m="8,8" x="42" y="8">
+			<fill color="linen">
+			<stroke color="black" width="1">
+
+			<arc point="180,132" radius="32" from="-48" to="225">
+			<arc point="84,132" radius="32" from="45" to="-228" ccw>
+			<stroke color="black" width="60">
+			<stroke color="linen" width="40">
+			<stroke color="lightsalmon" width="26">
+			<stroke color="peachpuff" width="20">
+		</drawing>
+		
+		<!-- кубс с текстура -->
+		<cube id="a" color="white" image="pic">
+	</suica>
+</body>
+
+
+
+	

@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+
+	<style>
+		/* позиция на аудио тага */
+		audio {
+			position: absolute;
+			display: inline-block;
+			bottom: 1em;
+			width: 30em;
+			left: calc(50% - 15em);
+		}
+	</style>
+
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop" orthographic background="lightgray">
+		<lookAt from="0,0,100">
+		<square y="-250" size="1400,50" color="black">
+	</suica>
+
+	<!-- фонова музика -->
+	<audio id="music" controls>
+		<source src="music.mp3" type="audio/mpeg">
+	</audio>
+
+	<script>
+		// топки и звукови ефекти
+		balls = [];
+		hitEffect = [];
+
+		for( var i=0; i<6; i++ )
+		{
+			balls[i] = sphere( [200*(i-2.5), -150+400*Math.abs(Math.sin(i)), 0], [150,150,10], hsl(60*i,100,50) );
+			balls[i].sign = 0;
+			
+			// всяка топка си има свой звуков ефект
+			hitEffect[i] = new Audio( 'soundeffect.wav' );
+		}
+
+		// флаг дали музиката свири
+		var playing = false;
+		
+		// слушане на събитията на музиката
+		element('music').addEventListener( 'play', () => playing=true );
+		element('music').addEventListener( 'pause', () => playing=false );
+		element('music').addEventListener( 'end', () => playing=false );
+		
+		// локално време
+		var t = 0;
+		
+		function loop( unused, dT )
+		{
+			// дали флагът за музика е изключен?
+			if( !playing ) return;
+			
+			// актуализиране на локалното време
+			t += dT;
+			
+			for( var i=0; i<6; i++ )
+			{
+				// промяната в знака определя дали е имало удар
+				var sin = Math.sin( t*(1+i/73) + i ),
+					sign = Math.sign( sin );
+					
+				// позиция на топка
+				balls[i].y = -150+400*Math.abs(sin);
+				
+				// имало е удар, пуска се звуковият ефект
+				if( sign != balls[i].sign )
+				{
+					hitEffect[i].play();
+					balls[i].sign = sign;
+				}
+			}
+		}
+	</script>
+	
+</body>
+
+
+
+	

@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	
+	<style>
+		div {
+			position: absolute;
+			font-family: sans-serif;
+		}
+
+		
+	</style>
+</head>
+
+<body>
+	<!-- празно графично поле на Суика -->
+	<suica fullWindow onTime="loop">
+	</suica>
+
+	<!-- празни HTML полета - по едно за всяка пирамида -->
+	<div id="0"></div>
+	<div id="1"></div>
+	<div id="2"></div>
+	<div id="3"></div>
+	<div id="4"></div>
+	<div id="5"></div>
+	<div id="6"></div>
+	<div id="7"></div>
+	<div id="8"></div>
+	<div id="9"></div>
+	<div id="10"></div>
+	<div id="11"></div>
+	<div id="12"></div>
+	<div id="13"></div>
+	<div id="14"></div>
+	<div id="15"></div>
+	<div id="16"></div>
+	<div id="17"></div>
+	<div id="18"></div>
+	<div id="19"></div>
+	
+	<script>
+		// създаване на ято пирамиди
+		var ps = [],
+			divs = [];
+			colors = ['crimson', 'linen', 'dimgray'];
+		
+		for( var i=0; i<20; i++ )
+		{
+			ps[i] = pyramid( 6, [0,0,0], 5, random(colors) );
+			its.spin = [random(0,360),random(0,360),random(0,360)];
+			// запомняне на HTML елемента на пирамида i
+			divs[i] = element( i ); 
+		}
+		
+		function loop( t )
+		{	
+			for( var i=0; i<20; i++ )
+			{
+				// всяка пирамида си има собствено време
+				t += i+0.5*Math.sin(t);
+				
+				var p = ps[i];
+				
+				// ново положение на пирамидата
+				p.x = 40*Math.cos( 0.5*t+i**2.1 );
+				p.y = 15*Math.cos( 0.5*t-i**2.5 );
+				p.z = 40*Math.sin( 0.5*t+i**2.1 );
+				
+				// ново завъртане
+				p.spinH = 15*t+i**3.2;
+				p.spinV = 15*t-i**2.9;
+				p.spinS = 25*t-i**2.5;
+				
+				// намиране на екранната позиция на пирамидата
+				var pos = p.screenPosition();
+				
+				// попълване в HTML полето на нейните данни
+				divs[i].innerHTML = '('+p.x.toFixed(1)+','+p.y.toFixed(1)+','+p.z.toFixed(1)+')';
+				
+				// преместване на HTML полето да е над пирамидата
+				divs[i].style.left = (pos[0]-60)+'px';
+				divs[i].style.top = (pos[1]+30)+'px';
+			}
+		}
+	</script>
+</body>
+
+
+
+	

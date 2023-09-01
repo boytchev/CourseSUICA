@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<orbit>
+		
+		<!-- централен въртящ се куб -->
+		<cube id="p" size="30" wireframe color="gray">
+		
+		<!-- пирамиди за начало и край на мълнията -->
+		<pyramid id="a" x="-55" spin="90,90" size="40,20,40" wireframe color="gray">
+		<pyramid id="b" x="55" spin="-90,90" size="40,20,40" wireframe color="gray">
+		
+		<!-- три отсечи за мълнията -->
+		<line id="ax" from="-35,0,0" color="crimson">
+		<line id="xy" color="crimson">
+		<line id="yb" to="35,0,0" color="crimson">
+	</suica>
+
+	<script>		
+		// помощна функция за разстояние
+		function distance2( px, q )
+		{
+			return (px-q[0])**2 + q[1]**2 + q[2]**2;
+		}
+		
+		// функция за най-близка точка
+		function closestPoint( px )
+		{
+			var best = [],
+				dist = +Infinity;
+				
+			// обхождат се 8-те върха на куб
+			for( var x=-15; x<=15; x+=30 )
+			for( var y=-15; y<=15; y+=30 )
+			for( var z=-15; z<=15; z+=30 )
+			{
+				// изчислява се разстоянието до връх
+				var q = p.objectPosition([x,y,z]);
+				var d = distance2( px, q );
+				
+				// запомня се, ако е текущо по-малко от вече запомненото
+				if( d < dist )
+				{
+					best = q;
+					dist = d;
+				}
+			}
+			
+			return best;
+		}
+		
+		function loop( t, dT )
+		{	
+			// въртене на двете пирамиди
+			a.spinT = 60*t;
+			b.spinT = 60*t;
+			
+			// движение на куба
+			p.spin = [30*t, 33*t, 36*t, 39*t];
+			p.y = 10*Math.sin( t );
+
+			// мълния през най-близкия връх до лявата пирамида
+			var q = closestPoint( -35 );
+			ax.to = q;
+			xy.from = q;
+
+			// мълния през най-близкия връх до дясната пирамида
+			q = closestPoint( 35 );
+			xy.to = q;
+			yb.from = q;
+		}
+	</script>
+</body>
+
+
+
+	

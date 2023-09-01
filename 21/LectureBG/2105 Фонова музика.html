@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+
+	<style>
+		/* позиция на аудио тага */
+		audio {
+			position: absolute;
+			display: inline-block;
+			bottom: 1em;
+			width: 30em;
+			left: calc(50% - 15em);
+		}
+	</style>
+
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop" orthographic background="lightgray">
+		<lookAt from="0,0,100">
+		<square y="-250" size="1400,50" color="black">
+	</suica>
+
+	<!-- фонова музика -->
+	<audio id="music" controls>
+		<source src="music.mp3" type="audio/mpeg">
+	</audio>
+
+	<script>
+		// топки
+		balls = [];
+		
+		for( var i=0; i<6; i++ )
+			balls[i] = sphere( [200*(i-2.5), 0, 0], [150,150,10], hsl(60*i,100,50) );
+
+		function loop( t )
+		{
+			// топане на топките
+			for( var i=0; i<6; i++ )
+				balls[i].y = -150+400*Math.abs(Math.sin(t*(1+i/73)+i));
+		}
+	</script>
+	
+</body>
+
+
+
+	

@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<!-- първа Суика -->
+	<suica background="lightgray" style="width:calc(50% - 1.5em); position:absolute; top:1em; left:1em; height:calc(100% - 2em);">
+	</suica>
+
+	<!-- команди, които са за първата Суика -->
+	<script>
+		orbit();
+		cube();
+		its.color = 'crimson';
+	</script>
+	
+	<!-- втора Суика -->
+	<suica background="lightgray" style="width:calc(50% - 1.5em); position:absolute; top:1em; right:1em; height:calc(100% - 2em);">
+	</suica>
+
+	<!-- команди, които са за втората Суика -->
+	<script>
+		orbit();
+		cube( [0,0,0], [50,10,10], 'royalblue' );
+		cube( [0,0,0], [10,50,10], 'royalblue' );
+		cube( [0,0,0], [10,10,50], 'royalblue' );
+	</script>
+
+</body>
+
+
+
+	

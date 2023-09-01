@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<!-- интерактивна Суика -->
+	<suica background="lightgray" style="width:calc(50% - 1.5em); position:absolute; top:1em; left:1em; height:calc(100% - 2em);">
+		<orbit>
+		<cube color="crimson">
+	</suica>
+	
+	<!-- копираща движението Суика -->
+	<suica background="lightgray" style="width:calc(50% - 1.5em); position:absolute; top:1em; right:1em; height:calc(100% - 2em);" onTime="loop">
+		<cube size="50,10,10" color="royalblue">
+		<cube size="10,50,10" color="royalblue">
+		<cube size="10,10,50" color="royalblue">
+	</suica>
+
+	<script>
+		function loop( )
+		{
+			// позицията на камерата от едната Суика
+			// се ползва от камерата на другата Суика
+			var pos = suica0.camera.position;
+			suica1.lookAt( [pos.x, pos.y, pos.z] );
+		}
+	</script>
+
+</body>
+
+
+
+	

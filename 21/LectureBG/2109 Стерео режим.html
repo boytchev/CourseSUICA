@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<!-- анаглифен режим - за стерео очила -->
+	<suica fullWindow stereo onTime="loop" background="lightgray">
+		<lookat from="0,0,100">
+	</suica>
+	
+	<script>
+		// списък с греди
+		var ps = [];
+		
+		// създаване на ято греди
+		for( var x=-9; x<=9; x++ )
+		for( var y=-7; y<=7; y++ )
+		if( x || y )
+		{
+			ps.push( cube( [6*x,6*y,0], [5,5,40], 'dimgray' ) );
+			its.spd = random(50,500);
+		}
+		
+		function loop( t )
+		{	
+			// движение на гредите
+			for( var i=0; i<ps.length; i++ )
+				ps[i].z =  (ps[i].spd*t) % 1000 - 800;
+		}
+	</script>
+</body>
+
+
+
+	

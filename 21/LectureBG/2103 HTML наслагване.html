@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	
+	<style>
+		* {
+			font-family: sans-serif;
+			font-size: 1.05em;
+			text-align: center;
+		}
+		
+		table {
+			width: 30em;
+		}
+		
+		div {
+			position: absolute;
+			left: calc( 50% - 15em );
+			top: 1em;
+		}
+		
+		th {
+			background: lightgray;
+		}
+		
+		th, td {
+			border: solid 1px gray;
+			padding: 0.1em 1em;
+		}
+		
+	</style>
+</head>
+
+<body>
+	<!-- празно графично поле на Суика -->
+	<suica fullWindow onTime="loop">
+	</suica>
+
+	<!-- HTML елемент над Суика -->
+	<div id="overlay"></div>
+	
+	<script>
+		// създаване на ято пирамиди
+		var ps = [],
+			colors = ['crimson', 'linen', 'dimgray'];
+		
+		for( var i=0; i<20; i++ )
+		{
+			ps[i] = pyramid( 6, [0,0,0], 5, random(colors) );
+			its.spin = [random(0,360),random(0,360),random(0,360)];
+		}
+		
+		function loop( t )
+		{	
+			// в анимационния цикъл се създава HTML таблица с данните на пирамидите
+			// това е кощунствено разхищение на ресурси -- по-добре ще е всяка пирамида
+			// да си знае HTML полетата за нея и директно да пише в тях
+			
+			// заглавие на таблицата
+			var html = '<table><tr><th>Номер</th><th>x</th><th>y</th><th>z</th></tr>';
+			
+			for( var i=0; i<20; i++ )
+			{
+				// всяка пирамида си има собствено време
+				t += i+0.5*Math.sin(t);
+				
+				var p = ps[i];
+				
+				// ново положение на пирамидата
+				p.x = 40*Math.cos( 0.5*t+i**2.1 );
+				p.y = 20*Math.cos( 0.5*t-i**2.5 );
+				p.z = 40*Math.sin( 0.5*t+i**2.1 );
+				
+				// ново завъртане
+				p.spinH = 10*t+i**3.2;
+				p.spinV = 10*t-i**2.9;
+				p.spinS = 20*t-i**2.5;
+				
+				// нов ред в таблицата
+				html += '<tr><td>'+i+'</td><td>'+p.x.toFixed(1)+'</td><td>'+p.y.toFixed(1)+'</td><td>'+p.z.toFixed(1)+'</td></tr>';
+			}
+			
+			// таблицата се затваря
+			html += '</table>';
+			
+			// и се пъха в стеаницата, като подменя предната таблица
+			element('overlay').innerHTML = html;
+		}
+	</script>
+</body>
+
+
+
+	
