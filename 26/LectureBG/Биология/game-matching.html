@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<title>ДНК съответствие</title>
+
+	<!-- зареждане на библиотеката СУИКА, текстури и стиловете -->
+	<script src="suica.js"></script>
+	<script src="utils.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+
+<body>
+
+<!-- --------------------------- -->
+<!-- заглавие и указание за игра -->
+<!-- --------------------------- -->
+	<h1>Игра „ДНК съответствие“</h1>
+	<p>Изберете с кликване с мишката нуклеобази от облака в такъв ред, че да се формира отдолу правилна ДНК спирала от двойки аденин-тимин и гуанин-цитозин. Правилните двойки се сливат, а сгрешените се блъскат. За всяка грешка се отнемат по 5 секунди. Ще можете ли за определено време да получите 100% правилна спирала?</p>
+	
+	
+	<!-- рисувателно поле -->
+	<suica width="700" height="400" pointerDown="pointerDown"></suica>
+	<p id="score" caption="center"></p>	
+
+	<div style="text-align:center;">
+		<a caption button href="game-matching.html">Нова игра</a>
+		<a caption button href="index.html">Назад</a>
+	</div>
+	
+	<p class="credits">Sound effects:
+			<a href="https://www.freesound.org/people/afleetingspeck/sounds/246281/">A Guitar Chord Hit Percussion</a> by afleetingspeck 2014 [<b>CC</b> 0];
+			<a href="https://www.freesound.org/people/Craxic/sounds/204136/">Glass14</a> by Craxic 2013 [<b>CC</b> BY];</p>
+
+	<!-- основен код на проекта -->
+	<script>
+	
+		background( rgb(230,230,230) );
+
+		var N = 25,					// брой бази
+			k = 0,					// брой сложени бази
+			bases = [A, G, C, T],	// възможни бази
+			sequence = [],			// оригинална поредица
+			sequence2 = [],			// поредица на играча
+			cloud = [];				// свободни бази в облака
+
+		var currentTime = 0,
+			startTime = undefined;	// начално време
+
+		// генериране на нова игра
+		function newGame( )
+		{
+			// генериране на случайна поредица от нуклеотиди
+			for( var i=0; i<N; i++ )
+			{
+				var b = Math.floor( random(0,40) )%4;
+				
+				var base = bases[b]([6*i-6*(N/2-0.5),0,0]);
+					base.nucleo.y = -5;
+				
+				sequence.push( base );
+				
+				// за всеки елемент има по два облачни елемента
+				for( var j=0; j<random([1,2]); j++ )
+				{
+					cloud.push( bases[3-b]([0,0,0]).style({
+						xOfs:  random(0,2*Math.PI),
+						yOfs:  random(0,2*Math.PI),
+						zOfs:  random(0,2*Math.PI),
+						speed: random(0.8,1.2),
+						rot:   random(0.8,1.2),
+						used:  false,
+					} ));
+				}
+			}
+		}
+
+
+
+		// генериране на игра с 25 нуклеотида
+		newGame( );
+		lookAt( [0,30,150], [0,30,0], [0,1,0] );
+
+
+
+		// обработване на натискане на бутон
+		function pointerDown( event )
+		{
+			obj = findObject( event, cloud );
+			if( !obj ) return;
+			if( obj.used ) return;
+			
+			// ако това е първото кликване върху нуклеотид,
+			// започва да тече времето на играта
+			if( startTime == undefined )
+				startTime = currentTime;
+				
+			// проверка за коректност на избора
+			if( obj.no+sequence[k].no != 3 )
+			{
+				// грешен избор, звук + наказание от 5 секунди
+				hitFail[hF%6].play();
+				hF++;
+				startTime -= 5;
+			}
+			else
+			{
+				// правилен избор и звук
+				hitBase[hB%6].play();
+				hB++;
+			}
+			
+			// избрания нуклеотид се слага в масива с втората поредица
+			obj.used = true;
+			sequence2[k] = obj;
+			sequence2[k].coef = 1;
+			k++;
+		}
+		
+		suica.addEventListener( 'time', loop );
+		
+		// функция за генериране на кадър
+		function loop( t, dT )
+		{
+			currentTime = t;
+			
+			// играта е спряла, ако сме генерирали цялата поредица
+			// или ако е изминало определеното време от 2 минути
+			var gameStopped = (k==N) || (currentTime>startTime+2*60);
+			
+			// за всеки елемент от главната редица правим леко въртене 
+			for (var i=0; i<N; i++)
+			{
+				var a = 60*t+20*i;
+				sequence[i].spin = [0,a,30];
+			}
+			
+			// въртене на елементите от облака с летящи нуклеобази
+			for (var i=0; i<cloud.length; i++)
+			{
+				var a = cloud[i].speed*t/2+2*i;
+				cloud[i].spin = [cloud[i].rot*250*a, 100*t+2*i+50*a, 60*t-i];
+
+				if (gameStopped)
+				{
+					// при спряла игра облакът се разпръсва
+					cloud[i].x *= 1 + dT;
+					cloud[i].y *= 1 + dT;
+					cloud[i].z *= 1 + dT;
+				}
+				else
+				{
+					// при текуща игра облакът се върти
+					cloud[i].x = 50*Math.sin(a+cloud[i].xOfs);
+					cloud[i].y = 40+15*Math.cos(a+cloud[i].yOfs);
+					cloud[i].z = 50*Math.cos(a+cloud[i].zOfs);
+				}
+			}
+
+			
+			// за всеки елемент от втората поредица правим
+			// трептене, ако е сгрешно свързан; правим и
+			// движение от облака към поредицата, ако е нужно
+			for (var i=0; i<k; i++)
+			{
+				var a = Suica.time+i/3;
+				var c = Math.cos(a);
+				var s = Math.sin(a);
+				var r = (sequence2[i].no+sequence[i].no==3)?3:3+0.6*Math.sin(40*a);
+				sequence2[i].coef *= 1-3*dT;
+				var coef = sequence2[i].coef;
+				sequence2[i].x = sequence2[i].x*coef+(1-coef)*sequence[i].x;
+				sequence2[i].y = sequence2[i].y*coef+(1-coef)*sequence[i].y;
+				sequence2[i].z = sequence2[i].z*coef+(1-coef)*sequence[i].z;
+				sequence2[i].spin = [0,sequence[i].spinV+180,30];
+				sequence2[i].nucleo.y = -(1-coef)*5;
+			}
+
+			// несъвпадащите елементи подскачат
+			for (var i=0; i<k; i++)
+			{
+				if( sequence2[i].coef < 0.1 )
+					if( sequence2[i].no+sequence[i].no != 3)
+					{
+						sequence[i].nucleo.y = -6+Math.sin(50*t+i);
+						sequence2[i].nucleo.y = -6+Math.sin(50*t+i);
+					}
+			}
+
+
+			// при приключила игра изчислява процента на точност
+			// на двойките; иначе само показва оставащото време
+			if( gameStopped )
+			{
+				var m=0;
+				for (var i=0; i<k; i++)
+					if (sequence[i].no+sequence2[i].no==3)
+						m++;
+				document.getElementById('score').innerHTML = 'ДНК спирала: '+(100*m/N).toFixed(1)+'%';
+			}
+			else
+			if( startTime == undefined )
+			{
+				document.getElementById('score').innerHTML = 'Изберете нуклеобаза';
+			}
+			else
+			{
+				document.getElementById('score').innerHTML = 'Време: '+(2*60-(currentTime-startTime)).toFixed(1);
+			}
+			
+		}
+	</script>	
+
+</body>

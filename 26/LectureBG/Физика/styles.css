@@ -1,0 +1,164 @@
+﻿body
+{
+	width: 640px;
+	margin: auto;
+	padding: 0 20px;
+	background-color: Beige;
+	text-align: center;
+	font-family: 'Times New Roman', serif;
+	color: Black;
+}
+
+h1
+{
+	font-family: Garamond, 'Times New Roman', serif;
+	font-size: 3em;
+	margin: 0.25em 0 0 0;
+	color: Chocolate;
+	text-shadow: 1px 1px 3px Black;
+}
+
+h4
+{
+	font-weight: normal;
+	font-size: 100%;
+	margin: 0 0 0.5em 0;
+}
+
+h2
+{
+	margin: 0;
+	padding: 0.25em 0 0.75em 0;
+	color: Black;
+	text-shadow: 0px 0 10px Beige;
+}
+
+canvas
+{
+	margin: 0;
+	border-radius: 10px;
+}
+
+div.button, div.buttonup, div.buttontop
+{
+	display: inline;
+	color: White;
+	cursor: pointer;
+	border-radius: 10px 10px 0 0;
+	border: solid 1px Chocolate;
+	padding: 0.2em 1em;
+	margin: 0 0.5em;
+	background-color: Chocolate;
+	position: relative;
+}
+
+div.buttonup
+{
+	border-radius: 0 0 10px 10px;
+	border: solid 1px Chocolate;
+	padding: 0.2em 1em;
+	margin: 0 0.5em;
+	top: 2px;
+}
+
+div.buttontop
+{
+	border-radius: 0 0 10px 10px;
+	border: solid 1px Chocolate;
+	padding: 0.2em 1em;
+	margin: 0 0.5em;
+	top: -5px;
+}
+
+div.button:hover, div.buttonup:hover, div.buttontop:hover
+{
+	color: Black;
+	background-color: BurlyWood;
+}
+
+div.section
+{
+	margin-top: 1em;
+	border: solid 1px Chocolate;
+	padding: 0 0 15px 0;
+	border-radius: 10px;
+	box-shadow: 0 0 10px Chocolate inset;
+	background: linear-gradient(BurlyWood,Beige,White);
+}
+
+p
+{
+	margin: 0.25em;
+	padding: 0 15px;
+	text-align: justify;
+	font-size: 1.15em;
+	text-indent: 1.5em;
+}
+
+em
+{
+	font-weight: bold;
+	font-style: normal;
+	color: Maroon;
+}
+
+ol
+{
+	margin: 0;
+	padding-left: 3em;
+	margin-left: 3em;
+}
+
+li
+{
+	text-align: justify;
+	font-size: 110%;
+}
+
+hr
+{
+	border: 0;
+	border-top: 2px solid Chocolate;
+}
+
+table
+{
+	margin: auto;
+}
+
+table, tr, td
+{
+	alignment: center;
+	border: solid 3px Chocolate;
+	border-collapse: collapse;
+	padding: 0.5em;
+}
+
+tr.header
+{
+	background-color: BurlyWood;
+}
+
+[formula]
+{
+	text-indent: 0;
+	text-align: center;
+	font-size: 120%;
+	background-color: White;
+	display: inline-block;
+	border: solid 1px BurlyWood;
+	border-radius: 0.5em;
+	padding: 0.5em;
+}
+
+img {
+	border-radius: 0.5em;
+	border: solid 1px BurlyWood;
+	filter: brightness(0.9) sepia(0.4);
+}
+
+img:hover {
+	border-radius: 0.5em;
+	border: solid 1px BurlyWood;
+	filter: brightness(1);
+}

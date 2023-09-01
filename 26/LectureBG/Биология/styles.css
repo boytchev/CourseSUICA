@@ -1,0 +1,101 @@
+﻿body
+{
+	width: 700px;
+	margin: auto;
+	padding: 0 20px;
+	background-color: rgb(90%,90%,90%);
+	font-family: 'Corbel', serif;
+	color: Black;
+}
+
+p
+{
+	font-size: 1.1em;
+	text-align: justify;
+}
+
+p[caption], a[caption]
+{
+	margin: 0;
+	color: LightBlue;
+	font-family: 'Arial Black';
+	font-size: 2em;
+	font-weight: bold;
+	text-transform: uppercase;
+	text-shadow: 1px 0px Black,  0px 1px Black, -1px 0px White, 0px -1px White;
+}
+
+p[caption=right]
+{
+	text-align: right;
+}
+
+table
+{
+	margin: auto;
+	font-size: 1.1em;
+	border-collapse: collapse;
+}
+
+tr, td
+{
+	alignment: center;
+	border: ridge 3px Gray;
+	padding: 0.5em;
+}
+
+table.noborder tr, table.noborder td
+{
+	border: none 20px Gray;
+}
+
+th
+{
+	background-color: LightGray;
+}
+
+p[caption=center]
+{
+	text-align: center;
+}
+
+p[caption=redcenter]
+{
+	text-align: center;
+	color: #FFC0C0;
+}
+
+a[caption]
+{
+	margin: 1em 0.5em 0 0.5em;
+	font-size: 1.25em;
+	display: inline-block;
+	border: solid 0px blue;
+	padding: 0.1em 0.5em;
+	border-radius: 0em;
+	border-top: 2px solid Gray;
+	color: Gainsboro;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a[button]:hover
+{
+	background-color: LightBlue;
+	text-shadow: 1px 0px Black,  0px 1px Black, -1px 0px White, 0px -1px White;
+}
+
+p.credits
+{
+	margin-top: 2em;
+	color: Gray;
+	font-size: 0.65em;
+	text-align: center;
+}
+
+suica, suica canvas
+{
+	border: none !important;
+}

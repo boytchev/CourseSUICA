@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<title>ДНК Изграждане</title>
+
+	<!-- зареждане на библиотеката СУИКА и стиловете -->
+	<script src="suica.js"></script>
+	<script src="utils.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+
+<body>
+
+<!-- --------------------------- -->
+<!-- заглавие и указание за игра -->
+<!-- --------------------------- -->
+	<h1>Игра „ДНК изграждане“</h1>
+	<p>Изберете с кликване с мишката нуклеобази от горния ред, за да създадете ДНК, което да съответства на показаната най-долу поредица от аминокиселини. Първоначално веригата е само със старт-кодон (ATG) и стоп-кодон (TAG). Новите бази ще се добавят точно преди стоп-кодона. Ако кликнете на сложен от вас нуклеотид, той ще се махне. Имате на разположение 2 минути.</p>
+	
+	
+	<!-- рисувателно поле -->
+	<suica width="700" height="200" pointerDown="pointerDown"></suica>
+	<p id="acids" caption="center"></p>	
+	<p id="result" caption="redcenter"></p>	
+	<p id="score" caption="center"></p>	
+
+	<div style="text-align:center;">
+		<a caption button href="game-building.html">Нова игра</a>
+		<a caption button href="index.html">Назад</a>
+	</div>
+
+	<p class="credits">Sound effects:
+			<a href="https://www.freesound.org/people/afleetingspeck/sounds/246281/">A Guitar Chord Hit Percussion</a> by afleetingspeck 2014 [<b>CC</b> 0];
+			<a href="https://www.freesound.org/people/Craxic/sounds/204136/">Glass14</a> by Craxic 2013 [<b>CC</b> BY];</p>
+
+
+	<!-- основен код на проекта -->
+	<script>
+		var n = 5,
+			sequence = [],			// оригинална поредица
+			acidNames = [];
+
+		var gameStopped = false,
+			currentTime = 0,
+			startTime = undefined;	// начално време
+
+		background( rgb(230,230,230) );
+
+		var bases = [
+			A( [-15,20,0] ).style({ size:1.5 }),
+			T( [-5,20,0] ).style({ size:1.5 }),
+			G( [5,20,0] ).style({ size:1.5 }),
+			C( [15,20,0] ).style({ size:1.5 }),
+		];
+		
+		lookAt( [0,10,60], [0,10,0], [0,1,0] );
+
+		// автоматично генериране на старт-кодон (ATG)
+		// и стоп-кодон (TAG)
+		sequence.push( A([0,0,0]) );
+		sequence.push( T([0,0,0]) );
+		sequence.push( G([0,0,0]) );
+		sequence.push( T([0,0,0]) );
+		sequence.push( A([0,0,0]) );
+		sequence.push( G([0,0,0]) );
+
+
+		// обработване на натискане на бутон
+		function pointerDown( event )
+		{
+			if( gameStopped ) return;
+			
+			// кликнато е на четирите големи кодона
+			obj = findObject( event, bases );
+			if( obj ) 
+			{
+				var newObj = obj.clone;
+					newObj.char = obj.char;
+					newObj.size = [1,1,1];
+				
+				if( startTime == undefined )
+					startTime = currentTime;
+
+				sequence.splice( sequence.length-3, 0, newObj );
+				hitBase[hB%6].play();
+				hB++;
+				return;
+			}
+
+			// кликнато е на кодон от спиралата
+			obj = findObject( event, sequence );
+			if( obj ) 
+			{
+				var i = sequence.indexOf( obj );
+				if( (i>2) && (i<sequence.length-3) )
+				{
+					obj.visible = false;
+					sequence.splice( i, 1 );
+					hitFail[hF%6].play();
+					hF++;
+				}
+				return;
+			}
+		}
+		
+		
+		// избиране на случайни аминокиселини
+		// и показване на тяхната поредица
+		for( var i=0; i<n; i++ )
+		{
+			var b = Math.floor(4000*Math.random())%(Object.keys(acid).length);
+			acidNames.push(Object.keys(acid)[b]);
+		}
+		document.getElementById('acids').innerHTML = acidNames.join('&ndash;');
+		
+		suica.addEventListener( 'time', loop );
+
+		
+		// функция за генериране на кадър
+		function loop( t, dT )
+		{
+			currentTime = t;
+
+			var m = sequence.length;
+
+			// играта е спряла, ако сме генерирали цялата поредица
+			// или ако е изминало определеното време от 2 минути
+			gameStopped = (m>=3*(n+2)) || (currentTime>startTime+2*60);
+			
+			// въртим 4-те автоматично създадени (големи)
+			// нуклеотида
+			var a = t;
+			for( var i=0; i<bases.length; i++ )
+			{
+				bases[i].spinT = 100*(i%2-0.5)*t;
+				if( gameStopped )
+					bases[i].z = (bases[i].z-1)*1.1;
+			}
+
+			// за всеки елемент от главната редица правим леко въртене 
+			var coef = 1-10*dT;
+			for (var i=0; i<m; i++)
+			{
+				var a = (60*t+20*i)%360,
+					x = 6*i - 6*(m/2-0.5);
+
+				if( m == 6 )
+				{
+					x += (i > 2) ? 2 : -2;
+				}
+				else
+				{
+					if( (i < 3) ) x -= 4;
+					if( (i > m-4) ) x += 4;
+				}
+				sequence[i].x = sequence[i].x*coef + (1-coef)*x;
+
+				if( gameStopped )
+				{
+					sequence[i].y = sequence[i].y*coef + (1-coef)*10;
+					sequence[i].spinV = (sequence[i].spinV)*coef
+				}
+				else
+				{
+					sequence[i].y = sequence[i].y*coef + (1-coef)*0;
+					sequence[i].spin = [0,a,30];
+				}
+			}
+
+			// обхождаме текущата поредица и намираме какви
+			// аминокиселини би генерирала тя
+			var str = [];
+			for (var i=3; i<m-5; i+=3)
+			{
+				var s = sequence[i].char+sequence[i+1].char+sequence[i+2].char;
+				if( codon[s] )
+					str.push( codon[s] )
+				else
+					str.push( '???' );
+			}
+			
+			// ако последната амино киселина не е пълна,
+			// показват се ? или ?? според броя налични
+			// нуклеотида - чак при три се получава име
+			if( m%3 > 1 )
+				str.push( '??' )
+			else if( m%3 > 0 )
+				str.push( '?' )
+			document.getElementById('result').innerHTML = str.join('&ndash;');
+			
+			if( element('result').innerHTML == element('acids').innerHTML )
+				gameStopped = true;
+
+			if( gameStopped )
+			{
+				document.getElementById('score').innerHTML = 'Играта приключи';
+			}
+			else
+			if( startTime == undefined )
+			{
+				document.getElementById('score').innerHTML = 'Изберете нуклеобаза';
+			}
+			else
+			{
+				document.getElementById('score').innerHTML = 'Време: '+(2*60-(currentTime-startTime)).toFixed(1);
+			}
+		}
+	</script>	
+
+</body>

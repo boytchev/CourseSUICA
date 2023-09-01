@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Нуклеобази</title>
+
+	<!-- зареждане на библиотеката СУИКА и стиловете -->
+	<script src="suica.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	
+</head>
+
+
+<body>
+
+<!-- ---------------------- -->
+<!-- заглавие и подзаглавие -->
+<!-- ---------------------- -->
+	<h1>Нуклеобази</h1>
+	<p>ДНК се състои от структурни елементи, наричани нуклеотиди. Техните азотни бази са основни структурни единици на нуклеиновите киселини. В ДНК базите са четири &ndash; <b>аденин</b>, <b>тимин</b>, <b>гуанин</b> и <b>цитозин</b>. Означават се с техните инициали на латински &ndash; <b>A</b>, <b>T</b>, <b>G</b>, <b>C</b>.</p>
+	
+	<p>Нуклеобазите участват в дефинирането на <a href="genetic-code.html">генетичния код</a>. В тримерните модели по-долу цветовете на атомите означават: въглерод &ndash; черно, азот &ndash; синьо, кислород &ndash; червено и водород &ndash; бяло.</p>
+
+	
+	<table class="noborder">
+		<tr>
+			<!-- клетка с рисувателно поле за аденин -->
+			<td width="150" style="vertical-align:top;"><suica id="adenine" width="150" height="150" ontime="loop"></suica></td>
+			<!-- клетка с пояснение за аденин и тимин -->
+			<td width="400">
+				<br><br><br>
+				<p caption="left">&#x25C4; Аденин</p>
+				<p><b>Aденинът</b> (C<small>5</small>H<small>5</small>N<small>5</small>) участва в клетъчното дишане и в синтезирането на протеини. В ДНК той винаги се свързва с <b>тимина</b> (C<small>5</small>H<small>6</small>N<small>2</small>O<small>2</small>).</p>
+				<p caption="right">Тимин &#x25BA;</p>
+			</td>
+			<!-- клетка с рисувателно поле за тимин -->
+			<td rowspan="2" width="150" style="vertical-align:bottom;"><suica id="thymine" width="150" height="150"></suica></td>
+		</tr>
+		<tr>
+			<!-- клетка с рисувателно поле за гуанин -->
+			<td rowspan="2" width="150" style="vertical-align:top;"><suica id="guanine" width="150" height="150"></suica></td>
+			<td width="400"><br><br></td></tr>
+		<tr>
+			<!-- клетка с пояснение за гуанин и цитозин -->
+			<td>
+				<p caption="left">&#x25C4; Гуанин</p>
+				<p><b>Гуанинът</b> (C<small>5</small>H<small>5</small>N<small>5</small>O) е третата нуклеобаза и в ДНК се свързва с <b>цитозина</b> (C<small>4</small>H<small>5</small>N<small>3</small>O), който е ко-фактор и участва в трансфера на фосфати.</p>
+				<p caption="right">Цитозин &#x25BA;</p>
+				<br><br><br>
+			</td>
+			<!-- клетка с рисувателно поле за цитозин -->
+			<td width="150" style="vertical-align:bottom;"><suica id="citosine" width="150" height="150"></suica></td>
+		</tr>
+	</table>
+
+	<!-- бутони -->
+	<div style="text-align:center;">
+		<a caption button href="index.html">Назад</a>
+	</div>
+	<br>
+	<br>
+	
+	<script>
+		function lines( ...pnt )
+		{
+			var result = [];
+			for( var i=0; i<pnt.length; i+=2 )
+				result.push(line(pnt[i],pnt[i+1],'black'));
+			return result;
+		}
+		
+		function C( x,y,z )
+		{
+			return sphere([x,y,z],8,'black' );
+		}
+		
+		function N( x,y,z )
+		{
+			return sphere([x,y,z],8,'blue');
+		}
+		
+		function O( x,y,z )
+		{
+			return sphere([x,y,z],8,'crimson');
+		}
+		
+		function H( x,y,z )
+		{
+			return sphere([x,y,z],6,'white');
+		}
+		
+		adenine.lookAt( [0,0,100] );
+		adenine.background( rgb(230,230,230) );
+
+		var adenineSubgroup = adenine.group( 
+			c1 = C(0,0,0),
+			c2 = C(9,0,0),
+			c3 = C(13.5,-7.8,0),
+			c4 = C(0,-15.6,0),
+			c5 = C(4.5,13.8,0),
+			n1 = N(22.5,-7.8,0),
+			n2 = N(9,-15.6,0),
+			n3 = N(-4.5,-7.8,0),
+			n4 = N(-2.8,8.6,0),
+			n5 = N(11.8,8.6,0),
+			h1 = H(26.5,-0.9,0),
+			h2 = H(26.5,-14.7,0),
+			h3 = H(-4,-22.5,0),
+			h4 = H(-10.6,10.2,0),
+			h5 = H(3.7,21.8,0),
+			...lines( c1,c2, c2,c3, c3,n1, n1,h1, n1,h2, c3,n2, n2,c4, c4,h3,
+					  c4,n3, n3,c1, c1,n4, n4,h4, n4,c5, c5,h5, c5,n5, n5,c2 )
+		);
+		adenineSubgroup.center = [-7, 2, 0];
+		adenineGroup = adenine.group( adenineSubgroup );
+		
+		
+		
+		citosine.lookAt( [0,0,100] );
+		citosine.background( rgb(230,230,230) );
+
+		var citosineSubgroup = citosine.group( 
+			c1 = C(0,0,0),
+			c2 = C(-13.5,-7.8,0),
+			c3 = C(-13.5,7.8,0),
+			c4 = C(-4.5,7.8,0),
+			n1 = N(9,0,0),
+			n2 = N(-4.5,-7.8,0),
+			n3 = N(-18,-0,0),
+			h1 = H(13,6.9,0),
+			h2 = H(13,-6.9,0),
+			h3 = H(-26,-0,0),
+			h4 = H(-17.5,14.7,0),
+			h5 = H(-0.5,14.7,0),
+			o1 = O(-18,-15.6,0),
+			...lines( c1,n1, n1,h1, n1,h2, c1,n2, n2,c2, c2,o1, c2,n3, n3,h3,
+					  n3,c3, c3,h4, c3,c4, c4,h5, c4,c1 )
+		);
+		citosineSubgroup.center = [6, -1, 0];
+		citosineGroup = citosine.group( citosineSubgroup );
+		
+		
+		
+		guanine.lookAt( [0,0,100] );
+		guanine.background( rgb(230,230,230) );
+
+		var guanineSubgroup = guanine.group( 
+			c1 = C(0.0,0.0,0.0),
+			c2 = C(9.0,0.0,0.0),
+			c3 = C(13.5,-7.8,0.0),
+			o1 = O(22.5,-7.8,0.0),
+			n1 = N(9.0,-15.6,0.0),
+			h1 = H(13.0,-22.5,0.0),
+			c4 = C(0.0,-15.6,0.0),
+			n2 = N(-4.5,-23.4,0.0),
+			h2 = H(-0.5,-30.3,0.0),
+			h3 = H(-12.5,-23.4,0.0),
+			n3 = N(-4.5,-7.8,0.0),
+			n4 = N(-2.8,8.6,0.0),
+			h4 = H(-10.6,10.2,0.0),
+			c5 = C(4.5,13.8,0.0),
+			h5 = H(3.7,21.8,0.0),
+			n5 = N(11.8,8.6,0.0),
+
+			...lines( c1,c2, c2,c3, c3,o1, c3,n1, n1,h1, n1,c4, c4,n2, n2,h2,
+					  n2,h3, c4,n3, n3,c1, c1,n4, n4,h4, n4,c5, c5,h5, c5,n5, n5,c2 )
+		);
+		guanineSubgroup.center = [3, -1.2, 0];
+		guanineGroup = guanine.group( guanineSubgroup );
+		
+		
+		
+		thymine.lookAt( [0,0,100] );
+		thymine.background( rgb(230,230,230) );
+
+		var thymineSubgroup = thymine.group( 
+			c1 = C(0.0,0.0,0.0),
+			c2 = C(7.8,-4.5,0.0),
+			o1 = O(15.6,0.0,0.0),
+			n1 = N(7.8,-13.5,0.0),
+			h1 = H(14.7,-17.5,0.0),
+			c3 = C(0.0,-18.0,0.0),
+			o2 = O(0.0,-27.0,0.0),
+			n2 = N(-7.8,-13.5,0.0),
+			h2 = H(-14.7,-17.5,0.0),
+			c4 = C(-7.8,-4.5,0.0),
+			h3 = H(-14.7,-0.5,0.0),
+			c5 = C(-0.0,9.0,0.0),
+			h4 = H(-0.0,12.8,7.0),
+			h5 = H(6.1,12.8,-3.5),
+			h6 = H(-6.1,12.8,-3.5),
+
+			...lines( c1,c2, c2,o1, c2,n1, n1,h1, n1,c3, c3,o2, c3,n2, n2,h2,
+					  n2,c4, c4,h3, c4,c1, c1,c5, c5,h4, c5,h5, c5,h6 )
+		);
+		thymineSubgroup.center = [0, -4.6, 0];
+		thymineGroup = thymine.group( thymineSubgroup );
+
+
+
+
+		function loop( t )
+		{
+			adenineGroup.spin = [50*t,55*t,60*t];
+			citosineGroup.spin = [50*t,55*t,60*t];
+			guanineGroup.spin = [50*t,55*t,60*t];
+			thymineGroup.spin = [50*t,55*t,60*t];
+		}
+	</script>
+</body>

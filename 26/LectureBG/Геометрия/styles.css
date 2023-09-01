@@ -1,0 +1,135 @@
+﻿body
+{
+	width: 600px;
+	margin: auto;
+	
+	background-color: Lavender;
+	text-align: center;
+	font-family: Candara;
+	color: Indigo;
+}
+	
+h1
+{
+	font-size: 3em;
+	margin-bottom: 0;
+	text-shadow: 0 0 3px MediumPurple;
+}
+
+h2
+{
+	margin-top: 3em;
+	border-top: 1px dotted MediumPurple;
+	text-align: left;
+	margin-bottom: 0;
+	text-shadow: 0 0 1px MediumPurple;
+}
+
+h3
+{
+	font-size: 125%;
+	font-style: italic;
+	font-weight: normal;
+	margin: 1em 0 auto 0;
+	padding-bottom: 0;
+	text-shadow: 0 0 2px MediumPurple;
+	border-bottom: dotted 1px MediumPurple;
+	text-align: left;
+}
+
+h4
+{
+	font-weight: normal;
+}
+
+p
+{
+	margin-top: 0.5em;
+	text-align: justify;
+	font-size: 1.1em;
+}
+
+suica
+{
+	display: block;
+	margin: 2em auto 0em auto;
+	border: dotted 1px MediumPurple;
+	box-shadow: 0 0 25px 0px MediumPurple;
+	background-color: LavenderBlush;
+}
+
+img
+{
+	display: block;
+	margin: auto;
+	border: solid 1px MediumPurple;
+	box-shadow: 0 0 5px 0px MediumPurple;
+	max-width: 20em;
+}
+
+em
+{
+	font-weight: bold;
+	font-style: italic;
+	color: DeepPink;
+}
+
+[formula]
+{
+	text-align: center;
+	font-size: 150%;
+}
+
+.label {
+	width: 3em;
+	border-radius: 0.3em;
+	border: pink dotted 1px;
+	text-align: center;
+	padding: 0.1em 0.2em 0.1em 0.2em;
+	position: absolute;
+	pointer-events: none;
+	user-select: none;
+	font-size: 1em;
+	font-family: 'Arial', sans-serif;
+	background-color: rgb(255,255,255,0.75);
+	z-index:10;
+}
+
+.area {
+	width: 4em;
+}
+
+.angle {
+	width: 3em;
+}
+
+
+.thumbnail
+{
+	width: 150px;
+	margin-left: 0.5em;
+}
+
+hr {
+	border: 0;
+	border-top: 1px dotted MediumPurple;
+	width: 300px;
+}
+
+label {
+	display: inline-block;
+	color: DeepPink;
+	margin: 1em 0.5em 0 0.5em;
+}
+
+input {
+	margin-bottom: 0.5em;
+	position: relative;
+	top: 0.1em;
+}
+
+li
+{
+	text-align: justify;
+	font-size: 110%;
+}
