@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+
+	<style>
+		p, button {
+			font-family: Candara;
+			font-size: 1.5em;
+			margin: 0 5em;
+		}
+		
+		button {
+			margin-top: 5em;
+		}
+	</style>
+	
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<!-- бутон за извличане на геолокация чрез действие на потребителя -->
+	<button id="button" onclick="geolocation()">Геолокация</button>
+	<hr>
+	<!-- данни от геолокацията -->
+	<p>Географска ширина: <b><span id="latitude"></span></b></p>
+	<p>Географска дължина: <b><span id="longitude"></span></b></p>
+	<p>Точност: <b><span id="accuracy"></span></b> метра с 95% вероятност</p>
+
+	<script>
+		
+		// заявка за текуща позиция чрез геолокация
+		function geolocation()
+		{
+			navigator.geolocation.getCurrentPosition( geoSuccess );
+		}
+			
+		// обработване на изпълнена заявка
+		function geoSuccess( geodata )
+		{
+			element('latitude').innerHTML = geodata.coords.latitude;
+			element('longitude').innerHTML = geodata.coords.longitude;
+			element('accuracy').innerHTML = Math.round(geodata.coords.accuracy);
+		}
+
+</script>
+
+</body>
+
+
+
+	

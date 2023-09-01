@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+
+	<style>
+		p {
+			font-family: Candara;
+			font-size: 1.5em;
+			margin: 0 5em;
+		}
+	</style>
+	
+	<script src="suica.js"></script>
+</head>
+	
+<body>
+	&nbsp;
+	<!-- полета за данни с ориентацията на устройство -->
+	<p>Алфа: <b><span id="alpha"></span></b></p>
+	<p>Бета: <b><span id="beta"></span></b></p>
+	<p>Гама: <b><span id="gamma"></span></b></p>
+	<p>Ориентация: <b><span id="absolute"></span></b></p>
+
+	<script>
+		// слушаме за събитието на ориентацията на устройство
+		window.addEventListener( "deviceorientation", deviceOrientation, true);
+
+		// функция, която показва данните на ориентацията
+		function deviceOrientation( event )
+		{
+			element('alpha').innerHTML = event.alpha.toFixed(1) + '&deg;';
+			element('beta').innerHTML = event.beta.toFixed(1) + '&deg;';
+			element('gamma').innerHTML = event.gamma.toFixed(1) + '&deg;';
+			element('absolute').innerHTML = event.absolute ? 'абсолютна' : 'относителна';
+		}
+	</script>
+</body>
+
+

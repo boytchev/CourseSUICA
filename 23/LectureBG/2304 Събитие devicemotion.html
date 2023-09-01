@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+
+	<style>
+		p {
+			font-family: Candara;
+			font-size: 1.5em;
+			margin: 0 5em;
+		}
+	</style>
+	
+	<script src="suica.js"></script>
+</head>
+	
+<body>
+	&nbsp;
+	<!-- полета за данни с движението на устройство -->
+	<p>Ускорение: <b><span id="acceleration"></span></b></p>
+	<p>Ускорение с гравитация: <b><span id="accelerationIncludingGravity"></span></b></p>
+	<p>Скорост на въртене: <b><span id="rotationRate"></span></b></p>
+	<p>Интервал: <b><span id="interval"></span></b></p>
+
+	<script>
+		// слушаме за събитието на движението на устройство
+		window.addEventListener( "devicemotion", deviceMotion, true);
+
+		// функция, която преобразува число към дадена точност
+		function str( a )
+		{
+			if( a === null ) return '';
+			if( a === undefined ) return '';
+			return a.toFixed(2);
+		}
+		
+		// функция, която преобразува {x,y,z} в низ
+		function string( a )
+		{
+			if( a === null ) return '';
+			
+			return '[' + str(a.x) + ', ' + str(a.y) +  ', ' + str(a.z) + ']';
+		}
+		
+		
+		// функция, която показва данните на движението
+		function deviceMotion( event )
+		{
+			element('acceleration').innerHTML = string( event.acceleration ) + ' м/с<sup><small>2</small></sup>';
+			element('accelerationIncludingGravity').innerHTML = string( event.accelerationIncludingGravity ) + ' м/с<sup><small>2</small></sup>';
+			element('rotationRate').innerHTML = string( event.rotationRate ) + ' &deg;/с';
+			element('interval').innerHTML = event.interval.toFixed(1) + ' мс';
+		}
+	</script>
+</body>
+
+

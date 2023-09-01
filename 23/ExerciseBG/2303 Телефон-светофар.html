@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+	
+<body>
+	<suica fullWindow>
+	</suica>
+
+	<script>
+		// слуша се събитието при промяна на ориентацията
+		window.addEventListener( "deviceorientation", deviceOrientation, true);
+
+		// реакция при установена промяна на ориентацията
+		function deviceOrientation( event )
+		{
+			// избор на цвят според ъгъл бета
+			if( Math.abs(event.beta) < 20 )
+				background( 'Lime' );
+			else
+			if( Math.abs(event.beta) < 160 )
+				background( 'Yellow' );
+			else
+				background( 'Crimson' );
+		}
+	</script>
+</body>
+
+

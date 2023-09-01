@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+
+	<style>
+		div {
+			font-family: Candara;
+			font-size: 15em;
+			text-align: center;
+		}
+	</style>
+	
+	<script src="suica.js"></script>
+</head>
+	
+<body>
+	<!-- поле за показване на броя крачки -->
+	<div id="steps">0</div>
+	<div style="font-size: 5em;">крачки</div>
+
+	<script>
+		steps = 0;
+		time = 0;
+
+		// слушаме за събитието на движението на устройство
+		window.addEventListener( "devicemotion", deviceMotion, true);
+
+		// функция, която показва данните на движението
+		function deviceMotion( event )
+		{
+			// дължина на вектора на ускорението
+			var acc = Math.sqrt( event.acceleration.x**2 + event.acceleration.y**2 + event.acceleration.z**2 ),
+				now = Date.now();
+				
+			// ако дължината е поне 1.5 и ако от предходната крачка
+			// са изминали поне 0.5 секунди, тогава имаме нова крачка
+			if( acc>1.5 && now>time+500)
+			{
+				steps++;
+				element('steps').innerHTML = steps;
+				time = now;
+			}
+		}
+	</script>
+</body>
+
+

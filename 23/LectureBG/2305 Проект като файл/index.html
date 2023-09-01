@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+	<style>
+		body { max-height: 400px; }
+	</style>
+</head>
+	
+<body>
+	<!-- Моделите са от www.kenney.nl Ллиценз: Public Domain / CC0
+			https://www.kenney.nl/assets/car-kit
+			https://www.kenney.nl/assets/city-kit-roads
+	-->
+
+	<suica fullwindow ontime="race">
+		<orbit>
+
+		<!-- създаване на писта -->
+		<group id="road" center="-20,0,20">
+			<model src="models/road_curvePavement.glb" size="20" z="-15">
+			<model src="models/road_curveBarrier.glb" size="20" z="-15">
+		</group>
+		<clone src="road" center="20,0,20" spin="90">
+		<clone src="road" center="20,0,-20" spin="180">
+		<clone src="road" center="-20,0,-20" spin="270">
+
+		<!-- зареждане на модел на кола и клониране за втора кола -->
+		<model id="a" src="models/race.glb" size="5">
+		<clone id="b" src="a">
+	</suica>
+
+	<script>
+		ta = 0;
+		tb = -90;
+		
+		function race( t, dt )
+		{
+			// движение на едната кола
+			ta += dt*(1+0.1*Math.sin(0.8*ta));
+			r = 30 + 3*Math.cos( 1.5*ta );
+			a.center = [ r*Math.sin(2*ta), 0, r*Math.cos(2*ta) ];
+			a.spin = degrees( 2*ta )-85;
+			
+			// движение на другата кола
+			tb += dt*(1+0.1*Math.cos(0.5*tb));
+			r = 30 + 3*Math.cos( 1.1*tb );
+			b.center = [ r*Math.sin(2*tb), 0, r*Math.cos(2*tb) ];
+			b.spin = degrees( 2*tb )-85;
+		}
+	</script>
+</body>
+
+

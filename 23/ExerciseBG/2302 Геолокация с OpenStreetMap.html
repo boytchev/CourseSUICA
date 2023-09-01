@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+
+	<style>
+		button {
+			font-family: Candara;
+			font-size: 1.5em;
+			margin: 0 5em;
+			margin-top: 5em;
+		}
+	</style>
+	
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<!-- бутон за извличане на геолокация чрез действие на потребителя -->
+	<button id="button" onclick="geolocation()">Геолокация с OpenStreetMap</button>
+
+	<script>
+		
+		// заявка за текуща позиция чрез геолокация
+		function geolocation()
+		{
+			navigator.geolocation.getCurrentPosition( geoSuccess );
+		}
+			
+		// показване на положението с OpenStreetMap
+		function geoSuccess( geodata )
+		{
+			window.open( 'https://www.openstreetmap.org/#map=19/'+geodata.coords.latitude+'/'+geodata.coords.longitude );
+		}
+
+</script>
+
+</body>
+
+
+
+	
