@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow background="lightgray">
+		<orbit altitude="50">
+		
+		<!-- външна форма на табелка -->
+		<shape id="dnd">
+			<moveTo point="-10,0">
+			<lineTo point="-10,-30">
+			<lineTo point="10,-30">
+			<lineTo point="10,0">
+			<curveTo m="10,10" point="0,10">
+			<curveTo m="-10,10" point="-10,0">
+		</shape>
+		
+		<!-- форма на дупка на табелка -->
+		<shape id="hole">
+			<arc radius="7">
+		</shape>
+		
+		<!-- текстура с надпис -->
+		<drawing id="text2" size="256" color="white">
+			<fillText point="50,190" text="PLEASE" color="crimson" font="40px Arial">
+			<fillText point="10,105" text="DO NOT" color="crimson" font="bold 60px Arial">
+			<fillText point="10,30" text="DISTURB" color="crimson" font="bold 53px Arial">
+		</drawing>
+		
+		<!-- плочка с надписа -->
+		<cube z="0.55" y="-11" size="17,17,1" color="white" image="text2">
+		
+		<!-- изтегляне на 2D форма с дупка в 3D обект -->
+		<extrude y="8" src="dnd, hole" count="1,50" color="crimson">
+		
+		<!-- дръжка -->
+		<cylinder y="12" z="-3" size="6" spinV="90" color="orange">
+		<sphere y="12" z="5" size="10" color="orange">
+	</suica>
+</head>

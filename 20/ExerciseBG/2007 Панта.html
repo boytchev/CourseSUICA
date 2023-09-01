@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<orbit altitude="40" distance="80" speed="1">
+		
+		<!-- основно тяло на панта -->
+		<cube id="plate" x="14" z="-2" size="20,30,2" hidden>
+		
+		<!-- два отвора за завинтване -->
+		<cylinder id="hole1" center="16,10,-7" size="3,10,3" spinV="90" hidden>
+		<cylinder id="hole2" center="16,-10,-7" size="3,10,3" spinV="90" hidden>
+
+		<!-- два плътни цилиндъра и още един цилиндър за тяхното продупчване -->
+		<cylinder id="hindge1" center="0,7.6,0" size="6,7.4" hidden>
+		<cylinder id="hindge2" center="0,-7.5,0" size="6,7.4" hidden>
+		<cylinder id="axis" center="0,-20,0" size="2,40" hidden >
+		
+		<!-- видима ос на въртене -->
+		<cylinder center="0,-20,0" size="1.8,40" color="lightgray">
+		
+		<!-- контруиране на дясното крило на пантата -->
+		<group id="right">
+			<!-- два издадени елемента, които свързват 
+			     продупчените цилиндри с основното тяло -->
+			<cube center="2,11.3,-2" size="4,7.4,2" color="gray">
+			<cube center="2,-3.8,-2" size="4,7.4,2" color="gray">
+			<!-- създаване на продупчено основно тяло -->
+			<construct src="plate-hole1-hole2" color="gray">
+			<!-- създаване на продупчените цилиндри -->
+			<construct src="hindge1+hindge2-axis" color="gray">
+		</group>
+
+		<!-- лявото крило е клонинг на дясното, но завъртяно наобратно -->
+		<clone id="left" src="right" spinS="180">
+	</suica>
+	
+	<script>
+		function loop( t )
+		{
+			// пърхане на крилата на пантата
+			left.spinH = 45+45*Math.sin(2*t);
+			right.spinH = -45-45*Math.sin(2*t);
+		}
+	</script>
+</head>

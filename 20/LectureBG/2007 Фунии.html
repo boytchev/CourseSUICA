@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow background="lightgray">
+		<orbit altitude="50">
+	</suica>
+	
+	<script>
+		// функция за фуния - точки по вертикална отсечка
+		// и радиус, който зависи от височината
+		function funnel( u )
+		{
+			return [ 0, 40*u-20, 0, 30/(11-10*u) ];
+		}
+		
+		// няколко вложени фунии
+		tube( [0,-5,0], funnel, 4, [40,100], 1, 'royalblue' );
+		tube( [0,-13,0], funnel, 4, [40,100], [1.4, 0.6, 1.4], 'black' );
+		tube( [0,-9,0], funnel, 4, [40,100], [1.2, 0.8, 1.2], 'navy' );
+		tube( [0,-1,0], funnel, 4, [40,100], [0.8, 1.2, 0.8], 'lightskyblue' );
+		tube( [0,3,0], funnel, 4, [40,100], [0.6, 1.4, 0.6], 'azure' );
+	</script>
+</head>

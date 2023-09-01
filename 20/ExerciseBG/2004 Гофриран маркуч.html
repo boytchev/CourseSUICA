@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit speed="0.2">
+	</suica>
+	
+	<script>
+		// функция за гофриран маркуч
+		function hosepipe( u )
+		{
+			// ъгъл a, радиус r и променлива дебелина на маркуча d
+			var a = 6*Math.PI*u,
+				r = 6+1.7*a,
+				d = 4+Math.sin(2*a*r);
+
+			// стесняване на накрайниците
+			if( u<0.05 || u>0.99 ) d = 3;
+			
+			// позиция по протежение на маркуча
+			return [ r*Math.cos(a), r*Math.sin(a), 0, d ];
+		}
+
+		// функция за гладък маркуч
+		function hosepipe2( u )
+		{
+			// ъгъл a, радиус r и константна дебелина на маркуча d
+			var a = 6*Math.PI*u,
+				r = 6+1.7*a,
+				d = 3.1;
+
+			// стесняване на накрайниците
+			if( u<0.05 || u>0.99 ) d = 2.9;
+			
+			// позиция по протежение на маркуча
+			return [ r*Math.cos(a), r*Math.sin(a), 0, d ];
+		}
+		
+		// създаване на два маркуча - гофриран и гладък
+		tube( [0,0,0], hosepipe, 1, 2000, 1, 'HotPink' ); // има нужда от много точки, затова е 2000
+		tube( [0,0,0], hosepipe2, 3, 400, 1, 'Pink' ); // няма нужда от чак толкова точки, затова е 400
+	</script>
+</head>

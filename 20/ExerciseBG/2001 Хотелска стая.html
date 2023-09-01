@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow onTime="loop">
+		<orbit enablePan="true">
+		
+		<!-- сглобяване на стая от външни модели -->
+		<model src="models/loungeSofa.glb" size="50" center="-25,-20,-20">
+		<model src="models/tableGlass.glb" size="30" center="-12.5,-20,0">
+		<model src="models/toilet.glb" size="40" center="7,-20,30" spinH="180">
+		<model src="models/ceilingFan.glb" size="40" center="0,30,-20" id="fan1">
+		<model src="models/ceilingFan.glb" size="40" center="0,30,20" id="fan2">
+		<model src="models/stairsOpen.glb" size="30" center="-26,-20,-40" >
+		<model src="models/shower.glb" size="37" center="49,-20,-40" >
+		<model src="models/floorFull.glb" size="100,20,100" center="-40,-21,30" >
+		<model src="models/speaker.glb" size="40" center="-10,-20,20" spinH="180" >
+		<model src="models/speaker.glb" size="40" center="17,-20,20" spinH="180" >
+		<model src="models/desk.glb" size="35" center="50,-20,16" spinH="180" >
+		<model src="models/chairDesk.glb" size="35" center="30,-20,16" >
+		<model src="models/laptop.glb" size="35" center="40,-6.5,20" spinH="180">
+	</suica>
+	
+	<script>
+		function loop( t )
+		{
+			// въртене на вентилаторите
+			fan1.spinH = 300*t;
+			fan2.spinH = 380*t;
+		}
+	</script>
+</head>

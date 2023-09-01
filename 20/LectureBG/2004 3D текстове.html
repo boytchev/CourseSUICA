@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit altitude="10" speed="0.2">
+	</suica>
+	
+	<script>
+		// списък с букви
+		text = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		
+		for( var i=0; i<text.length; i++ )
+		{
+			// разположени са равномерно в кръг
+			a = 360 * i/text.length;
+
+			x = 40*Math.sin( radians(a) );
+			z = 40*Math.cos( radians(a) );
+			
+			// всяка е отделен обект
+			text3d( text[i], 'fonts/droid.json', [x,0,z], [10,5,15], hsl(random(0,360),100,50) );
+			its.spinH = a;
+		}
+	</script>
+</head>

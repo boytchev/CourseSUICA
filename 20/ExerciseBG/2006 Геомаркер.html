@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow background="lightgray">
+		<orbit altitude="20" distance="60" speed="0.4">
+		
+		<!-- платформа -->
+		<cylinder y="-6" size="60,1" color="dimgray">
+		<circle id="floor" y="-4.5" size="55" spinV="90" visible="false">
+		
+		<!-- външна форма на геомеркер -->
+		<shape id="geoout">
+			<moveTo point="0,0">
+			<curveTo m="4,8" point="0,8.2">
+			<curveTo m="-4,8" point="0,0">
+		</shape>
+		
+		<!-- форма на отвора на геомеркер -->
+		<shape id="geoin">
+			<arc point="0,6.1" radius="1.5">
+		</shape>
+		
+		<!-- геомаркер като 2D форма изтеглена в 3D обект -->
+		<extrude id="geomarker" src="geoout, geoin" y="-4.5" count="10,50" color="orange" radius="0.3">
+	</suica>
+	
+	<script>
+		// клониране на геомаркера в тълпа от геомаркери
+		for( var i=0; i<50; i++ )
+		{
+			geomarker.clone.style( {
+				center: randomIn(floor),
+				spinH: random(0,360),
+				color: hsl( 360*i/15, 100, 50 ),
+			} );
+		}
+	</script>
+</head>

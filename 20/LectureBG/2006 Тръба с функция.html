@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="suica.js"></script>
+</head>
+
+<body>
+	<suica fullWindow>
+		<orbit altitude="50" speed="0.2">
+	</suica>
+	
+	<script>
+		// функция, точки по вертикална окръжност
+		function torus( u )
+		{
+			u = 2*Math.PI*u;
+
+			return [ 15*Math.cos(u), 15*Math.sin(u), 0 ];
+		}
+		
+		// функция, описваща хоризонтална синусоида
+		function sinus( u )
+		{
+			return [ 5*Math.sin(30*u), 0, 100*u-50 ];
+		}
+		
+		// тор на база окръжност
+		tube( [0,0,0], torus, 4, 100, 1, 'tomato' );
+		
+		// лъкатушеща тръба на база синусоида
+		tube( [0,0,0], sinus, 2, 400, 1, 'dimgray' );
+	</script>
+</head>
