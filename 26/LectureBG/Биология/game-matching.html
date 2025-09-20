@@ -164,7 +164,7 @@
 			// движение от облака към поредицата, ако е нужно
 			for (var i=0; i<k; i++)
 			{
-				var a = Suica.time+i/3;
+				var a = t+i/3;
 				var c = Math.cos(a);
 				var s = Math.sin(a);
 				var r = (sequence2[i].no+sequence[i].no==3)?3:3+0.6*Math.sin(40*a);
